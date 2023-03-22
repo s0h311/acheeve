@@ -1,5 +1,5 @@
 <template>
-    <p>Tschuess Welt</p>
+    <p>Hello from Login Component</p>
 </template>
 
 <script>
