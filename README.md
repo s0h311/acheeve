@@ -1,6 +1,6 @@
 ### **Anforderungen**
 ___
-`node 18.14.2 LTS`
+`Node.js 18.14.2`
 
 <br />
 
