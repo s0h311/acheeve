@@ -15,5 +15,8 @@
     "@vueuse/nuxt": "^9.13.0",
     "nuxt": "^3.2.3",
     "prisma": "^4.11.0"
+  },
+  "dependencies": {
+    "joi": "^17.9.1"
   }
 }
