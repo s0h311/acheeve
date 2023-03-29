@@ -8,7 +8,7 @@
     <input class="rounded-3xl w-full h-9 px-4 outline-none -mt-4 bg-textfield" type="password" placeholder="*******"
       v-model="credentials.password">
     <div class="space-y-8 w-full -mt-8 mb-8">
-      <NuxtLink to="/signup" class="underline text-primary text-sm">Reset Password</NuxtLink>
+      <NuxtLink to="/resetPassword" class="underline text-primary text-sm">Reset Password</NuxtLink>
       <div class="grid grid-cols-2 gap-6">
         <button class="rounded-3xl bg-blue-400 px-2 py-2.5 w-full text-sm text-primary font-bold" @click="handle('email')">Login</button>
         <button class="rounded-3xl bg-blue-400 px-2 py-2.5 w-full text-sm text-primary font-bold" @click="navigateTo('/signup')">Sign Up</button>
