@@ -1,4 +1,5 @@
 {
+  "name": "acheeve",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -8,15 +9,17 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/image-edge": "^1.0.0-27954023.4cee565",
+    "@nuxt/image-edge": "^1.0.0-28000486.357efad",
     "@nuxtjs/supabase": "^0.3.1",
-    "@nuxtjs/tailwindcss": "^6.4.1",
     "@vueuse/core": "^9.13.0",
     "@vueuse/nuxt": "^9.13.0",
-    "nuxt": "^3.2.3",
-    "prisma": "^4.11.0"
+    "autoprefixer": "^10.4.14",
+    "nuxt": "^3.3.2",
+    "postcss": "^8.4.21",
+    "prisma": "^4.12.0",
+    "tailwindcss": "^3.3.0"
   },
-  "dependencies": {
-    "joi": "^17.9.1"
+  "overrides": {
+    "vue": "latest"
   }
 }
