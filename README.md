@@ -2,6 +2,7 @@
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
+<<<<<<< HEAD
 ## Setup
 
 Make sure to install the dependencies:
@@ -40,3 +41,9 @@ npm run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+=======
+### **Wie starte ich Acheeve?**
+---
+1. Projektordner im Terminal öffnen.
+2. Folgende Befehle nacheinander ausführen: `npm install` und `npm run dev`
+>>>>>>> f83c90d (login page view done)
