@@ -1,5 +1,5 @@
 <template>
-this is the signup page
+<Signup />
 </template>
 
 <script setup>
