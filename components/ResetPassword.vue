@@ -18,6 +18,5 @@ const handle = async () => {
   //      und Mail an die angegebene Mail verschicken (?)
 
   navigateTo('/')
-}
-  
+} 
 </script>

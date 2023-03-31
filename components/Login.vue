@@ -1,14 +1,19 @@
 <template>
   <div class="grid place-items-center gap-8 mt-10">
-    <button class="bg-slate-200 w-52 h-52 rounded-full">LOGO</button>
-    <p class="text-primary text-xl font-semibold">Welcome to Acheeve, a Web-App helping to manage your habits and thoughts
-    </p>
-    <input class="rounded-3xl w-full h-9 px-4 outline-none bg-textfield" type="text" placeholder="E-Mail"
-      v-model="credentials.email">
-    <input class="rounded-3xl w-full h-9 px-4 outline-none -mt-4 bg-textfield" type="password" placeholder="*******"
-      v-model="credentials.password">
+    <button class="bg-slate-200 w-52 h-52 rounded-full">
+      <nuxt-img src="logo.png" alt="acheeve logo" />
+    </button>
+    <p class="text-primary text-xl font-semibold">
+    Welcome to Acheeve, a Web-App helping to manage your habits and thoughts</p>
+    <input class="rounded-3xl w-full h-9 px-4 outline-none bg-textfield text-primary" type="text" placeholder="E-Mail"
+    v-model="credentials.email">
+    <input class="rounded-3xl w-full h-9 px-4 outline-none -mt-4 bg-textfield text-primary" type="password" placeholder="*******"
+    v-model="credentials.password">
     <div class="space-y-8 w-full -mt-8 mb-8">
-      <NuxtLink to="/resetPassword" class="underline text-primary text-sm">Reset Password</NuxtLink>
+      <div class="flex relative items-center">
+        <NuxtLink to="/resetPassword" class="underline text-primary text-sm">Reset Password</NuxtLink>
+        <p class="absolute right-0 text-red-500" v-if="errorMessage">Please try again</p>
+      </div>
       <div class="grid grid-cols-2 gap-6">
         <button class="rounded-3xl bg-blue-400 px-2 py-2.5 w-full text-sm text-primary font-bold" @click="handle('email')">Login</button>
         <button class="rounded-3xl bg-blue-400 px-2 py-2.5 w-full text-sm text-primary font-bold" @click="navigateTo('/signup')">Sign Up</button>
@@ -36,10 +41,11 @@ const credentials = useState('credentials', () => {
   }
 })
 
+const errorMessage = ref(false)
+
 const supabase = useSupabaseClient()
 
 const handle = async (authProvider) => {
-
   if (authProvider === 'email') {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: credentials.value.email,
@@ -47,20 +53,18 @@ const handle = async (authProvider) => {
     })
 
     if (error) {
+    errorMessage.value = true
     console.log(error)
-  }
+    }
   } else {
     const { data, error } = await supabase.auth.signInWithOAuth({
     provider: authProvider
   })
-
   if (error) {
+    errorMessage.value = true
     console.log(error)
   }
   }
-  
   navigateTo('/')
-
-  
 }
 </script>
