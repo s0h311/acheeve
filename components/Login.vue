@@ -1,7 +1,7 @@
 <template>
   <div class="grid place-items-center gap-8 mt-10">
     <button class="bg-slate-200 w-52 h-52 rounded-full">
-      <nuxt-img src="logo.png" alt="acheeve logo" />
+      <img src="/logo.png" alt="acheeve logo" />
     </button>
     <p class="text-primary text-xl font-semibold">
     Welcome to Acheeve, a Web-App helping to manage your habits and thoughts</p>
