@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      title: 'Acheeve | Habits & more',
+      title: 'Acheeve | Habits & More',
       link: [{rel: 'icon', type:'image/x-icon', href:'/favicon.ico'}]
     }
   },

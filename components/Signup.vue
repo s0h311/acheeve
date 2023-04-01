@@ -4,10 +4,10 @@
     <div class="flex space-x-4">
       <InputField label="Firstname" name="firstname" placeholder="John" @change-input="onchange"/>
       <InputField label="Lastname" name="lastname" placeholder="Wick" @change-input="onchange"/>
-    </div>  
+    </div>
     <InputField label="E-Mail" name="email" placeholder="john@wick.de" @change-input="onchange"/>
     <InputField label="Password" name="password" placeholder="*******" type="password" @change-input="onchange"/>
-    <button class="rounded-3xl bg-blue-400 px-2 py-2.5 mt-6 w-full text-sm text-primary font-bold" @click="handle">Sign Up</button>
+    <InputButton text="Sign Up" @click="handle" />
   </div>
 </template>
 

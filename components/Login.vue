@@ -1,22 +1,22 @@
 <template>
-  <div class="grid place-items-center gap-8 mt-10">
+  <div class="grid place-items-center gap-8 md:mt-10">
     <button class="bg-slate-200 w-52 h-52 rounded-full">
       <img src="/logo.png" alt="acheeve logo" />
     </button>
     <p class="text-primary text-xl font-semibold">
     Welcome to Acheeve, a Web-App helping to manage your habits and thoughts</p>
-    <input class="rounded-3xl w-full h-9 px-4 outline-none bg-textfield text-primary" type="text" placeholder="E-Mail"
+    <input class="rounded-3xl w-full md:w-1/6 h-9 px-4 outline-none bg-textfield text-primary" type="text" placeholder="E-Mail"
     v-model="credentials.email">
-    <input class="rounded-3xl w-full h-9 px-4 outline-none -mt-4 bg-textfield text-primary" type="password" placeholder="*******"
+    <input class="rounded-3xl w-full md:w-1/6 h-9 px-4 outline-none -mt-4 bg-textfield text-primary" type="password" placeholder="*******"
     v-model="credentials.password">
-    <div class="space-y-8 w-full -mt-8 mb-8">
+    <div class="space-y-8 w-full md:w-1/6 -mt-8 mb-8">
       <div class="flex relative items-center">
         <NuxtLink to="/resetPassword" class="underline text-primary text-sm">Reset Password</NuxtLink>
-        <p class="absolute right-0 text-red-500" v-if="errorMessage">Please try again</p>
+        <p class="absolute right-0 text-red-500" v-if="errorMessage">Please Try Again</p>
       </div>
       <div class="grid grid-cols-2 gap-6">
-        <button class="rounded-3xl bg-blue-400 px-2 py-2.5 w-full text-sm text-primary font-bold" @click="handle('email')">Login</button>
-        <button class="rounded-3xl bg-blue-400 px-2 py-2.5 w-full text-sm text-primary font-bold" @click="navigateTo('/signup')">Sign Up</button>
+        <InputButton text="Login" @click="handle('email')" />
+        <InputButton text="Sign Up" @click="navigateTo('/signup')" />
       </div>
     </div>
     <div class="flex justify-center space-x-4">
