@@ -3,7 +3,7 @@
     <h1 class="text-primary text-5xl font-semibold mb-10">{{ $t('password_reset') }}</h1>
 
     <InputField
-    class="w-full"
+    class="w-full md:w-fit"
     name="email"
     label="E-Mail"
     placeholder="john@wick.de"

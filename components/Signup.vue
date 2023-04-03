@@ -2,7 +2,7 @@
   <div class="grid place-items-center gap-3 pt-32">
     <h1 class="text-primary text-5xl font-semibold mb-10">Create a new Account</h1>
     
-    <div class="w-full">
+    <div class="w-full md:w-fit">
       <InputField
       v-for="input in inputs" :key="input.id"
       :id="input.id"
@@ -11,12 +11,14 @@
       :placeholder="input.placeholder"
       :type="input.type"
       @change-input="onchange"/>
+
+      <div class="grid grid-cols-2 gap-6 w-full">
+        <InputButton text="Login" @click="navigateTo('/login')" />
+        <InputButton text="Sign Up" @click="handle" />
+      </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-6 w-full">
-      <InputButton text="Login" @click="navigateTo('/login')" />
-      <InputButton text="Sign Up" @click="handle" />
-    </div>
+    
   </div>
 </template>
 
@@ -50,7 +52,6 @@ const credentials = useState('credentials', () => {
   return {
     email: '',
     password: '',
-    passwordCorfirm: '',
     name:'',
   }
 })

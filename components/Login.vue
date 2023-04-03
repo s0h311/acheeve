@@ -4,8 +4,9 @@
       <img src="/logo.png" alt="acheeve logo" />
     </button>
     <p class="text-primary text-xl font-semibold">{{ $t('welcome_text') }}</p>
-    <div class="w-full">
+    <div class="w-full md:w-fit">
       <InputField
+      class="mb-2"
       v-for="input in inputs" :key="input.id"
       :id="input.id"
       :name="input.name"
