@@ -1,6 +1,7 @@
 <template>
   <div>
     <label class="text-primary text-sm ml-2">{{ label }}</label>
+    <br />
     <input
     class="rounded-3xl w-full h-10 px-4 outline-none bg-textfield text-primary"
     :type="`${type ? type : 'text'}`"
@@ -27,4 +28,5 @@ const emits = defineEmits(['changeInput'])
 const onChange = () => {
   emits('changeInput', props.name, input.value)
 }
+
 </script>

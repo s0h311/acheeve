@@ -3,12 +3,17 @@
     <button class="bg-slate-200 w-52 h-52 rounded-full">
       <img src="/logo.png" alt="acheeve logo" />
     </button>
-    <p class="text-primary text-xl font-semibold">
-    Welcome to Acheeve, a Web-App helping to manage your habits and thoughts</p>
-    <input class="rounded-3xl w-full md:w-1/6 h-9 px-4 outline-none bg-textfield text-primary" type="text" placeholder="E-Mail"
-    v-model="credentials.email">
-    <input class="rounded-3xl w-full md:w-1/6 h-9 px-4 outline-none -mt-4 bg-textfield text-primary" type="password" placeholder="*******"
-    v-model="credentials.password">
+    <p class="text-primary text-xl font-semibold">{{ $t('welcome_text') }}</p>
+    <div class="w-full">
+      <InputField
+      v-for="input in inputs" :key="input.id"
+      :id="input.id"
+      :name="input.name"
+      :label="input.label"
+      :placeholder="input.placeholder"
+      :type="input.type"
+      @change-input="onchange"/>
+    </div>
     <div class="space-y-8 w-full md:w-1/6 -mt-8 mb-8">
       <div class="flex relative items-center">
         <NuxtLink to="/resetPassword" class="underline text-primary text-sm">Reset Password</NuxtLink>
@@ -34,6 +39,23 @@
 </template>
 
 <script setup>
+
+const inputs = [
+  {
+    id: 1,
+    name: 'email',
+    label: 'E-Mail',
+    placeholder: 'john@wick.de'
+  },
+  {
+    id: 2,
+    name: 'password',
+    label: 'Password',
+    placeholder: '*******',
+    type: 'password'
+  },
+]
+
 const credentials = useState('credentials', () => {
   return {
     email: '',
@@ -66,5 +88,9 @@ const handle = async (authProvider) => {
   }
   }
   navigateTo('/')
+}
+
+const onchange = (name, input) => {
+  credentials.value[name] = input
 }
 </script>

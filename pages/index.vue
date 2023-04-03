@@ -15,3 +15,4 @@ const handleLogout = async () => {
   await supabase.auth.signOut()
 }
 </script>
+

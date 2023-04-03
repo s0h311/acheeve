@@ -1,13 +1,22 @@
 <template>
   <div class="grid place-items-center gap-3 pt-32">
     <h1 class="text-primary text-5xl font-semibold mb-10">Create a new Account</h1>
-    <div class="flex space-x-4">
-      <InputField label="Firstname" name="firstname" placeholder="John" @change-input="onchange"/>
-      <InputField label="Lastname" name="lastname" placeholder="Wick" @change-input="onchange"/>
+    
+    <div class="w-full">
+      <InputField
+      v-for="input in inputs" :key="input.id"
+      :id="input.id"
+      :name="input.name"
+      :label="input.label"
+      :placeholder="input.placeholder"
+      :type="input.type"
+      @change-input="onchange"/>
     </div>
-    <InputField label="E-Mail" name="email" placeholder="john@wick.de" @change-input="onchange"/>
-    <InputField label="Password" name="password" placeholder="*******" type="password" @change-input="onchange"/>
-    <InputButton text="Sign Up" @click="handle" />
+
+    <div class="grid grid-cols-2 gap-6 w-full">
+      <InputButton text="Login" @click="navigateTo('/login')" />
+      <InputButton text="Sign Up" @click="handle" />
+    </div>
   </div>
 </template>
 
@@ -18,27 +27,22 @@ const supabase = useSupabaseClient()
 const inputs = [
   {
     id: 1,
-    name: 'firstname',
-    label: 'Firstname',
+    name: 'name',
+    label: 'What should we call you?',
     placeholder: 'John',
   },
   {
     id: 2,
-    name: 'lastname',
-    label: 'Lastname',
-    placeholder: 'Wick'
-  },
-  {
-    id: 3,
     name: 'email',
     label: 'E-Mail',
     placeholder: 'john@wick.de'
   },
   {
-    id: 4,
+    id: 3,
     name: 'password',
     label: 'Password',
-    placeholder: '*******'
+    placeholder: '*******',
+    type: 'password'
   },
 ]
 
@@ -47,9 +51,7 @@ const credentials = useState('credentials', () => {
     email: '',
     password: '',
     passwordCorfirm: '',
-    firstname:'',
-    username: '',
-    lastname: ''
+    name:'',
   }
 })
 

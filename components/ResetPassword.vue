@@ -1,8 +1,14 @@
 <template>
   <div class="grid place-items-center gap-5 pt-56">
-    <h1 class="text-primary text-5xl font-semibold mb-10">Password Reset</h1>
-    <input class="rounded-3xl w-full md:w-1/6 h-10 px-4 outline-none bg-textfield" type="text" placeholder="E-Mail"
-    v-model="email">
+    <h1 class="text-primary text-5xl font-semibold mb-10">{{ $t('password_reset') }}</h1>
+
+    <InputField
+    class="w-full"
+    name="email"
+    label="E-Mail"
+    placeholder="john@wick.de"
+    @change-input="onchange"/>
+
     <InputButton text="Send Reset E-Mail" @click="handle" />
   </div>
 </template>
@@ -18,4 +24,8 @@ const handle = async () => {
 
   navigateTo('/')
 } 
+
+const onchange = (_name, input) => {
+  emits.value = input
+}
 </script>

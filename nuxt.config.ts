@@ -1,4 +1,5 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import i18n from './config/i18n.js'
+
 export default defineNuxtConfig({
   app: {
     head: {
@@ -10,6 +11,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/supabase',
     '@nuxt/image-edge',
+    '@nuxtjs/i18n',
   ],
   css: ['@/assets/css/main.css'],
   postcss: {
@@ -20,5 +22,24 @@ export default defineNuxtConfig({
   },
   image: {
     dir: 'assets/static'
+  },
+  i18n: {
+    defaultLocale: 'en',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',  // recommended
+    },
+    locales: [
+      {
+        code: 'en',
+        name: 'English'
+      },
+      {
+        code: 'de',
+        name: 'Deutsch'
+      }
+    ],
+    vueI18n: i18n
   }
 })
