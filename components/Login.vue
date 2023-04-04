@@ -26,14 +26,14 @@
       <button
       v-for="provider in authProviders"
       class="rounded-xl bg-white p-1"
-      @click="handle(provider)">
+      @click="handle(provider.name)">
       <img class="w-10" :src="provider.image" :alt="`login with ${provider.name}}`" />
       </button>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 const inputs = [
   {
