@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <label class="text-primary text-sm ml-2">{{ label }}</label>
+  <div class="rounded-3xl responsive-1 h-14 px-4 bg-textfield">
+    <label class="text-primary text-xs">{{ label }}</label>
     <br />
     <input
-    class="rounded-3xl w-full h-10 px-4 outline-none bg-textfield text-primary"
+    class="text-primary bg-transparent outline-none"
     :type="`${type ? type : 'text'}`"
     :placeholder="placeholder"
     v-model="input"

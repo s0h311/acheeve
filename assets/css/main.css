@@ -5,3 +5,9 @@
 :root {
   background-color: #282A37;
 }
+
+@layer base {
+  .responsive-1 {
+    @apply w-full sm:w-4/6 md:w-3/6 lg:w-2/6
+  }
+}

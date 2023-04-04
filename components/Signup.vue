@@ -1,24 +1,20 @@
 <template>
-  <div class="grid place-items-center gap-3 pt-32">
-    <h1 class="text-primary text-5xl font-semibold mb-10">Create a new Account</h1>
-    
-    <div class="w-full md:w-fit">
-      <InputField
-      v-for="input in inputs" :key="input.id"
-      :id="input.id"
-      :name="input.name"
-      :label="input.label"
-      :placeholder="input.placeholder"
-      :type="input.type"
-      @change-input="onchange"/>
+  <div class="grid place-items-center pt-32">
+    <h1 class="text-primary text-5xl font-semibold mb-[60px]">Create a new Account</h1>
+    <InputField
+    class="mb-8"
+    v-for="input in inputs" :key="input.id"
+    :id="input.id"
+    :name="input.name"
+    :label="input.label"
+    :placeholder="input.placeholder"
+    :type="input.type"
+    @change-input="onchange"/>
 
-      <div class="grid grid-cols-2 gap-6 w-full">
-        <InputButton text="Login" @click="navigateTo('/login')" />
-        <InputButton text="Sign Up" @click="handle" />
-      </div>
+    <div class="grid grid-cols-2 gap-6 w-full">
+      <InputButton text="Login" @click="navigateTo('/login')" />
+      <InputButton text="Sign Up" @click="handle" />
     </div>
-
-    
   </div>
 </template>
 

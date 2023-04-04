@@ -5,7 +5,6 @@
 </template>
 
 <script setup>
-
 defineProps({
   text: ''
 })
@@ -15,5 +14,4 @@ const emits = defineEmits(['click'])
 const onClick = () => {
   emits('click')
 }
-
 </script>
