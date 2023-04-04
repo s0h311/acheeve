@@ -8,6 +8,6 @@
 
 @layer base {
   .responsive-1 {
-    @apply w-full sm:w-4/6 md:w-3/6 lg:w-2/6
+    @apply w-full sm:w-4/6 md:w-3/6 lg:w-2/6 xl:w-[20%] 2xl:w-[20%]
   }
 }
