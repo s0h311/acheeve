@@ -15,9 +15,12 @@
 <script setup>
 
 const email = ref('')
+const supabase = useSupabaseClient();
 
 const handle = async () => {
-
+  const {data, error} = supabase.auth.resetPasswordForEmail(email.value, {
+    redirectTo: 'https://localhost:3000/setNewPassword'
+  })
   //todo: Checken ob Account mit angegebener Email existiert
   //      und Mail an die angegebene Mail verschicken (?)
 
