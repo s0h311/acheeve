@@ -1,5 +1,6 @@
 {
   "password_reset": "Password Reset",
   "welcome_text": "Welcome to Acheeve, we will help you, organize your habits and thoughts",
-  "set_new_password": "Confirm password"
+  "set_new_password": "Confirm password",
+  "new_password": "Enter new password"
 }

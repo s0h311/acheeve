@@ -1,5 +1,6 @@
 {
   "password_reset": "Passwort zurücksetzen",
   "welcome_text": "Willkommen bei Acheeve",
-  "set_new_password": "Passwort Bestätigen"
+  "set_new_password": "Passwort Bestätigen",
+  "new_password": "Neues Passwort eingeben"
 }
