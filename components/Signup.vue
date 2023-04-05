@@ -11,7 +11,10 @@
     :type="input.type"
     @change-input="onchange"/>
 
-    <div class="grid grid-cols-2 gap-6 w-full">
+    <div class="responsive-1 relative -mt-16">
+      <p class="absolute right-0 text-red-500" v-if="errorMessage">Please Try Again</p>
+    </div>
+    <div class="grid grid-cols-2 gap-6 responsive-1">
       <InputButton text="Login" @click="navigateTo('/login')" />
       <InputButton text="Sign Up" @click="handle" />
     </div>
@@ -21,6 +24,8 @@
 <script setup>
 
 const supabase = useSupabaseClient()
+
+const errorMessage = ref(false)
 
 const inputs = [
   {
@@ -59,8 +64,10 @@ const handle = async () => {
     password: credentials.value.password
   })
 
-  navigateTo('/')
-  if (error) {
+  if (!error) {
+    navigateTo('/')
+  } else {
+    errorMessage.value = true
     console.log(error)
   }
 }

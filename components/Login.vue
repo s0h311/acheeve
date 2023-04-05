@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 
 const inputs = [
   {
@@ -69,7 +69,7 @@ const authProviders = [
   },
 ]
 
-const credentials = useState('credentials', () => {
+const credentials = useState('credentials', () => { 
   return {
     email: '',
     password: ''

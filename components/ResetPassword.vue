@@ -25,6 +25,6 @@ const handle = async () => {
 } 
 
 const onchange = (_name, input) => {
-  emits.value = input
+  email.value = input
 }
 </script>

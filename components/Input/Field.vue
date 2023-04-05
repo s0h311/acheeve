@@ -28,5 +28,4 @@ const emits = defineEmits(['changeInput'])
 const onChange = () => {
   emits('changeInput', props.name, input.value)
 }
-
 </script>
