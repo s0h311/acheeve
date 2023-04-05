@@ -29,12 +29,11 @@ const passwords = useState('passwords', () => {
 const supabase = useSupabaseClient();
 
 const handle = async () => {
-  if (password === passwordConfirm) {
+  if (passwords.value.password === passwords.value.passwordConfirm) {
     const { data, error } = await supabase.auth.updateUser({
       password: passwords.value.password
     })
   }
-
   navigateTo('/')
 } 
 
