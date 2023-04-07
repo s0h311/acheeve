@@ -6,9 +6,14 @@
     name="email"
     label="E-Mail"
     placeholder="john@wick.de"
+    :is-error="errorMessage"
     @change-input="onchange"/>
 
-    <InputButton text="Send Reset E-Mail" @click="handle" />
+    <div class="responsive-1 relative -mt-10">
+      <p class="absolute right-0 text-red-500" v-if="errorMessage">Please Try Again</p>
+    </div>
+
+    <InputButton class="-mt-2" text="Send Reset E-Mail" @click="handle" />
   </div>
 </template>
   
@@ -16,15 +21,22 @@
 
 const email = ref('')
 const supabase = useSupabaseClient();
+const errorMessage = ref(false)
 
 const handle = async () => {
+  const { value, error: validationError } = useValidateMail(email.value)
+  if (validationError) errorMessage.value = true
+  else {
   const {data, error} = supabase.auth.resetPasswordForEmail(email.value, {
     redirectTo: 'https://acheeve.app/setNewPassword'
   })
-  navigateTo('/')
-} 
+  if (error) errorMessage.value = true
+  else navigateTo('/')
+  }
+}
 
 const onchange = (_name, input) => {
+  errorMessage.value = false
   email.value = input
 }
 </script>

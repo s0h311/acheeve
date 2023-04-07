@@ -23,5 +23,8 @@
   },
   "overrides": {
     "vue": "latest"
+  },
+  "dependencies": {
+    "joi": "^17.9.1"
   }
 }

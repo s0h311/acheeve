@@ -11,3 +11,17 @@
     @apply w-full sm:w-4/6 md:w-3/6 lg:w-2/6 xl:w-[20%] 2xl:w-[20%]
   }
 }
+
+.errorBorder {
+  border-width: 2px;
+  border-color: rgb(239 68 68);
+  animation: horizontal-shaking 0.3s;
+}
+
+@keyframes horizontal-shaking {
+ 0% { transform: translateX(0) }
+ 25% { transform: translateX(5px) }
+ 50% { transform: translateX(-5px) }
+ 75% { transform: translateX(5px) }
+ 100% { transform: translateX(0) }
+}

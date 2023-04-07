@@ -1,6 +1,6 @@
 <template>
   <div class="grid place-items-center gap-8 md:mt-10">
-    <LogoRound />
+    <Logo />
     <h1 class="text-primary text-xl font-semibold">{{ $t('welcome_text') }}</h1>
     
     <InputField
@@ -10,6 +10,7 @@
     :label="input.label"
     :placeholder="input.placeholder"
     :type="input.type"
+    :is-error="errorMessage"
     @change-input="onchange"/>
     
     <div class="space-y-8 responsive-1 -mt-8 mb-8">
@@ -82,28 +83,34 @@ const supabase = useSupabaseClient()
 
 const handle = async (authProvider) => {
   if (authProvider === 'email') {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: credentials.value.email,
-      password: credentials.value.password
-    })
-
-    if (error) {
-    errorMessage.value = true
-    console.log(error)
-    }
+    emailLogin()
   } else {
     const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: authProvider
+      provider: authProvider
+    })
+    if (error) {
+      errorMessage.value = true
+      return
+    }
+    navigateTo('/')
+  }
+}
+
+const emailLogin = async () => {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: credentials.value.email,
+    password: credentials.value.password
   })
+
   if (error) {
     errorMessage.value = true
-    console.log(error)
-  }
+    return
   }
   navigateTo('/')
 }
 
 const onchange = (name, input) => {
+  errorMessage.value = false
   credentials.value[name] = input
 }
 </script>

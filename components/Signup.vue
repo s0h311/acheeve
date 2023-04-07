@@ -9,6 +9,7 @@
     :label="input.label"
     :placeholder="input.placeholder"
     :type="input.type"
+    :is-error="errorMessage"
     @change-input="onchange"/>
 
     <div class="responsive-1 relative -mt-16">
@@ -73,6 +74,7 @@ const handle = async () => {
 }
 
 const onchange = (name, input) => {
+  errorMessage.value = false
   credentials.value[name] = input
 }
 </script>

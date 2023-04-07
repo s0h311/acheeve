@@ -1,5 +1,7 @@
 <template>
-  <div class="rounded-3xl responsive-1 h-14 px-4 bg-textfield">
+  <div
+  :class="[{ errorBorder: isError}, 'focus:border-0']"
+  class="rounded-3xl responsive-1 h-14 px-4 bg-textfield">
     <label class="text-primary text-xs">{{ label }}</label>
     <br />
     <input
@@ -18,7 +20,8 @@ const props = defineProps({
   label: String,
   type: String,
   placeholder: String,
-  name: String
+  name: String,
+  isError: Boolean
 })
 
 const input = ref('')
