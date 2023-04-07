@@ -1,6 +1,6 @@
 <template>
-  <div class="grid place-items-center gap-5 pt-56">
-    <h1 class="text-primary text-5xl font-semibold mb-10">{{ $t('password_reset') }}</h1>
+  <div class="grid place-items-center w-full my-auto md:pt-0">
+    <h1 class="text-primary text-5xl font-semibold mb-14">{{ $t('password_reset') }}</h1>
 
     <InputField
     name="email"
@@ -9,11 +9,11 @@
     :is-error="errorMessage"
     @change-input="onchange"/>
 
-    <div class="responsive-1 relative -mt-10">
+    <div class="responsive-1 relative mb-6">
       <p class="absolute right-0 text-red-500" v-if="errorMessage">Please Try Again</p>
     </div>
 
-    <InputButton class="-mt-2" text="Send Reset E-Mail" @click="handle" />
+    <InputButton text="Send Reset E-Mail" @click="handle" />
   </div>
 </template>
   

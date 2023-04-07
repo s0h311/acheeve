@@ -1,8 +1,9 @@
 <template>
-  <div class="grid place-items-center pt-32">
-    <h1 class="text-primary text-5xl font-semibold mb-[60px]">Create a new Account</h1>
+  <div class="grid place-items-center w-full my-auto"> <!---pt-32-->
+    <h1 class="text-primary text-5xl font-semibold mb-14">Create a new Account</h1>
+
     <InputField
-    class="mb-8"
+    class="mb-6"
     v-for="input in inputs" :key="input.id"
     :id="input.id"
     :name="input.name"
@@ -12,9 +13,10 @@
     :is-error="errorMessage"
     @change-input="onchange"/>
 
-    <div class="responsive-1 relative -mt-16">
-      <p class="absolute right-0 text-red-500" v-if="errorMessage">Please Try Again</p>
+    <div class="responsive-1 relative -mt-6 mb-6" v-if="errorMessage">
+      <p class="absolute right-0 text-red-500">Please Try Again</p>
     </div>
+    
     <div class="grid grid-cols-2 gap-6 responsive-1">
       <InputButton text="Login" @click="navigateTo('/login')" />
       <InputButton text="Sign Up" @click="handle" />

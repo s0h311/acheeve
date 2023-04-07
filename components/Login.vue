@@ -1,5 +1,5 @@
 <template>
-  <div class="grid place-items-center gap-8 md:mt-10">
+  <div class="grid place-items-center gap-6 w-full my-auto">
     <Logo />
     <h1 class="text-primary text-xl font-semibold">{{ $t('welcome_text') }}</h1>
     
@@ -13,7 +13,7 @@
     :is-error="errorMessage"
     @change-input="onchange"/>
     
-    <div class="space-y-8 responsive-1 -mt-8 mb-8">
+    <div class="space-y-4 responsive-1 -mt-6 mb-6">
       <div class="flex relative items-center">
         <NuxtLink to="/resetPassword" class="underline text-primary text-sm">Reset Password</NuxtLink>
         <p class="absolute right-0 text-red-500" v-if="errorMessage">Please Try Again</p>
@@ -23,6 +23,7 @@
         <InputButton text="Sign Up" @click="navigateTo('/signup')" />
       </div>
     </div>
+    
     <div class="flex justify-center space-x-4">
       <button
       v-for="provider in authProviders"

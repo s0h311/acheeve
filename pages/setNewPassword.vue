@@ -1,12 +1,14 @@
 <template>
-  <div class="grid place-items-center gap-5 pt-56">
-    <h1 class="text-primary text-5xl font-semibold mb-10">{{ $t('new_password') }}</h1>
+  <div class="grid place-items-center w-full my-auto">
+    <h1 class="text-primary text-5xl font-semibold mb-14">{{ $t('new_password') }}</h1>
 
     <InputField
+    class="mb-6"
     name="password"
     label="New Password"
     placeholder="*******"
     type="password"
+    :is-error="errorMessage"
     @change-input="onchange"/>
 
     <InputField
@@ -14,9 +16,10 @@
     label="Confirm Password"
     placeholder="*******"
     type="password"
+    :is-error="errorMessage"
     @change-input="onchange"/>
 
-    <div class="responsive-1 relative -mt-10">
+    <div class="responsive-1 relative mb-6">
       <p class="absolute right-0 text-red-500" v-if="errorMessage">Please Try Again</p>
     </div>
 
@@ -25,6 +28,9 @@
 </template>
   
 <script setup>
+definePageMeta({
+  middleware: ['auth']
+})
 
 const passwords = useState('passwords', () => {
   return {
@@ -33,7 +39,6 @@ const passwords = useState('passwords', () => {
   }
 })
 const supabase = useSupabaseClient();
-
 const errorMessage = ref(false)
 
 const handle = async () => {
@@ -41,13 +46,13 @@ const handle = async () => {
     const { data, error } = await supabase.auth.updateUser({
       password: passwords.value.password
     })
-    navigateTo('/')
-  } else {
-    errorMessage.value = true
-  }
+    if (error) errorMessage.value = true
+    else navigateTo('/')
+  } else errorMessage.value = true
 } 
 
 const onchange = (name, input) => {
+  errorMessage.value = false
   passwords.value[name] = input
 }
 </script>
