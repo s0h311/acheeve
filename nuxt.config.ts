@@ -1,10 +1,14 @@
-import i18n from './config/i18n.js'
+import i18n from './config/i18n'
+import { pwa } from './config/pwa'
 
 export default defineNuxtConfig({
   app: {
     head: {
       title: 'Acheeve | Habits & More',
-      link: [{rel: 'icon', type:'image/x-icon', href:'/favicon.ico'}]
+      link: [
+        {rel: 'icon', type:'image/x-icon', href:'/favicon.ico'},
+        {rel: 'apple-touch-icon', href:'/logo.png'},
+      ],
     }
   },
   modules: [
@@ -12,7 +16,9 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@nuxt/image-edge',
     '@nuxtjs/i18n',
+    '@vite-pwa/nuxt'
   ],
+  pwa,
   css: ['@/assets/css/main.css'],
   postcss: {
     plugins: {
