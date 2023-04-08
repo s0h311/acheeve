@@ -27,7 +27,7 @@ const handle = async () => {
   const { value, error: validationError } = useValidateMail(email.value)
   if (validationError) errorMessage.value = true
   else {
-  const {data, error} = supabase.auth.resetPasswordForEmail(email.value, {
+  const { data, error } = supabase.auth.resetPasswordForEmail(email.value, {
     redirectTo: 'https://acheeve.app/setNewPassword'
   })
   if (error) errorMessage.value = true

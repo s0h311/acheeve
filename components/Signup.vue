@@ -27,7 +27,6 @@
 <script setup>
 
 const supabase = useSupabaseClient()
-
 const errorMessage = ref(false)
 
 const inputs = [

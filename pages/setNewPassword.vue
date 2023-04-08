@@ -28,8 +28,20 @@
 </template>
   
 <script setup>
+
 definePageMeta({
-  middleware: ['auth']
+  middleware: [
+    (to, from) => {
+      const supabase = useSupabaseClient()
+      const isRecovery = ref(false)
+      supabase.auth.onAuthStateChange((event, _session) => {
+        if (event == 'PASSWORD_RECOVERY') isRecovery.value = true
+      })
+
+      if (isRecovery) return
+      else return navigateTo('/')
+    }
+  ]
 })
 
 const passwords = useState('passwords', () => {
