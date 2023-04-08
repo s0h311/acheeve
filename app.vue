@@ -2,6 +2,7 @@
   <div>
     <VitePwaManifest />
     <NuxtLoadingIndicator />
+    <Announcement />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
