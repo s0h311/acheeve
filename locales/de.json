@@ -5,11 +5,18 @@
   "set_new_password": "Passwort bestätigen",
   "new_password": "Neues Passwort erstellen",
   "create_new_account": "Erstelle ein neues Konto",
-  "box_new_password": "Gib dein neues Passwort an",
-  "box_confirm_new_password": "Bestätige dein Passwort",
-  "box_name_asked": "Wie sollen wir dich nennen?",
+  "input_new_password": "Gib dein neues Passwort an",
+  "input_confirm_new_password": "Bestätige dein Passwort",
+  "input_label_password_login": "Passwort",
+  "input_label_name_signup": "Wie sollen wir dich nennen?",
+  "input_label_password_signup": "Passwort",
+  "input_placeholder_name_login": "john@wick.de",
   "button_login": "Einloggen",
   "button_sign_up": "Registrieren",
   "button_reset_password": "Passwort zurücksetzen",
-  "button_error_message": "Versuche es erneut"
+  "button_error_message_login": "Versuche es erneut",
+  "button_error_message_resetpassword": "Bitte gib eine gültige Email an",
+  "button_error_message_signup": "Versuche es erneut",
+  "button_error_message_setnewpassword": "Versuche es erneut",
+  "button_forgot_password": "Passwort vergessen?"
 }

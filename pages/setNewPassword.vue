@@ -5,7 +5,7 @@
     <InputField
     class="mb-6"
     name="password"
-    :label="$t('box_new_password')"
+    :label="$t('input_new_password')"
     placeholder="*******"
     type="password"
     :is-error="errorMessage"
@@ -13,14 +13,14 @@
 
     <InputField
     name="passwordConfirm"
-    :label="$t('box_confirm_new_password')"
+    :label="$t('input_confirm_new_password')"
     placeholder="*******"
     type="password"
     :is-error="errorMessage"
     @change-input="onchange"/>
 
     <div class="responsive-1 relative mb-6">
-      <p class="absolute right-0 text-red-500" v-if="errorMessage">Please Try Again</p>
+      <p class="absolute right-0 text-red-500" v-if="errorMessage">{{ $t('button_error_message_setnewpassword') }}</p>
     </div>
 
     <InputButton :text="$t('set_new_password')" @click="handle" />
