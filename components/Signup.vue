@@ -14,7 +14,7 @@
     @change-input="onchange"/>
 
     <div class="responsive-1 relative -mt-6 mb-6" v-if="errorMessage">
-      <p class="absolute right-0 text-red-500">{{$t('button_error_message_signup')}}</p>
+      <p class="absolute right-0 text-red-500">{{$t('error_message_signup')}}</p>
     </div>
     
     <div class="grid grid-cols-2 gap-6 responsive-1">
@@ -46,7 +46,7 @@ const inputs = [
   {
     id: 3,
     name: 'password',
-    label: t('input_label_password_signup'),
+    label: t('password'),
     placeholder: '*******',
     type: 'password'
   },

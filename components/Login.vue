@@ -16,7 +16,7 @@
     <div class="space-y-4 responsive-1 -mt-6 mb-6">
       <div class="flex relative items-center">
         <NuxtLink to="/resetPassword" class="underline text-primary text-sm">{{$t('button_forgot_password')}}</NuxtLink>
-        <p class="absolute right-0 text-red-500" v-if="errorMessage">{{$t('button_error_message_login')}}</p>
+        <p class="absolute right-0 text-red-500" v-if="errorMessage">{{$t('error_message_login')}}</p>
       </div>
       <div class="grid grid-cols-2 gap-6">
         <InputButton :text="$t('button_login')" @click="handle('email')" />
@@ -49,7 +49,7 @@ const inputs = [
   {
     id: 2,
     name: 'password',
-    label: t('input_label_password_login'),
+    label: t('password'),
     placeholder: '*******',
     type: 'password'
   },

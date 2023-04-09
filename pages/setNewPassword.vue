@@ -20,7 +20,7 @@
     @change-input="onchange"/>
 
     <div class="responsive-1 relative mb-6">
-      <p class="absolute right-0 text-red-500" v-if="errorMessage">{{ $t('button_error_message_setnewpassword') }}</p>
+      <p class="absolute right-0 text-red-500" v-if="errorMessage">{{ $t('error_message_setnewpassword') }}</p>
     </div>
 
     <InputButton :text="$t('set_new_password')" @click="handle" />
