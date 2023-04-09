@@ -1,6 +1,15 @@
 {
-  "password_reset": "Password Reset",
-  "welcome_text": "Welcome to Acheeve, we will help you, organize your habits and thoughts",
+  "announcement": "Acheeve is Under Construction",
+  "password_reset": "Reset your password",
+  "welcome_text": "Welcome to Acheeve! We will help you organize your habits and thoughts.",
   "set_new_password": "Confirm password",
-  "new_password": "Enter new password"
+  "new_password": "New Password",
+  "create_new_account": "Create a new Account",
+  "box_new_password": "Create new password",
+  "box_confirm_new_password": "Confirm password",
+  "box_name_asked": "What should we call you?",
+  "button_login": "Login",
+  "button_sign_up": "Sign Up",
+  "button_reset_password": "Reset Password",
+  "button_error_message": "Please try again"
 }

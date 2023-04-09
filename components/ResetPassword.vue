@@ -10,10 +10,10 @@
     @change-input="onchange"/>
 
     <div class="responsive-1 relative mb-6">
-      <p class="absolute right-0 text-red-500" v-if="errorMessage">Please Try Again</p>
+      <p class="absolute right-0 text-red-500" v-if="errorMessage">{{ $t('button_error_message') }}</p>
     </div>
 
-    <InputButton text="Send Reset E-Mail" @click="handle" />
+    <InputButton :text="$t('button_reset_password')" @click="handle" />
   </div>
 </template>
   

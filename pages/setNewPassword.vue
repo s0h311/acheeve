@@ -5,7 +5,7 @@
     <InputField
     class="mb-6"
     name="password"
-    label="New Password"
+    :label="$t('box_new_password')"
     placeholder="*******"
     type="password"
     :is-error="errorMessage"
@@ -13,7 +13,7 @@
 
     <InputField
     name="passwordConfirm"
-    label="Confirm Password"
+    :label="$t('box_confirm_new_password')"
     placeholder="*******"
     type="password"
     :is-error="errorMessage"

@@ -15,12 +15,12 @@
     
     <div class="space-y-4 responsive-1 -mt-6 mb-6">
       <div class="flex relative items-center">
-        <NuxtLink to="/resetPassword" class="underline text-primary text-sm">Reset Password</NuxtLink>
-        <p class="absolute right-0 text-red-500" v-if="errorMessage">Please Try Again</p>
+        <NuxtLink :to="('/resetPassword')" class="underline text-primary text-sm">{{$t('button_reset_password')}}</NuxtLink>
+        <p class="absolute right-0 text-red-500" v-if="errorMessage">{{$t('button_error_message')}}</p>
       </div>
       <div class="grid grid-cols-2 gap-6">
-        <InputButton text="Login" @click="handle('email')" />
-        <InputButton text="Sign Up" @click="navigateTo('/signup')" />
+        <InputButton :text="$t('button_login')" @click="handle('email')" />
+        <InputButton :text="$t('button_sign_up')" @click="navigateTo('/signup')" />
       </div>
     </div>
     
