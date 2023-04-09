@@ -1,6 +1,22 @@
 {
-  "password_reset": "Password Reset",
-  "welcome_text": "Welcome to Acheeve, we will help you, organize your habits and thoughts",
+  "announcement": "Acheeve is Under Construction",
+  "password_reset": "Reset your password",
+  "welcome_text": "Welcome to Acheeve! We will help you organize your habits and thoughts.",
   "set_new_password": "Confirm password",
-  "new_password": "Enter new password"
+  "new_password": "New Password",
+  "create_new_account": "Create a new Account",
+  "password": "Password",
+  "input_new_password": "Create new password",
+  "input_confirm_new_password": "Confirm password",
+  "input_label_name_signup": "What should we call you?",
+  "input_label_password_signup": "Password",
+  "input_placeholder_name_login": "john@wick.com",
+  "button_login": "Login",
+  "button_sign_up": "Sign Up",
+  "button_reset_password": "Reset Password",
+  "button_forgot_password": "Forgot password?",
+  "error_message_login": "Please try again",
+  "error_message_resetpassword": "Please enter a valid email",
+  "error_message_setnewpassword": "Please try again",
+  "error_message_signup": "Please try again"
 }
