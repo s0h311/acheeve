@@ -18,7 +18,7 @@
     </div>
     
     <div class="grid grid-cols-2 gap-6 responsive-1">
-      <InputButton :text="$t('button_login')" @click="navigateTo('/login')" />
+      <InputButton :text="$t('button_login')" @click="navigateTo(l('/login'))" />
       <InputButton :text="$t('button_sign_up')" @click="handle" />
     </div>
   </div>
@@ -26,9 +26,10 @@
 
 <script setup>
 
+const { t } = useI18n()
+const l = useLocalePath()
 const supabase = useSupabaseClient()
 const errorMessage = ref(false)
-const {t} = useI18n();
 
 const inputs = [
   {
@@ -68,7 +69,7 @@ const handle = async () => {
   })
 
   if (!error) {
-    navigateTo('/')
+    navigateTo(l('/'))
   } else {
     errorMessage.value = true
     console.log(error)
