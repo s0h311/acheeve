@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 440" width="440" height="440">
+	<title>triangle-svg</title>
+	<style>
+		.s0 { fill: #8fccfe } 
+		.s1 { fill: #ffffff } 
+	</style>
+	<path id="Layer copy" class="s0" d="m219.5 9l217.5 377h-435z"/>
+	<path id="Layer" class="s1" d="m219.5 129l174.5 302.5h-349z"/>
+</svg>

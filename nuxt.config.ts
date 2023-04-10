@@ -6,8 +6,8 @@ export default defineNuxtConfig({
     head: {
       title: 'Acheeve | Habits & More',
       link: [
-        {rel: 'icon', type:'image/x-icon', href:'/favicon.ico'},
-        {rel: 'apple-touch-icon', href:'/logo.png'},
+        {rel: 'icon', type:'image/svg+xml', href:'/a.svg'},
+        {rel: 'apple-touch-icon', href:'/a-logo.svg'},
       ],
     }
   },
