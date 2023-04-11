@@ -69,22 +69,19 @@ const handle = async () => {
 
   if (data) {
     saveName(data.user.id)
-    navigateTo('/')
+    navigateTo(l('/'))
 
   } if (error) {
     errorMessage.value = true
-    console.log(error)
   }
 }
 
 const saveName = async (id) => {
-const { error } = await supabase
-  .from('profiles')
-  .insert({ name: credentials.value.name, id})
-  
-
+  const { error } = await supabase   
+    .from('profiles')
+    .insert({ name: credentials.value.name, id})
   if (error) {
-    console.log(error)
+    errorMessage.value = true
   }
 }
 
