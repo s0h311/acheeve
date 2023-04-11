@@ -6,6 +6,9 @@ export default async (id: string) => {
     .select()
     .eq('id', id)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e128315 (cleanup, homepage)
     return profile
 }
