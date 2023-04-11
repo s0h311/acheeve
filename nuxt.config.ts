@@ -6,8 +6,8 @@ export default defineNuxtConfig({
     head: {
       title: 'Acheeve | Habits & More',
       link: [
-        {rel: 'icon', type:'image/x-icon', href:'/favicon.ico'},
-        {rel: 'apple-touch-icon', href:'/logo.png'},
+        {rel: 'icon', type:'image/svg+xml', href:'/a.svg'},
+        {rel: 'apple-touch-icon', href:'/a-logo.svg'},
       ],
     }
   },
@@ -34,8 +34,9 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
-      redirectOn: 'root',  // recommended
+      redirectOn: 'root',
     },
+    strategy: 'prefix',
     locales: [
       {
         code: 'en',

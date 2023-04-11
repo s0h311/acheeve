@@ -29,19 +29,10 @@
   
 <script setup>
 
-definePageMeta({
-  middleware: [
-    (to, from) => {
-      const supabase = useSupabaseClient()
-      const isRecovery = ref(false)
-      supabase.auth.onAuthStateChange((event, _session) => {
-        if (event == 'PASSWORD_RECOVERY') isRecovery.value = true
-      })
+const l = useLocalePath();
 
-      if (isRecovery) return
-      else return navigateTo('/')
-    }
-  ]
+definePageMeta({
+  middleware: ['password-recovery']
 })
 
 const passwords = useState('passwords', () => {
@@ -59,7 +50,7 @@ const handle = async () => {
       password: passwords.value.password
     })
     if (error) errorMessage.value = true
-    else navigateTo('/')
+    else navigateTo(l('/'))
   } else errorMessage.value = true
 } 
 

@@ -1,0 +1,13 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 642 642" width="800" height="800">
+	<title>a</title>
+	<defs>
+		<image  width="644" height="642" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoQAAAKCAQMAAAByIFoRAAAAAXNSR0IB2cksfwAAAANQTFRFKCo3RvJDpQAAAElJREFUeJztwTEBAAAAwqD1T+1pCaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABuzaQAAc6QKwAAAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+		.s0 { fill: #8fccfe } 
+		.s1 { fill: #ffffff } 
+	</style>
+	<use id="bg" href="#img1" x="-1" y="0"/>
+	<path id="Layer copy" class="s0" d="m321 93l235 407.3h-470z"/>
+	<path id="Layer" class="s1" d="m321 222.7l188.5 326.8h-377z"/>
+</svg>

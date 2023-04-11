@@ -19,8 +19,9 @@
   
 <script setup>
 
+const l = useLocalePath()
 const email = ref('')
-const supabase = useSupabaseClient();
+const supabase = useSupabaseClient()
 const errorMessage = ref(false)
 
 const handle = async () => {
@@ -31,7 +32,7 @@ const handle = async () => {
     redirectTo: 'https://acheeve.app/setNewPassword'
   })
   if (error) errorMessage.value = true
-  else navigateTo('/')
+  else navigateTo(l('/'))
   }
 }
 
