@@ -68,11 +68,21 @@ const handle = async () => {
     password: credentials.value.password
   })
 
-  if (!error) {
+  if (data) {
+    saveName(data.user.id)
     navigateTo(l('/'))
-  } else {
+
+  } if (error) {
     errorMessage.value = true
-    console.log(error)
+  }
+}
+
+const saveName = async (id) => {
+  const { error } = await supabase   
+    .from('profiles')
+    .insert({ name: credentials.value.name, id})
+  if (error) {
+    errorMessage.value = true
   }
 }
 
