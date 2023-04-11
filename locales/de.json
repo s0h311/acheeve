@@ -18,5 +18,6 @@
   "error_message_login": "Versuche es erneut",
   "error_message_resetpassword": "Bitte gib eine gültige E-Mail-Adresse an",
   "error_message_setnewpassword": "Versuche es erneut",
-  "error_message_signup": "Versuche es erneut"
+  "error_message_signup": "Versuche es erneut",
+  "logout": "Abmelden"
 }

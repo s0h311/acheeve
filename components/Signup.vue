@@ -71,8 +71,9 @@ const handle = async () => {
   if (data) {
     saveName(data.user.id)
     navigateTo(l('/'))
-
-  } if (error) {
+  }
+  
+  if (error) {
     errorMessage.value = true
   }
 }
@@ -80,7 +81,11 @@ const handle = async () => {
 const saveName = async (id) => {
   const { error } = await supabase   
     .from('profiles')
-    .insert({ name: credentials.value.name, id})
+    .insert({
+      name: credentials.value.name,
+      id
+    })
+    
   if (error) {
     errorMessage.value = true
   }

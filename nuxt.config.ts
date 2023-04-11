@@ -9,6 +9,9 @@ export default defineNuxtConfig({
         {rel: 'icon', type:'image/svg+xml', href:'/a.svg'},
         {rel: 'apple-touch-icon', href:'/a-logo.svg'},
       ],
+      htmlAttrs: {
+        lang: 'en' //should be auto detected
+      } 
     }
   },
   modules: [
