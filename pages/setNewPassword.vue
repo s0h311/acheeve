@@ -29,6 +29,7 @@
   
 <script setup>
 definePageMeta({
+  layout: 'centered',
   middleware: ['password-recovery']
 })
 

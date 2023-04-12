@@ -19,6 +19,7 @@
 
 <script setup>
 definePageMeta({
+  layout: 'centered',
   middleware: ['not-auth']
 })
 
