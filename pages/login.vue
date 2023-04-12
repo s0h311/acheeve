@@ -92,28 +92,28 @@ const handle = async (authProvider) => {
   if (authProvider === 'email') {
     emailLogin()
   } else {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: authProvider
     })
     if (error) {
       errorMessage.value = true
-      return
+    } else {
+      navigateTo(l('/'))
     }
-    navigateTo(l('/'))
   }
 }
 
 const emailLogin = async () => {
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const { error } = await supabase.auth.signInWithPassword({
     email: credentials.value.email,
     password: credentials.value.password
   })
 
   if (error) {
     errorMessage.value = true
-    return
+  } else {
+    navigateTo(l('/'))
   }
-  navigateTo(l('/'))
 }
 
 const onchange = (name, input) => {
