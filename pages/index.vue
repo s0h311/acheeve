@@ -8,7 +8,7 @@
 <script setup>
 definePageMeta({
   layout: 'centered',
-  middleware: ['auth']
+  middleware: ['auth'],
 })
 
 const user = useSupabaseUser()
