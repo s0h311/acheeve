@@ -28,11 +28,11 @@
 </template>
   
 <script setup>
-const l = useLocalePath();
-
 definePageMeta({
   middleware: ['password-recovery']
 })
+
+const l = useLocalePath();
 
 const passwords = useState('passwords', () => {
   return {
