@@ -1,0 +1,12 @@
+node_modules
+.output
+.nuxt
+prisma
+locales
+assets
+*.md
+.eslintrc
+.prettierrc
+.gitignore
+.npmrc
+.nvmrc
