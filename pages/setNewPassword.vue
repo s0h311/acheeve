@@ -28,7 +28,6 @@
 </template>
   
 <script setup>
-
 const l = useLocalePath();
 
 definePageMeta({
