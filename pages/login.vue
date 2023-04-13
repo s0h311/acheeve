@@ -17,18 +17,41 @@
 
     <div class="space-y-4 responsive-1 -mt-6 mb-6">
       <div class="flex relative items-center">
-        <NuxtLink :to="l('/resetPassword')" class="underline text-primary text-sm">{{ $t('button_forgot_password') }}</NuxtLink>
-        <p class="absolute right-0 text-red-500" v-if="errorMessage">{{ $t('error_message_login') }}</p>
+        <NuxtLink
+          :to="l('/resetPassword')"
+          class="underline text-primary text-sm"
+          >{{ $t('button_forgot_password') }}</NuxtLink
+        >
+        <p
+          class="absolute right-0 text-red-500"
+          v-if="errorMessage"
+        >
+          {{ $t('error_message_login') }}
+        </p>
       </div>
       <div class="grid grid-cols-2 gap-6">
-        <InputButton :text="$t('button_login')" @click="handle('email')" />
-        <InputButton :text="$t('button_sign_up')" @click="navigateTo(l('/signup'))" />
+        <InputButton
+          :text="$t('button_login')"
+          @click="handle('email')"
+        />
+        <InputButton
+          :text="$t('button_sign_up')"
+          @click="navigateTo(l('/signup'))"
+        />
       </div>
     </div>
 
     <div class="flex justify-center space-x-4">
-      <button v-for="provider in authProviders" class="rounded-xl bg-white p-1" @click="handle(provider.name)">
-        <img class="w-10" :src="provider.image" :alt="`login with ${provider.name}}`" />
+      <button
+        v-for="provider in authProviders"
+        class="rounded-xl bg-white p-1"
+        @click="handle(provider.name)"
+      >
+        <img
+          class="w-10"
+          :src="provider.image"
+          :alt="`login with ${provider.name}}`"
+        />
       </button>
     </div>
   </div>

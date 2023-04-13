@@ -1,7 +1,10 @@
 <template>
   <div class="grid place-items-center m-auto">
     <p class="text-primary text-2xl font-semibold text-center">Hey {{ name }}</p>
-    <InputButton :text="$t('logout')" @click="handleLogout" />
+    <InputButton
+      :text="$t('logout')"
+      @click="handleLogout"
+    />
   </div>
 </template>
 
