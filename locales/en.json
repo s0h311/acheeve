@@ -10,7 +10,7 @@
   "input_confirm_new_password": "Confirm password",
   "input_label_name_signup": "What should we call you?",
   "input_label_password_signup": "Password",
-  "input_placeholder_name_login": "john@wick.com",
+  "input_placeholder_name_login": "john@wick{'.'}com",
   "button_login": "Login",
   "button_sign_up": "Sign Up",
   "button_reset_password": "Reset Password",

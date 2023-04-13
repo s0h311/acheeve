@@ -10,3 +10,7 @@ assets
 .gitignore
 .npmrc
 .nvmrc
+*.config.ts
+*.config.js
+*.json
+

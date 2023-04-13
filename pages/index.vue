@@ -17,8 +17,10 @@ const name = ref('')
 const l = useLocalePath()
 
 if (user.value) {
-  const profile = await useUserProfile(user.value.id)
-  name.value = profile[0].name
+  const { profile, error } = await useUserProfile(user.value.id)
+
+  if (profile) name.value = profile[0].name
+  if (error) name.value = 'unknown'
 }
 
 const handleLogout = async () => {

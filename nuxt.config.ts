@@ -1,4 +1,3 @@
-import i18n from './config/i18n'
 import { pwa } from './config/pwa'
 
 export default defineNuxtConfig({
@@ -50,6 +49,6 @@ export default defineNuxtConfig({
         name: 'Deutsch'
       }
     ],
-    vueI18n: i18n
+    vueI18n: './config/i18n.js'
   }
 })
