@@ -82,14 +82,13 @@ const handle = async () => {
   const { error: passwordValidationError } = useValidatePassword(credentials.value.password)
   if (emailValidationError || passwordValidationError || !credentials.value.name) errorMessage.value = true
   else {
-    const { data, error } = await supabase.auth.signUp({
+    const { data: user, error } = await supabase.auth.signUp({
       email: credentials.value.email,
       password: credentials.value.password,
     })
 
-    if (data) {
-      saveName(data.user.id)
-      navigateTo(l('/'))
+    if (user.value) {
+      await saveName(user.user.id)
     }
     if (error) {
       errorMessage.value = true
@@ -98,10 +97,13 @@ const handle = async () => {
 }
 
 const saveName = async (id) => {
-  const { error } = await supabase.from('profiles').insert({
+  const { data, error } = await supabase.from('profiles').insert({
     name: credentials.value.name,
     id,
   })
+  if (data) {
+    navigateTo(l('/'))
+  }
   if (error) {
     errorMessage.value = true
   }
