@@ -20,13 +20,11 @@ const name = ref('')
 const l = useLocalePath()
 
 if (user.value) {
-  console.log(user.value.id)
   const { profile, error } = await useUserProfile(user.value.id)
 
-  //if (profile) console.log(profile)
-  //if (error) console.log(error)
+  if (profile) name.value = profile[0].name
+  if (error) name.value = 'error'
 }
-
 const handleLogout = async () => {
   await supabase.auth.signOut()
   navigateTo(l('/login'))
