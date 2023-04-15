@@ -71,24 +71,39 @@ const inputs = [
 
 const credentials = useState('credentials', () => {
   return {
+    name: '',
     email: '',
     password: '',
-    name: '',
   }
 })
 
 const handle = async () => {
-  //if (credentials.value.password !== credentials.value.password) return
-  const { data, error } = await supabase.auth.signUp({
-    email: credentials.value.email,
-    password: credentials.value.password,
-  })
+  const { error: emailValidationError } = useValidateMail(credentials.value.email)
+  const { error: passwordValidationError } = useValidatePassword(credentials.value.password)
+  if (emailValidationError || passwordValidationError || !credentials.value.name) errorMessage.value = true
+  else {
+    const { data, error } = await supabase.auth.signUp({
+      email: credentials.value.email,
+      password: credentials.value.password,
+    })
 
-  if (!error) {
-    navigateTo(l('/'))
-  } else {
+    if (data) {
+      saveName(data.user.id)
+      navigateTo(l('/'))
+    }
+    if (error) {
+      errorMessage.value = true
+    }
+  }
+}
+
+const saveName = async (id) => {
+  const { error } = await supabase.from('profiles').insert({
+    name: credentials.value.name,
+    id,
+  })
+  if (error) {
     errorMessage.value = true
-    console.log(error)
   }
 }
 

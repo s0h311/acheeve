@@ -125,15 +125,20 @@ const handle = async (authProvider) => {
 }
 
 const emailLogin = async () => {
-  const { error } = await supabase.auth.signInWithPassword({
-    email: credentials.value.email,
-    password: credentials.value.password,
-  })
+  const { error: emailValidationError } = useValidateMail(credentials.value.email)
+  const { error: passwordValidationError } = useValidatePassword(credentials.value.password)
+  if (emailValidationError || passwordValidationError) errorMessage.value = true
+  else {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: credentials.value.email,
+      password: credentials.value.password,
+    })
 
-  if (error) {
-    errorMessage.value = true
-  } else {
-    navigateTo(l('/'))
+    if (error) {
+      errorMessage.value = true
+    } else {
+      navigateTo(l('/'))
+    }
   }
 }
 
