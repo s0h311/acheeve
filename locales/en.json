@@ -19,5 +19,6 @@
   "error_message_resetpassword": "Please enter a valid email",
   "error_message_setnewpassword": "Please try again",
   "error_message_signup": "Please try again",
-  "logout": "Logout"
+  "logout": "Logout",
+  "profile": "Profile"
 }

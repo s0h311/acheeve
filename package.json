@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": "17.9.1"
+    "node": "16.20.0"
   },
   "name": "acheeve",
   "private": true,
@@ -15,11 +15,11 @@
   },
   "devDependencies": {
     "@nuxt/image-edge": "^1.0.0-28000486.357efad",
-    "@nuxtjs/i18n": "^8.0.0-beta.10",
+    "@nuxtjs/i18n": "^8.0.0-beta.11",
     "@nuxtjs/supabase": "^0.3.1",
     "@vite-pwa/nuxt": "^0.0.7",
-    "@vueuse/core": "^9.13.0",
-    "@vueuse/nuxt": "^9.13.0",
+    "@vueuse/core": "^10.0.2",
+    "@vueuse/nuxt": "^10.0.2",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
@@ -34,6 +34,8 @@
     "vue": "latest"
   },
   "dependencies": {
-    "joi": "^17.9.1"
+    "@pinia/nuxt": "^0.4.8",
+    "joi": "^17.9.1",
+    "pinia": "^2.0.34"
   }
 }

@@ -18,7 +18,8 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@nuxt/image-edge',
     '@nuxtjs/i18n',
-    '@vite-pwa/nuxt'
+    '@vite-pwa/nuxt',
+    '@pinia/nuxt',
   ],
   pwa,
   css: ['@/assets/css/main.css'],
@@ -50,5 +51,11 @@ export default defineNuxtConfig({
       }
     ],
     vueI18n: './config/i18n.js'
-  }
+  },
+  pinia: {
+    autoImports: [
+      'defineStore',
+      ['defineStore', 'definePiniaStore'],
+    ],
+  },
 })
