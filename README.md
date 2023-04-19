@@ -1,8 +1,6 @@
 ### **Anforderungen**
 ___
-`Node 18.14.2`
-
-<br />
+`Node 16.20.0`
 
 ### **Wie starte ich Acheeve?**
 ---
