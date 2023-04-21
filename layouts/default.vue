@@ -1,5 +1,5 @@
 <template>
-  <div class="p-10">
+  <div class="flex h-screen p-7">
     <slot />
   </div>
 </template>
