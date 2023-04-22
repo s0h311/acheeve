@@ -1,8 +1,8 @@
 import en from '../locales/en.json'
 import de from '../locales/de.json'
 
-export default {
+export default defineI18nConfig(nuxt => ({
   locale: 'en',
   fallbackLocale: 'en',
-  messages: { en, de }
-}
+  messages: { en, de },
+}))

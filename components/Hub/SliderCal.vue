@@ -29,10 +29,20 @@ const props = defineProps({
 
 const emits = defineEmits(['dateChange'])
 
+const { t } = useI18n()
 const daysInEachDirec: number = parseInt(props.daysInEachDirec)
 const selectedDateId = ref<number>(daysInEachDirec)
 const dateRefs = ref<HTMLElement[] | []>([])
-const weekdays: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+const weekdays: string[] = [
+  t('sunday_short'),
+  t('monday_short'),
+  t('tuesday_short'),
+  t('wednesday_short'),
+  t('thursday_short'),
+  t('friday_short'),
+  t('saturday_short'),
+  t('sunday_short'),
+]
 const dates: Date[] = []
 
 interface CalendarDay {

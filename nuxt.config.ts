@@ -1,3 +1,4 @@
+import { i18n } from './config/i18n'
 import { pwa } from './config/pwa'
 
 export default defineNuxtConfig({
@@ -22,6 +23,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
   ],
   pwa,
+  i18n,
   css: ['@/assets/css/main.css'],
   postcss: {
     plugins: {
@@ -31,26 +33,6 @@ export default defineNuxtConfig({
   },
   image: {
     dir: 'assets/static'
-  },
-  i18n: {
-    defaultLocale: 'en',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root',
-    },
-    strategy: 'prefix',
-    locales: [
-      {
-        code: 'en',
-        name: 'English'
-      },
-      {
-        code: 'de',
-        name: 'Deutsch'
-      }
-    ],
-    vueI18n: './config/i18n.js'
   },
   pinia: {
     autoImports: [

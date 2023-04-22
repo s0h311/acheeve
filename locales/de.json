@@ -20,5 +20,12 @@
   "error_message_setnewpassword": "Versuche es erneut",
   "error_message_signup": "Versuche es erneut",
   "logout": "Abmelden",
-  "profile": "Profil"
+  "profile": "Profil",
+  "monday_short": "Mo",
+  "tuesday_short": "Di",
+  "wednesday_short": "Mi",
+  "thursday_short": "Do",
+  "friday_short": "Fr",
+  "saturday_short": "Sa",
+  "sunday_short": "So"
 }
