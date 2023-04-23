@@ -25,6 +25,12 @@ input:-webkit-autofill:active {
   animation: horizontal-shaking 0.3s;
 }
 
+.x-middle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 @keyframes horizontal-shaking {
  0% { transform: translateX(0) }
  25% { transform: translateX(5px) }

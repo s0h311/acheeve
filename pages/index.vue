@@ -16,8 +16,38 @@
         @date-change="onDateChange"
       />
     </div>
+    <div>
+      <button
+        class="absolute right-12 bottom-6"
+        @click="navigateTo(l('/diary'))"
+      >
+        <img
+          src="/icons/hub/diary_icon.png"
+          alt=""
+        />
+      </button>
+      <button class="absolute x-middle bottom-14">
+        <img
+          src="/icons/hub/add_icon.png"
+          alt=""
+        />
+      </button>
+      <button
+        class="absolute left-12 bottom-6"
+        @click="navigateTo(l('/calendar'))"
+      >
+        <img
+          src="/icons/hub/calendar_icon.png"
+          alt=""
+        />
+      </button>
+    </div>
   </div>
 </template>
+
+<style>
+@import '/assets/css/main.css';
+</style>
 
 <script setup lang="ts">
 const { t } = useI18n()
