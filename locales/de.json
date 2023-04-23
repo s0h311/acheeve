@@ -27,5 +27,7 @@
   "thursday_short": "Do",
   "friday_short": "Fr",
   "saturday_short": "Sa",
-  "sunday_short": "So"
+  "sunday_short": "So",
+  "diary": "Tagebuch",
+  "habits": "Habits"
 }
