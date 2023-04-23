@@ -95,11 +95,6 @@ const authProviders = [
     name: 'facebook',
     image: '/auth/facebook.png',
   },
-  {
-    id: 3,
-    name: 'apple',
-    image: '/auth/apple-white.png',
-  },
 ]
 
 const credentials = useState('credentials', () => {
