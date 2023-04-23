@@ -16,6 +16,7 @@
         @date-change="onDateChange"
       />
     </div>
+    <NavBar />
   </div>
 </template>
 
