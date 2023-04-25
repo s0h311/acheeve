@@ -1,5 +1,4 @@
 {
-  "announcement": "Acheeve is Under Construction",
   "password_reset": "Reset your password",
   "welcome_text": "Welcome to Acheeve! We will help you organize your habits and thoughts.",
   "set_new_password": "Confirm password",
@@ -21,6 +20,10 @@
   "error_message_signup": "Please try again",
   "logout": "Logout",
   "profile": "Profile",
+  "today": "Today",
+  "date_st": "st of",
+  "date_nd": "nd of",
+  "date_th": "th of",
   "monday_short": "Mon",
   "tuesday_short": "Tue",
   "wednesday_short": "Wed",
@@ -28,6 +31,19 @@
   "friday_short": "Fri",
   "saturday_short": "Sat",
   "sunday_short": "Sun",
+  "january": "January",
+  "february": "February",
+  "march": "March",
+  "april": "April",
+  "may": "May",
+  "june": "June",
+  "july": "July",
+  "august": "August",
+  "september": "September",
+  "october": "October",
+  "november": "November",
+  "december": "December",
   "diary": "Diary",
-  "habits": "Habits"
+  "habits": "Habits",
+  "habits_left_welcome_text_hub": "Habits left"
 }

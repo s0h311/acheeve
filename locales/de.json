@@ -1,5 +1,4 @@
 {
-  "announcement": "Acheeve ist in Entwicklung",
   "password_reset": "Setze dein Passwort zurück",
   "welcome_text": "Willkommen bei Acheeve! Mit uns organisierst du Gedanken und Angewohnheiten.",
   "set_new_password": "Passwort bestätigen",
@@ -21,6 +20,10 @@
   "error_message_signup": "Versuche es erneut",
   "logout": "Abmelden",
   "profile": "Profil",
+  "today": "Heute",
+  "date_st": ".",
+  "date_nd": ".",
+  "date_th": ".",
   "monday_short": "Mo",
   "tuesday_short": "Di",
   "wednesday_short": "Mi",
@@ -28,6 +31,19 @@
   "friday_short": "Fr",
   "saturday_short": "Sa",
   "sunday_short": "So",
+  "january": "Januar",
+  "february": "Februar",
+  "march": "März",
+  "april": "April",
+  "may": "Mai",
+  "june": "Juni",
+  "july": "Juli",
+  "august": "August",
+  "september": "September",
+  "october": "Oktober",
+  "november": "November",
+  "december": "Dezember",
   "diary": "Tagebuch",
-  "habits": "Habits"
+  "habits": "Habits",
+  "habits_left_welcome_text_hub": "Habits übrig"
 }

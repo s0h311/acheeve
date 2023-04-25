@@ -44,13 +44,14 @@
     <div class="flex justify-center space-x-4">
       <button
         v-for="provider in authProviders"
+        :key="provider.id"
         class="rounded-xl bg-white p-1"
         @click="handle(provider.name)"
       >
         <img
           class="w-10"
           :src="provider.image"
-          :alt="`login with ${provider.name}}`"
+          :alt="`login with ${provider.name}`"
         />
       </button>
     </div>

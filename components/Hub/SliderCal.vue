@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar w-full md:w-1/5 h-20 whitespace-nowrap relative overflow-x-scroll overflow-y-hidden cursor-pointer">
+  <div class="calendar w-full md:w-1/2 h-20 whitespace-nowrap overflow-x-scroll overflow-y-hidden cursor-pointer">
     <div
       class="rounded-2xl inline-block float-none w-1/6 h-4/6 text-center"
       v-for="date in allDates"
