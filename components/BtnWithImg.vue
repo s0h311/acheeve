@@ -1,12 +1,14 @@
 <template>
   <div>
     <button @click="emits('onClick')">
-      <img
+      <nuxt-img
+        :width="width"
+        :height="height"
         :src="imageUrl"
         :alt="`Button for ${name}`"
       />
     </button>
-    <p class="text-primary text-center text-xs -mt-1">{{ label }}</p>
+    <p class="text-primary text-center text-xs">{{ label }}</p>
   </div>
 </template>
 
@@ -15,6 +17,8 @@ const props = defineProps({
   imageUrl: String,
   name: String,
   label: String,
+  width: Number,
+  height: Number,
 })
 
 const emits = defineEmits(['onClick'])

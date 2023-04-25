@@ -32,9 +32,6 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  image: {
-    dir: 'assets/static'
-  },
   pinia: {
     autoImports: [
       'defineStore',
