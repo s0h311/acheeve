@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[{ errorBorder: isError }, 'focus:border-0']"
-    class="rounded-3xl responsive-1 h-14 px-4 bg-textfield"
+    class="rounded-3xl responsive-1 h-14 px-4 bg-dark2"
   >
     <label class="text-primary text-xs">{{ label }}</label>
     <br />

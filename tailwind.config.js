@@ -11,8 +11,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#282A37',
-        textfield: '#323645',
+        dark: '#282A37',
+        dark2: '#323645',
         primary: '#EDEDEE'
       }
     },

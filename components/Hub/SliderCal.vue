@@ -9,7 +9,7 @@
       @click="updateSelectedDate(date.id)"
     >
       <p
-        :class="[selectedDateId === date.id ? 'text-background' : 'text-primary']"
+        :class="[selectedDateId === date.id ? 'text-dark' : 'text-primary']"
         class="unselectable font-semibold"
       >
         {{ date.weekday }} <br />
@@ -57,9 +57,9 @@ onMounted(() => {
 
 const scrollToSelectedDate = (elementRef: number) => {
   if (dateRefs.value) {
-    //Scroll authomatically to the current date
+    //scrolls authomatically to the current date
     dateRefs.value[elementRef].scrollIntoView({
-      behavior: 'smooth',
+      behavior: 'auto',
       inline: 'center',
     })
   }

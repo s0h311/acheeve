@@ -45,7 +45,7 @@
       <button
         v-for="provider in authProviders"
         :key="provider.id"
-        class="rounded-xl bg-white p-1"
+        class="rounded-xl bg-primary p-1"
         @click="handle(provider.name)"
       >
         <img

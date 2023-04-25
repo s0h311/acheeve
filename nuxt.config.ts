@@ -12,7 +12,7 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en' //should be auto detected
       } 
-    }
+    },
   },
   ssr: ('true' === process.env.SSR),
   modules: [
