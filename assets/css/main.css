@@ -14,11 +14,12 @@
   }
 }
 
+/* Change the white to any color ;) */
 input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  transition: all 0s 50000s;
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #323645 inset !important;
 }
 
 .errorBorder {
