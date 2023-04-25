@@ -1,7 +1,7 @@
 {
   "name": "Acheeve",
   "short_name": "Acheeve",
-  "start_url": "/login",
+  "start_url": "/",
   "icons": [
     {
       "src": "pwa-icons/manifest-icon-192.maskable.png",
