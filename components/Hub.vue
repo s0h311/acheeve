@@ -1,21 +1,25 @@
 <template>
-  <div class="grid grid-rows-3 place-items-center w-full">
-    <button
-      class="absolute right-3 top-3"
-      @click="navigateTo(l('/profile'))"
-    >
-      <img
-        src="/icons/hub/settings.svg"
-        alt=""
-      />
-    </button>
-    <div class="grid place-items-center gap-8 mt-8">
-      <h1 class="text-primary font-semibold text-[26px] leading-8 whitespace-pre-wrap text-center">{{ getWelcomeText() }}</h1>
-      <HubSliderCal
-        days-in-each-direc="14"
-        @date-change="onDateChange"
-      />
+  <div class="grid grid-rows-4 place-items-center w-full">
+    <div class="w-full">
+      <button
+        class="absolute right-3 top-3"
+        @click="navigateTo(l('/profile'))"
+      >
+        <img
+          src="/icons/hub/settings.svg"
+          alt=""
+        />
+      </button>
+      <div class="grid place-items-center gap-8 mt-8">
+        <h1 class="text-primary font-semibold text-[26px] leading-8 whitespace-pre-wrap text-center">{{ getWelcomeText() }}</h1>
+        <HubSliderCal
+          days-in-each-direc="14"
+          @date-change="onDateChange"
+        />
+      </div>
     </div>
+    <!--Filter-->
+    <!--HabitCards-->
     <NavBar />
   </div>
 </template>

@@ -11,7 +11,7 @@
 
 <script setup>
 defineProps({
-  text: '',
+  text: String,
 })
 
 const emits = defineEmits(['click'])
