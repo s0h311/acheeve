@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-rows-4 place-items-center w-full">
-    <div class="w-full">
+    <div class="max-w-md">
       <button
         class="absolute right-3 top-3"
         @click="navigateTo(l('/profile'))"
@@ -17,8 +17,8 @@
           @date-change="onDateChange"
         />
       </div>
+      <HubFilter />
     </div>
-    <!--Filter-->
     <!--HabitCards-->
     <NavBar />
   </div>
