@@ -26,7 +26,7 @@
         class=""
         :width="50"
         :height="50"
-        :name="$t('diary')"
+        :name="$t('diary_entry')"
         image-url="/icons/hub/diary_icon.png"
         :label="$t('add_diary_entry')"
         @on-click="isActive = !isActive"

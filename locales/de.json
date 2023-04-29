@@ -52,5 +52,6 @@
   "add_habit": "Baue ein neues Habit auf",
   "add": "Füge hinzu...",
   "add_diary_entry": "Notiere deine Gedanken",
-  "close_add_habit_or_entry": "Menü schließen"
+  "close_add_habit_or_entry": "Menü schließen",
+  "diary_entry": "Tagebucheintrag"
 }
