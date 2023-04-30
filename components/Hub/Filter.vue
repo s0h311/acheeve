@@ -2,15 +2,13 @@
   <div class="flex flex-col justify-between h-full">
     <div class="flex justify-center mt-5">
       <div
-        class="filter-option"
-        :class="{ active: filter === 'todo' }"
+        class="text-primary cursor-pointer mx-2.5 my-0 p-2.5 rounded-[5px]"
         @click="setFilter('todo')"
       >
         ToDo
       </div>
       <div
-        class="filter-option"
-        :class="{ active: filter === 'done' }"
+        class="text-primary cursor-pointer mx-2.5 my-0 p-2.5 rounded-[5px]"
         @click="setFilter('done')"
       >
         Done
@@ -55,22 +53,22 @@ export default {
       filter: 'todo',
     })
 
-    const setFilter = (filter) => {
+    const setFilter = filter => {
       state.filter = filter
     }
 
     const filteredTasks = computed(() => {
       if (state.filter === 'todo') {
         return {
-          Morning: state.tasks.Morning.filter((task) => task.isDone === false),
-          Evening: state.tasks.Evening.filter((task) => task.isDone === false),
-          Everytime: state.tasks.Everytime.filter((task) => task.isDone === false),
+          Morning: state.tasks.Morning.filter(task => task.isDone === false),
+          Evening: state.tasks.Evening.filter(task => task.isDone === false),
+          Everytime: state.tasks.Everytime.filter(task => task.isDone === false),
         }
       } else {
         return {
-          Morning: state.tasks.Morning.filter((task) => task.isDone === true),
-          Evening: state.tasks.Evening.filter((task) => task.isDone === true),
-          Everytime: state.tasks.Everytime.filter((task) => task.isDone === true),
+          Morning: state.tasks.Morning.filter(task => task.isDone === true),
+          Evening: state.tasks.Evening.filter(task => task.isDone === true),
+          Everytime: state.tasks.Everytime.filter(task => task.isDone === true),
         }
       }
     })
@@ -79,13 +77,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.filter-option {
-  @apply text-primary cursor-pointer mx-2.5 my-0 p-2.5 rounded-[5px];
-}
-
-.filter-option.active {
-  @apply bg-[#0074d9] text-white;
-}
-</style>
