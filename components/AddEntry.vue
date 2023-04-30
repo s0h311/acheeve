@@ -1,21 +1,16 @@
 <template>
   <div
-    class="grid grid-cols-2 gap-x-4 cursor-pointer -ml-28"
+    class="flex items-center space-x-7 px-6 py-5 border-2 border-[#5195ea] cursor-pointer bg-[#2b4276] rounded-2xl w-full"
     @click="emits('onClick')"
   >
-    <div class="place-self-end">
-      <button>
-        <nuxt-img
-          :width="width"
-          :height="height"
-          :src="imageUrl"
-          :alt="`Button for ${name}`"
-        />
-      </button>
-    </div>
-    <div class="">
-      <h2 class="text-x1 text-red-400 font-semibold">{{ name }}</h2>
-      <p class="text-primary text-xs">{{ label }}</p>
+    <BtnWithImg
+      :width="width"
+      :height="height"
+      :imageUrl="imageUrl"
+    />
+    <div>
+      <h2 class="text-xl text-red-400 font-semibold">{{ name }}</h2>
+      <p class="text-primary text-sm">{{ label }}</p>
     </div>
   </div>
 </template>
