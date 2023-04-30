@@ -41,7 +41,7 @@
       :name="$t('habits')"
       image-url="/icons/hub/habits_icon.png"
       :label="$t('habits')"
-      @on-click="navigateTo(l('/habits'))"
+      @on-click="navigateTo(l('/'))"
     />
     <BtnWithImg
       :width="55"
