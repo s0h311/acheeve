@@ -45,6 +45,13 @@
   "december": "Dezember",
   "diary": "Tagebuch",
   "habits": "Habits",
+  "habit": "Habit",
   "habits_left_welcome_text_hub": "Habits übrig",
-  "go_back_btn_error_page": "Zurück"
+  "go_back_btn_error_page": "Zurück",
+  "add_new_habit_or_diary_entry": "Füge ein neues Habit oder einen neuen Tagebucheintrag hinzu",
+  "add_habit": "Baue ein neues Habit auf",
+  "add": "Füge hinzu...",
+  "add_diary_entry": "Notiere deine Gedanken",
+  "close_add_habit_or_entry": "Menü schließen",
+  "diary_entry": "Tagebucheintrag"
 }

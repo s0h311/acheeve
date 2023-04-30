@@ -45,6 +45,13 @@
   "december": "December",
   "diary": "Diary",
   "habits": "Habits",
+  "habit": "Habit",
   "habits_left_welcome_text_hub": "Habits left",
-  "go_back_btn_error_page": "Go Back"
+  "go_back_btn_error_page": "Go Back",
+  "add_new_habit_or_diary_entry": "Add a new habit or diary entry",
+  "add_habit": "Start building a habit",
+  "add": "Add...",
+  "add_diary_entry": "Write down your thoughts",
+  "close_add_habit_or_entry": "Close menu",
+  "diary_entry": "Diary entry"
 }
