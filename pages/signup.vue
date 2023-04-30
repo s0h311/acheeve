@@ -3,22 +3,40 @@
     <!---pt-32-->
     <h1 class="text-primary text-5xl font-semibold mb-14">{{ $t('create_new_account') }}</h1>
 
-    <InputField class="mb-6" v-for="input in inputs" :key="input.id" :id="input.id" :name="input.name"
-      :label="input.label" :placeholder="input.placeholder" :type="input.type" :is-error="errorMessage"
-      @change-input="onchange" />
+    <InputField
+      class="mb-6"
+      v-for="input in inputs"
+      :key="input.id"
+      :id="input.id"
+      :name="input.name"
+      :label="input.label"
+      :placeholder="input.placeholder"
+      :type="input.type"
+      :is-error="errorMessage"
+      @change-input="onchange"
+    />
 
-    <div class="responsive-1 relative -mt-6 mb-6" v-if="errorMessage">
+    <div
+      class="responsive-1 relative -mt-6 mb-6"
+      v-if="errorMessage"
+    >
       <p class="absolute right-0 text-red-500">{{ errorMessage }}</p>
     </div>
 
     <div class="grid grid-cols-2 gap-6 responsive-1">
-      <InputButton :text="$t('button_login')" @click="navigateTo(l('/login'))" />
-      <InputButton :text="$t('button_sign_up')" @click="handle" />
+      <InputButton
+        :text="$t('button_login')"
+        @click="navigateTo(l('/login'))"
+      />
+      <InputButton
+        :text="$t('button_sign_up')"
+        @click="handle"
+      />
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 definePageMeta({
   layout: 'centered',
   middleware: ['not-auth'],
@@ -27,9 +45,17 @@ definePageMeta({
 const { t } = useI18n()
 const l = useLocalePath()
 const supabase = useSupabaseClient()
-const errorMessage = ref(null)
+const errorMessage = ref<string | null>(null)
 
-const inputs = [
+interface Credential {
+  id: Number
+  name: String
+  label: String
+  placeholder: String
+  type?: String
+}
+
+const inputs: Credential[] = [
   {
     id: 1,
     name: 'name',
@@ -60,15 +86,13 @@ const credentials = useState('credentials', () => {
 })
 
 const handle = async () => {
-  let emailValidationError = await useValidateMail(credentials.value.email)
-  let passwordValidationError = await useValidatePassword(credentials.value.password)
-  let ameValidationError = await useValidatePassword(credentials.value.name)
+  let emailValidationError: string | null = useValidateMail(credentials.value.email)
+  let passwordValidationError: string | null = useValidatePassword(credentials.value.password)
+  let nameValidationError: string | null = useValidateName(credentials.value.name)
 
-  console.log(emailValidationError)
-  if (emailValidationError) errorMessage.value = emailValidationError
-  if (passwordValidationError) errorMessage.value = passwordValidationError
-  if (nameValidationError) errorMessage.value = nameValidationError
-
+  if (emailValidationError) errorMessage.value = t(emailValidationError)
+  else if (passwordValidationError) errorMessage.value = t(passwordValidationError)
+  else if (nameValidationError) errorMessage.value = t(nameValidationError)
   else {
     const { data: user, error } = await supabase.auth.signUp({
       email: credentials.value.email,
@@ -81,18 +105,18 @@ const handle = async () => {
       })
 
       if (error) {
-        errorMessage.value = true
+        errorMessage.value = 'error'
       } else {
         navigateTo(l('/'))
       }
     }
     if (error) {
-      errorMessage.value = true
+      errorMessage.value = 'error'
     }
   }
 }
 
-const onchange = (name, input) => {
+const onchange = (name: string, input: string) => {
   errorMessage.value = null
   credentials.value[name] = input
 }

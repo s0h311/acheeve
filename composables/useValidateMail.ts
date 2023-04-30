@@ -1,26 +1,21 @@
 import Joi from 'joi'
-import { useI18n } from 'vue-i18n'
 
-const schema = Joi.string()
-  .email({ tlds: { allow: false } })
-  .required()
+const schema = Joi.string().email({ tlds: { allow: false } })
 
-export default function validateEmail(email: string): string | null {
+export default (email: string): string | null => {
   const { error } = schema.validate(email)
-  const { t } = useI18n()
 
   if (error) {
-    const errorMessage = error.details[0].message
+    const errorMessage = error.details[0].type
 
-    if (errorMessage.includes('email')) {
-      return t('error_email_invalid')
+    if (errorMessage.includes('string.email')) {
+      return 'validation_error_email_invalid'
     }
 
-    if (errorMessage.includes('empty')) {
-      return t('error_email_required')
+    if (errorMessage.includes('string.empty')) {
+      return 'validation_error_email_required'
     }
-    return null
+    return 'validation_error_other'
   }
-
   return null
 }
