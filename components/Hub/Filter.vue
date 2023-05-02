@@ -1,79 +1,81 @@
 <template>
-  <div class="flex flex-col justify-between h-full">
-    <div class="flex justify-center mt-5">
-      <div
-        class="text-primary cursor-pointer mx-2.5 my-0 p-2.5 rounded-[5px]"
-        @click="setFilter('todo')"
+  <div class="w-full h-[12%] space-y-2">
+    <div class="grid grid-cols-2">
+      <button
+        class="rounded-md rounded-r-none"
+        :class="[selectedState === 1 ? 'bg-[#595b63]' : 'bg-black']"
+        @click="handleStateChange(1)"
       >
-        ToDo
-      </div>
-      <div
-        class="text-primary cursor-pointer mx-2.5 my-0 p-2.5 rounded-[5px]"
-        @click="setFilter('done')"
+        {{ $t('todo') }}
+      </button>
+      <button
+        class="rounded-md rounded-l-none"
+        :class="[selectedState === 2 ? 'bg-[#595b63]' : 'bg-black']"
+        @click="handleStateChange(2)"
       >
-        Done
-      </div>
+        {{ $t('done') }}
+      </button>
     </div>
-    <div class="flex-[1] overflow-y-auto mt-5">
-      <div
-        class="flex items-center mb-2.5"
-        v-for="(tasks, time) in filteredTasks"
-        :key="time"
-      >
-        <div class="text-primary text-xl font-semibold mr-5">{{ time }}</div>
-        <div class="flex flex-wrap gap-2.5">
-          <div
-            class="bg-[#eee] p-[5px] rounded-[5px]"
-            v-for="(task, index) in tasks"
-            :key="index"
-          >
-            {{ task.text }}
-          </div>
-        </div>
+    <div
+      class="grid grid-cols-2 cursor-pointer h-full"
+      v-for="daytime in daytimes"
+      :key="daytime.id"
+      @click="handleDaytimeChange(daytime.id)"
+    >
+      <div class="flex items-center space-x-3">
+        <img
+          :src="daytime.icon"
+          alt=""
+        />
+        <p class="text-primary">{{ daytime.name }}</p>
       </div>
+      <img
+        class="place-self-end"
+        :src="daytime.id === selectedDaytime ? '/icons/hub/drop_down_active.png' : '/icons/hub/drop_down_inactive.png'"
+        alt=""
+      />
     </div>
   </div>
 </template>
 
-<script>
-import { reactive, computed } from 'vue'
+<script setup lang="ts">
+const { t } = useI18n()
 
-export default {
-  setup() {
-    const state = reactive({
-      tasks: {
-        Morning: [
-          { text: 'brush teeeeeeth', isDone: true },
-          { text: 'eat', isDone: false },
-        ],
-        Evening: [{ text: 'brush again', isDone: true }],
-        Everytime: [],
-      },
-      newTask: '',
-      filter: 'todo',
-    })
+const props = defineProps({
+  morningLeft: String,
+  eveningLeft: String,
+  alldayLeft: String,
+})
+const emits = defineEmits(['onStateChange', 'onDaytimeChange'])
 
-    const setFilter = filter => {
-      state.filter = filter
-    }
+const selectedState = ref<number>(1) // 1 = ToDo, 2 = Done
+const selectedDaytime = ref<number>(0) // 1 = morning, 2 = evening, 3 = allday
 
-    const filteredTasks = computed(() => {
-      if (state.filter === 'todo') {
-        return {
-          Morning: state.tasks.Morning.filter(task => task.isDone === false),
-          Evening: state.tasks.Evening.filter(task => task.isDone === false),
-          Everytime: state.tasks.Everytime.filter(task => task.isDone === false),
-        }
-      } else {
-        return {
-          Morning: state.tasks.Morning.filter(task => task.isDone === true),
-          Evening: state.tasks.Evening.filter(task => task.isDone === true),
-          Everytime: state.tasks.Everytime.filter(task => task.isDone === true),
-        }
-      }
-    })
-
-    return { state, setFilter, filteredTasks }
+const daytimes = [
+  {
+    id: 1,
+    name: t('morning'),
+    icon: '/icons/hub/morning.png',
   },
+  {
+    id: 2,
+    name: t('evening'),
+    icon: '/icons/hub/evening.png',
+  },
+  {
+    id: 3,
+    name: t('allday'),
+    icon: '/icons/hub/allday.png',
+  },
+]
+
+const handleStateChange = (state: number) => {
+  selectedState.value = state
+  emits('onStateChange', state)
+}
+
+const handleDaytimeChange = (daytime: number) => {
+  selectedDaytime.value = selectedDaytime.value === daytime ? 0 : daytime
+  emits('onDaytimeChange', daytime)
 }
 </script>
