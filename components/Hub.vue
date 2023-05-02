@@ -18,7 +18,7 @@
         />
       </div>
     </div>
-    <!--Filter-->
+    <HubFilter />
     <!--HabitCards-->
     <NavBar />
   </div>
