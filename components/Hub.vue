@@ -1,6 +1,6 @@
 <template>
-  <div class="grid grid-rows-4 place-items-center w-full">
-    <div class="w-full">
+  <div class="responsive-w grid gap-8 h-screen mx-auto">
+    <div>
       <button
         class="absolute right-3 top-3"
         @click="navigateTo(l('/profile'))"
@@ -19,12 +19,18 @@
       </div>
     </div>
     <HubFilter />
-    <!--HabitCards-->
-    <NavBar />
+    <HabitListing />
+    <div class="relative">
+      <NavBar />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: 'centered',
+})
+
 const { t } = useI18n()
 const l = useLocalePath()
 

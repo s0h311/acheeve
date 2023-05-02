@@ -1,9 +1,9 @@
 <template>
   <div
     v-if="isActive"
-    class="grid place-items-center gap-8 pb-8 pt-4 px-6 responsive-1 absolute bottom-0 md:left-auto bg-[#1b2a4a] rounded-t-3xl"
+    class="grid w-full gap-8 pb-8 pt-4 px-6 absolute bottom-0 bg-[#1b2a4a] rounded-t-3xl"
   >
-    <div class="flex items-center">
+    <div class="flex items-center justify-center">
       <h1 class="text-center text-primary text-xl">{{ $t('add') }}</h1>
       <button
         class="text-primary font-semibold text-2xl absolute right-6"
@@ -33,7 +33,7 @@
   </div>
   <div
     v-else
-    class="grid grid-cols-3 responsive-1 absolute bottom-3 left-0 md:left-auto place-items-center px-6"
+    class="grid grid-cols-3 w-full absolute bottom-0 md:left-auto place-items-center px-6"
   >
     <BtnWithImg
       :width="45"

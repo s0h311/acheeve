@@ -10,7 +10,7 @@
 }
 
 @layer base {
-  .responsive-1 {
+  .responsive-w {
     @apply w-full sm:w-4/6 md:w-3/6 lg:w-2/6 xl:w-[20%] 2xl:w-[20%]
   }
 }
@@ -35,4 +35,18 @@ input:-webkit-autofill:active  {
  50% { transform: translateX(-5px) }
  75% { transform: translateX(5px) }
  100% { transform: translateX(0) }
+}
+
+.hideScrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hideScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hideScrollbar div {
+  zoom: 1;
 }

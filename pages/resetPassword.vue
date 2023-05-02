@@ -10,7 +10,7 @@
       @change-input="onchange"
     />
 
-    <div class="responsive-1 relative mb-6">
+    <div class="responsive-w relative mb-6">
       <p
         class="absolute right-0 text-red-500"
         v-if="errorMessage"

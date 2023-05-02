@@ -1,5 +1,5 @@
 <template>
-  <div class="calendar responsive-1 h-20 whitespace-nowrap overflow-x-scroll overflow-y-hidden cursor-pointer">
+  <div class="hideScrollbar w-full whitespace-nowrap overflow-x-scroll overflow-y-hidden cursor-pointer">
     <div
       class="rounded-2xl inline-block float-none w-1/6 h-4/6 text-center"
       v-for="date in allDates"
@@ -101,20 +101,6 @@ const updateSelectedDate = (dateId: number) => {
 </script>
 
 <style scoped>
-.calendar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.calendar::-webkit-scrollbar {
-  display: none;
-}
-
-.calendar div {
-  zoom: 1;
-}
-
 .unselectable {
   -webkit-touch-callout: none;
   -webkit-user-select: none;

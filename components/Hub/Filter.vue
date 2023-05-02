@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full h-[12%] space-y-2">
-    <div class="grid grid-cols-2">
+  <div class="space-y-3">
+    <div class="grid grid-cols-2 h-1/5">
       <button
         class="rounded-md rounded-r-none"
         :class="[selectedState === 1 ? 'bg-[#595b63]' : 'bg-black']"
@@ -17,7 +17,7 @@
       </button>
     </div>
     <div
-      class="grid grid-cols-2 cursor-pointer h-full"
+      class="grid grid-cols-2 cursor-pointer"
       v-for="daytime in daytimes"
       :key="daytime.id"
       @click="handleDaytimeChange(daytime.id)"

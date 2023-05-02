@@ -17,13 +17,13 @@
     />
 
     <div
-      class="responsive-1 relative -mt-6 mb-6"
+      class="responsive-w relative -mt-6 mb-6"
       v-if="errorMessage"
     >
       <p class="absolute right-0 text-red-500">{{ errorMessage }}</p>
     </div>
 
-    <div class="grid grid-cols-2 gap-6 responsive-1">
+    <div class="grid grid-cols-2 gap-6 responsive-w">
       <InputButton
         :text="$t('button_login')"
         @click="navigateTo(l('/login'))"

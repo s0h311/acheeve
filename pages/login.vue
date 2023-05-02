@@ -15,7 +15,7 @@
       @change-input="onchange"
     />
 
-    <div class="space-y-4 responsive-1 -mt-6 mb-6">
+    <div class="space-y-4 responsive-w -mt-6 mb-6">
       <div class="flex relative items-center">
         <NuxtLink
           :to="l('/resetPassword')"
