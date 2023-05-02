@@ -1,3 +1,11 @@
-<template></template>
+<template>
+  <div>
+    <p>this is the diary page</p>
+  </div>
+</template>
 
-<script setup></script>
+<script setup lang="ts">
+definePageMeta({
+  middleware: ['auth'],
+})
+</script>
