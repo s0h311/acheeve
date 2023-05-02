@@ -20,7 +20,7 @@
       class="responsive-1 relative -mt-6 mb-6"
       v-if="errorMessage"
     >
-      <p class="absolute right-0 text-red-500">{{ $t('error_message_signup') }}</p>
+      <p class="absolute right-0 text-red-500">{{ errorMessage }}</p>
     </div>
 
     <div class="grid grid-cols-2 gap-6 responsive-1">
@@ -36,7 +36,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 definePageMeta({
   layout: 'centered',
   middleware: ['not-auth'],
@@ -45,9 +45,17 @@ definePageMeta({
 const { t } = useI18n()
 const l = useLocalePath()
 const supabase = useSupabaseClient()
-const errorMessage = ref(false)
+const errorMessage = ref<string | null>(null)
 
-const inputs = [
+interface Credential {
+  id: Number
+  name: String
+  label: String
+  placeholder: String
+  type?: String
+}
+
+const inputs: Credential[] = [
   {
     id: 1,
     name: 'name',
@@ -78,10 +86,13 @@ const credentials = useState('credentials', () => {
 })
 
 const handle = async () => {
-  const { error: emailValidationError } = useValidateMail(credentials.value.email)
-  const { error: passwordValidationError } = useValidatePassword(credentials.value.password)
+  let emailValidationError: string | null = useValidateMail(credentials.value.email)
+  let passwordValidationError: string | null = useValidatePassword(credentials.value.password)
+  let nameValidationError: string | null = useValidateName(credentials.value.name)
 
-  if (emailValidationError || passwordValidationError || !credentials.value.name) errorMessage.value = true
+  if (emailValidationError) errorMessage.value = t(emailValidationError)
+  else if (passwordValidationError) errorMessage.value = t(passwordValidationError)
+  else if (nameValidationError) errorMessage.value = t(nameValidationError)
   else {
     const { data: user, error } = await supabase.auth.signUp({
       email: credentials.value.email,
@@ -94,19 +105,19 @@ const handle = async () => {
       })
 
       if (error) {
-        errorMessage.value = true
+        errorMessage.value = 'error'
       } else {
         navigateTo(l('/'))
       }
     }
     if (error) {
-      errorMessage.value = true
+      errorMessage.value = 'error'
     }
   }
 }
 
-const onchange = (name, input) => {
-  errorMessage.value = false
+const onchange = (name: string, input: string) => {
+  errorMessage.value = null
   credentials.value[name] = input
 }
 </script>
