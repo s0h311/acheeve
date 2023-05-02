@@ -1,5 +1,5 @@
 <template>
-  <div class="responsive-w grid gap-8 h-screen mx-auto">
+  <div class="responsive-w grid gap-10 mx-auto">
     <div>
       <button
         class="absolute right-3 top-3"
@@ -58,7 +58,14 @@ const getWelcomeText = (): string => {
   let month = months[selectedDate.value.getMonth()]
 
   let firstWord = selectedDate.value.toLocaleDateString() === todaysDate ? t('today') : ''
-  let numberExtension = day.toString().endsWith('1') ? t('date_st') : day.toString().endsWith('2') ? t('date_nd') : t('date_th')
+  let dayString = day.toString()
+  let numberExtension = dayString.endsWith('1')
+    ? t('date_st')
+    : dayString.endsWith('2')
+    ? t('date_nd')
+    : dayString.endsWith('3')
+    ? t('date_rd')
+    : t('date_th')
 
   return firstWord + ' ' + day + numberExtension + ' ' + month + '\n' + habitsLeft.value + ' ' + t('habits_left_welcome_text_hub')
 }

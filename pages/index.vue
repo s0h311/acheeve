@@ -1,7 +1,9 @@
 <template>
-  <div class="w-full">
-    <Hub />
-  </div>
+  <Hub />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+definePageMeta({
+  layout: 'centered',
+})
+</script>

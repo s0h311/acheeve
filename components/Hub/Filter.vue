@@ -2,14 +2,14 @@
   <div class="space-y-3">
     <div class="grid grid-cols-2 h-1/5">
       <button
-        class="rounded-md rounded-r-none"
+        class="rounded-md rounded-r-none font-semibold"
         :class="[selectedState === 1 ? 'bg-[#595b63]' : 'bg-black']"
         @click="handleStateChange(1)"
       >
         {{ $t('todo') }}
       </button>
       <button
-        class="rounded-md rounded-l-none"
+        class="rounded-md rounded-l-none font-semibold"
         :class="[selectedState === 2 ? 'bg-[#595b63]' : 'bg-black']"
         @click="handleStateChange(2)"
       >
@@ -27,7 +27,7 @@
           :src="daytime.icon"
           alt=""
         />
-        <p class="text-primary">{{ daytime.name }}</p>
+        <p class="text-primary text-lg leading-none font-semibold">{{ daytime.name }}</p>
       </div>
       <img
         class="place-self-end"

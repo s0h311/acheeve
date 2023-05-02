@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-[60%] hideScrollbar whitespace-nowrap space-y-5 overflow-y-scroll overflow-x-hidden">
+  <div class="w-full h-[65%] hideScrollbar whitespace-nowrap space-y-5 overflow-y-scroll overflow-x-hidden">
     <HabitCard
       v-for="habit in dummyHabits"
       :key="habit.id"
