@@ -26,31 +26,32 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 definePageMeta({
   layout: 'centered',
   middleware: ['not-auth'],
 })
 
 const l = useLocalePath()
-const email = ref('')
+const { t } = useI18n()
+const email = ref<string>('')
 const supabase = useSupabaseClient()
-const errorMessage = ref(false)
+const errorMessage = ref<string | null>(null)
 
 const handle = async () => {
-  const { value, error: validationError } = useValidateMail(email.value)
-  if (validationError) errorMessage.value = true
+  let passwordValidationError: string | null = useValidateMail(email.value)
+  if (passwordValidationError) errorMessage.value = t(passwordValidationError)
   else {
-    const { data, error } = supabase.auth.resetPasswordForEmail(email.value, {
+    const { error } = await supabase.auth.resetPasswordForEmail(email.value, {
       redirectTo: 'https://acheeve.app/setNewPassword',
     })
-    if (error) errorMessage.value = true
+    if (error) errorMessage.value = t('validation_error_other') // Muss geändert werden!
     else navigateTo(l('/'))
   }
 }
 
-const onchange = (_name, input) => {
-  errorMessage.value = false
+const onchange = (_name: string, input: string) => {
+  errorMessage.value = null
   email.value = input
 }
 </script>
