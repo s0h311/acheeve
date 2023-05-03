@@ -11,9 +11,16 @@
 
 @layer base {
   .responsive-w {
-    @apply w-full sm:w-4/6 md:w-3/6 lg:w-2/6 xl:w-[20%] 2xl:w-[20%]
+    @apply w-full sm:w-4/6 md:w-3/6 lg:w-2/6 xl:w-[27%] 2xl:w-[27%]
   }
 }
+
+@media (min-width: 1920px) {
+  .responsive-w {
+    width: 35vh;
+  }
+}
+  
 
 /* Change the white to any color ;) */
 input:-webkit-autofill,

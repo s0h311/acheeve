@@ -1,23 +1,21 @@
 <template>
-  <div class="grid place-items-center w-full my-auto md:pt-0">
+  <div class="grid place-items-center responsive-w m-auto">
     <h1 class="text-primary text-5xl font-semibold mb-14">{{ $t('password_reset') }}</h1>
 
     <InputField
       name="email"
       label="E-Mail"
       placeholder="john@wick.de"
-      :is-error="errorMessage"
+      :errorMessage="validationErrorMessage"
       @change-input="onchange"
     />
 
-    <div class="responsive-w relative mb-6">
-      <p
-        class="absolute right-0 text-red-500"
-        v-if="errorMessage"
-      >
-        {{ $t('error_message_resetpassword') }}
-      </p>
-    </div>
+    <p
+      v-if="errorMessage"
+      class="place-self-end text-red-500"
+    >
+      {{ $t(errorMessage) }}
+    </p>
 
     <InputButton
       :text="$t('button_reset_password')"
@@ -34,23 +32,30 @@ definePageMeta({
 
 const l = useLocalePath()
 const { t } = useI18n()
-const email = ref<string>('')
 const supabase = useSupabaseClient()
+
+const email = ref<string>('')
+const validationErrorMessage = ref<string>('')
 const errorMessage = ref<string | null>(null)
 
 const handle = async () => {
-  let passwordValidationError: string | null = useValidateMail(email.value)
-  if (passwordValidationError) errorMessage.value = t(passwordValidationError)
+  let emailValidationError: string | null = useValidateMail(email.value)
+  if (emailValidationError) validationErrorMessage.value = emailValidationError
   else {
     const { error } = await supabase.auth.resetPasswordForEmail(email.value, {
       redirectTo: 'https://acheeve.app/setNewPassword',
     })
-    if (error) errorMessage.value = t('validation_error_other') // Muss geändert werden!
-    else navigateTo(l('/'))
+    if (error) {
+      let message = useGetSupabaseErrorMessage(error)
+      errorMessage.value = message
+    } else {
+      navigateTo(l('/'))
+    }
   }
 }
 
 const onchange = (_name: string, input: string) => {
+  validationErrorMessage.value = ''
   errorMessage.value = null
   email.value = input
 }

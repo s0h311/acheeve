@@ -1,5 +1,5 @@
 <template>
-  <div class="grid place-items-center w-full my-auto">
+  <div class="grid place-items-center responsive-w m-auto">
     <h1 class="text-primary text-5xl font-semibold mb-14">{{ $t('new_password') }}</h1>
 
     <InputField
@@ -8,7 +8,7 @@
       :label="$t('input_new_password')"
       placeholder="*******"
       type="password"
-      :is-error="errorMessage"
+      :errorMessage="validationErrorMessage"
       @change-input="onchange"
     />
 
@@ -17,18 +17,16 @@
       :label="$t('input_confirm_new_password')"
       placeholder="*******"
       type="password"
-      :is-error="errorMessage"
+      :errorMessage="mismatchErrorMessage"
       @change-input="onchange"
     />
 
-    <div class="responsive-w relative mb-6">
-      <p
-        class="absolute right-0 text-red-500"
-        v-if="errorMessage"
-      >
-        {{ $t('error_message_setnewpassword') }}
-      </p>
-    </div>
+    <p
+      v-if="errorMessage"
+      class="place-self-end text-red-500"
+    >
+      {{ $t(errorMessage) }}
+    </p>
 
     <InputButton
       :text="$t('set_new_password')"
@@ -40,35 +38,43 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'centered',
-  middleware: ['password-recovery'],
+  //middleware: ['password-recovery'],
 })
 
-const { t } = useI18n()
 const l = useLocalePath()
+const { t } = useI18n()
+const supabase = useSupabaseClient()
 
+const validationErrorMessage = ref<string>('')
+const mismatchErrorMessage = ref<string>('')
+const errorMessage = ref<string | null>(null)
 const passwords = useState('passwords', () => {
   return {
     password: '',
     passwordConfirm: '',
   }
 })
-const supabase = useSupabaseClient()
-const errorMessage = ref<string | null>(null)
 
 const handle = async () => {
-  let passwordValidationError: string | null = useValidateMail(passwords.value.password)
-  if (passwordValidationError) errorMessage.value = t(passwordValidationError)
-  if (passwords.value.password !== passwords.value.passwordConfirm) errorMessage.value = t('validation_error_other') // ÄNDERN
+  let passwordValidationError: string | null = useValidatePassword(passwords.value.password)
+  if (passwordValidationError) validationErrorMessage.value = passwordValidationError
+  if (passwords.value.password !== passwords.value.passwordConfirm) mismatchErrorMessage.value = 'error_message_password_confirm'
   else {
     const { error } = await supabase.auth.updateUser({
       password: passwords.value.password,
     })
-    if (error) errorMessage.value = t('validation_error_other') // ÄNDERN
-    else navigateTo(l('/'))
+    if (error) {
+      let message = useGetSupabaseErrorMessage(error)
+      errorMessage.value = message
+    } else {
+      navigateTo(l('/'))
+    }
   }
 }
 
 const onchange = (name: string, input: string) => {
+  validationErrorMessage.value = ''
+  mismatchErrorMessage.value = ''
   errorMessage.value = null
   passwords.value[name] = input
 }

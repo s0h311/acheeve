@@ -1,5 +1,5 @@
 <template>
-  <div class="grid place-items-center gap-6 w-full my-auto">
+  <div class="grid place-items-center gap-6 responsive-w m-auto">
     <Logo />
     <h1 class="text-primary text-xl font-semibold">{{ $t('welcome_text') }}</h1>
 
@@ -11,11 +11,11 @@
       :label="input.label"
       :placeholder="input.placeholder"
       :type="input.type"
-      :is-error="errorMessage"
+      :errorMessage="input.errorMessage"
       @change-input="onchange"
     />
 
-    <div class="space-y-4 responsive-w -mt-6 mb-6">
+    <div class="space-y-4 w-full -mt-6 mb-6">
       <div class="flex relative items-center">
         <NuxtLink
           :to="l('/resetPassword')"
@@ -26,7 +26,7 @@
           class="absolute right-0 text-red-500"
           v-if="errorMessage"
         >
-          {{ $t('error_message_login') }}
+          {{ $t(errorMessage) }}
         </p>
       </div>
       <div class="grid grid-cols-2 gap-6">
@@ -58,23 +58,25 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 definePageMeta({
   layout: 'centered',
   middleware: ['not-auth'],
 })
 
-const { t } = useI18n()
 const l = useLocalePath()
-const errorMessage = ref(false)
+const { t } = useI18n()
 const supabase = useSupabaseClient()
 
-const inputs = [
+const errorMessage = ref<string | null>(null)
+
+const inputs = ref([
   {
     id: 1,
     name: 'email',
     label: 'E-Mail',
     placeholder: 'john@wick.de',
+    errorMessage: '',
   },
   {
     id: 2,
@@ -82,8 +84,9 @@ const inputs = [
     label: t('password'),
     placeholder: '*******',
     type: 'password',
+    errorMessage: '',
   },
-]
+])
 
 const authProviders = [
   {
@@ -105,7 +108,7 @@ const credentials = useState('credentials', () => {
   }
 })
 
-const handle = async (authProvider) => {
+const handle = async (authProvider: any) => {
   if (authProvider === 'email') {
     emailLogin()
   } else {
@@ -113,7 +116,8 @@ const handle = async (authProvider) => {
       provider: authProvider,
     })
     if (error) {
-      errorMessage.value = true
+      let message = useGetSupabaseErrorMessage(error)
+      errorMessage.value = message
     } else {
       navigateTo(l('/'))
     }
@@ -121,9 +125,11 @@ const handle = async (authProvider) => {
 }
 
 const emailLogin = async () => {
-  const { error: emailValidationError } = useValidateMail(credentials.value.email)
-  const { error: passwordValidationError } = useValidatePassword(credentials.value.password)
-  if (emailValidationError || passwordValidationError) errorMessage.value = true
+  let emailValidationError = useValidateMail(credentials.value.email)
+  let passwordValidationError = useValidatePassword(credentials.value.password)
+
+  if (emailValidationError) inputs.value[0].errorMessage = emailValidationError
+  if (passwordValidationError) inputs.value[1].errorMessage = passwordValidationError
   else {
     const { error } = await supabase.auth.signInWithPassword({
       email: credentials.value.email,
@@ -131,15 +137,18 @@ const emailLogin = async () => {
     })
 
     if (error) {
-      errorMessage.value = true
+      let message = useGetSupabaseErrorMessage(error)
+      errorMessage.value = message
     } else {
       navigateTo(l('/'))
     }
   }
 }
 
-const onchange = (name, input) => {
-  errorMessage.value = false
+const onchange = (name: string, input: string) => {
+  inputs.value[0].errorMessage = ''
+  inputs.value[1].errorMessage = ''
+  errorMessage.value = null
   credentials.value[name] = input
 }
 </script>

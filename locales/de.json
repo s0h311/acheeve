@@ -14,10 +14,6 @@
   "button_sign_up": "Registrieren",
   "button_reset_password": "Passwort zurücksetzen",
   "button_forgot_password": "Passwort vergessen?",
-  "error_message_login": "Versuche es erneut",
-  "error_message_resetpassword": "Bitte gib eine gültige E-Mail-Adresse an",
-  "error_message_setnewpassword": "Versuche es erneut",
-  "error_message_signup": "Versuche es erneut",
   "logout": "Abmelden",
   "profile": "Profil",
   "today": "Heute",
@@ -64,7 +60,10 @@
   "validation_error_password_pattern": "Das Passwort muss mindestens eine Ziffer und ein Sonderzeichen enthalten.",
   "validation_error_name_length": "Der Name muss mindestens aus 2 Buchstaben bestehen.",
   "validation_error_name_required": "Der Name ist erforderlich.",
-  "validation_error_email_invalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+  "validation_error_email_invalid": "Gib bitte eine gültige E-Mail-Adresse ein.",
   "validation_error_email_required": "Die E-Mail-Adresse ist erforderlich.",
-  "validation_error_other": "Irgendetwas stimmt nicht"
+  "validation_error_other": "Irgendetwas stimmt nicht",
+  "error_message_password_confirm": "Die Passwörter stimmen nicht überein", 
+  "login_error_incorrect_info": "Email oder Passwort falsch, versuch bitte nochmal",
+  "already_registered_error": "Du hast bereits ein Konto, bitte einloggen"
 }

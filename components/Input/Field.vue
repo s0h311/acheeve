@@ -1,18 +1,26 @@
 <template>
-  <div
-    :class="[{ errorBorder: isError }, 'focus:border-0']"
-    class="rounded-3xl responsive-w h-14 px-4 bg-dark2"
-  >
-    <label class="text-primary text-xs">{{ label }}</label>
-    <br />
-    <input
-      class="text-primary bg-transparent outline-none"
-      :type="`${type ? type : 'text'}`"
-      :placeholder="placeholder"
-      v-model="input"
-      :name="name"
-      @change="onChange"
-    />
+  <div class="w-full grid place-items-center">
+    <div
+      :class="[{ errorBorder: !!errorMessage }, 'focus:border-0']"
+      class="rounded-3xl w-full h-14 px-4 bg-dark2"
+    >
+      <label class="text-primary text-xs">{{ label }}</label>
+      <br />
+      <input
+        class="text-primary bg-transparent outline-none"
+        :type="`${type ? type : 'text'}`"
+        :placeholder="placeholder"
+        v-model="input"
+        :name="name"
+        @change="onChange"
+      />
+    </div>
+    <p
+      v-if="errorMessage"
+      class="place-self-start text-red-500 max-w-fit"
+    >
+      {{ $t(errorMessage) }}
+    </p>
   </div>
 </template>
 
@@ -22,7 +30,7 @@ const props = defineProps({
   type: String,
   placeholder: String,
   name: String,
-  isError: Boolean,
+  errorMessage: String,
 })
 
 const input = ref('')

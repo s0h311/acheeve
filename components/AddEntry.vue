@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center space-x-7 px-6 py-5 border-2 border-[#5195ea] cursor-pointer bg-[#2b4276] rounded-2xl w-full"
+    class="flex items-center space-x-7 px-6 py-5 border-2 border-[#5195ea] cursor-pointer bg-[#2b4276] rounded-2xl"
     @click="emits('onClick')"
   >
     <BtnWithImg

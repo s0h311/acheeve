@@ -21,8 +21,16 @@
     <HubFilter />
     <HabitListing />
     <div class="relative">
-      <NavBar />
+      <NavBar
+        v-if="!addEntryMenuActive"
+        @onClick="addEntryMenuActive = true"
+      />
     </div>
+    <AddEntryMenu
+      class="w-full absolute bottom-0 left-0 md:left-auto"
+      v-if="addEntryMenuActive"
+      @onClick="addEntryMenuActive = false"
+    />
   </div>
 </template>
 
@@ -33,7 +41,7 @@ const l = useLocalePath()
 const todaysDate: string = new Date().toLocaleDateString()
 const selectedDate = ref<Date>(new Date())
 const habitsLeft = ref<number>(4)
-
+const addEntryMenuActive = ref<boolean>(false)
 const months = [
   t('january'),
   t('february'),
@@ -72,8 +80,4 @@ const onDateChange = (date: Date) => {
 }
 </script>
 
-<style scoped>
-.responsive-w {
-  @apply w-full sm:w-4/6 md:w-4/6 lg:w-3/6 xl:w-[27%] 2xl:w-[27%];
-}
-</style>
+<style scoped></style>

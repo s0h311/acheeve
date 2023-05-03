@@ -1,5 +1,5 @@
 <template>
-  <div class="grid place-items-center w-full my-auto">
+  <div class="grid place-items-center responsive-w m-auto">
     <!---pt-32-->
     <h1 class="text-primary text-5xl font-semibold mb-14">{{ $t('create_new_account') }}</h1>
 
@@ -12,18 +12,17 @@
       :label="input.label"
       :placeholder="input.placeholder"
       :type="input.type"
-      :is-error="errorMessage"
+      :errorMessage="input.errorMessage"
       @change-input="onchange"
     />
-
-    <div
-      class="responsive-w relative -mt-6 mb-6"
+    <p
       v-if="errorMessage"
+      class="place-self-end -mt-6 text-red-500"
     >
-      <p class="absolute right-0 text-red-500">{{ errorMessage }}</p>
-    </div>
+      {{ $t(errorMessage) }}
+    </p>
 
-    <div class="grid grid-cols-2 gap-6 responsive-w">
+    <div class="grid grid-cols-2 gap-6 w-full">
       <InputButton
         :text="$t('button_login')"
         @click="navigateTo(l('/login'))"
@@ -45,6 +44,7 @@ definePageMeta({
 const { t } = useI18n()
 const l = useLocalePath()
 const supabase = useSupabaseClient()
+
 const errorMessage = ref<string | null>(null)
 
 interface Credential {
@@ -53,20 +53,23 @@ interface Credential {
   label: String
   placeholder: String
   type?: String
+  errorMessage: String
 }
 
-const inputs: Credential[] = [
+const inputs = ref<Credential[]>([
   {
     id: 1,
     name: 'name',
     label: t('input_label_name_signup'),
     placeholder: 'John',
+    errorMessage: '',
   },
   {
     id: 2,
     name: 'email',
     label: 'E-Mail',
     placeholder: 'john@wick.de',
+    errorMessage: '',
   },
   {
     id: 3,
@@ -74,8 +77,9 @@ const inputs: Credential[] = [
     label: t('password'),
     placeholder: '*******',
     type: 'password',
+    errorMessage: '',
   },
-]
+])
 
 const credentials = useState('credentials', () => {
   return {
@@ -86,37 +90,44 @@ const credentials = useState('credentials', () => {
 })
 
 const handle = async () => {
+  let nameValidationError: string | null = useValidateName(credentials.value.name)
   let emailValidationError: string | null = useValidateMail(credentials.value.email)
   let passwordValidationError: string | null = useValidatePassword(credentials.value.password)
-  let nameValidationError: string | null = useValidateName(credentials.value.name)
 
-  if (emailValidationError) errorMessage.value = t(emailValidationError)
-  else if (passwordValidationError) errorMessage.value = t(passwordValidationError)
-  else if (nameValidationError) errorMessage.value = t(nameValidationError)
+  if (nameValidationError) inputs.value[0].errorMessage = t(nameValidationError)
+  if (emailValidationError) inputs.value[1].errorMessage = t(emailValidationError)
+  if (passwordValidationError) inputs.value[2].errorMessage = t(passwordValidationError)
   else {
     const { data: user, error } = await supabase.auth.signUp({
       email: credentials.value.email,
       password: credentials.value.password,
     })
-    if (user) {
+
+    if (error) {
+      let message = useGetSupabaseErrorMessage(error)
+      errorMessage.value = message
+    }
+
+    if (user && !error) {
       const { error } = await supabase.from('profiles').insert({
         name: credentials.value.name,
         id: user.user.id,
       })
 
       if (error) {
-        errorMessage.value = 'error'
+        let message = useGetSupabaseErrorMessage(error)
+        errorMessage.value = message
       } else {
         navigateTo(l('/'))
       }
-    }
-    if (error) {
-      errorMessage.value = 'error'
     }
   }
 }
 
 const onchange = (name: string, input: string) => {
+  inputs.value[0].errorMessage = ''
+  inputs.value[1].errorMessage = ''
+  inputs.value[2].errorMessage = ''
   errorMessage.value = null
   credentials.value[name] = input
 }

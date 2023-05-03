@@ -14,10 +14,6 @@
   "button_sign_up": "Sign Up",
   "button_reset_password": "Reset Password",
   "button_forgot_password": "Forgot password?",
-  "error_message_login": "Please try again",
-  "error_message_resetpassword": "Please enter a valid email",
-  "error_message_setnewpassword": "Please try again",
-  "error_message_signup": "Please try again",
   "logout": "Logout",
   "profile": "Profile",
   "today": "Today",
@@ -66,5 +62,8 @@
   "validation_error_name_required": "The name is required.",
   "validation_error_email_invalid": "Please enter a valid email address.",
   "validation_error_email_required": "The email address is required.",
-  "validation_error_other": "Something's wrong"
+  "validation_error_other": "Something's wrong",
+  "error_message_password_confirm": "Passwords do not match",
+  "login_error_incorrect_info": "Incorrect email or password, please try again.",
+  "already_registered_error": "You already have an account, please login"
 }
