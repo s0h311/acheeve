@@ -74,6 +74,6 @@ const onDateChange = (date: Date) => {
 
 <style scoped>
 .responsive-w {
-  @apply w-full sm:w-4/6 md:w-3/6 lg:w-2/6 xl:w-[20%] 2xl:w-[27%];
+  @apply w-full sm:w-4/6 md:w-4/6 lg:w-3/6 xl:w-[27%] 2xl:w-[27%];
 }
 </style>
