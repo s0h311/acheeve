@@ -70,15 +70,18 @@ const welcomeText = computed<string>((): string => {
 
   let firstWord = selectedDate.value.toLocaleDateString() === todaysDate ? t('today') : ''
   let dayString = day.toString()
-  let numberExtension = dayString.endsWith('1')
-    ? t('date_st')
-    : dayString.endsWith('2')
-    ? t('date_nd')
-    : dayString.endsWith('3')
-    ? t('date_rd')
-    : t('date_th')
+  let numberExtension =
+    dayString.startsWith('1') && dayString.length === 2
+      ? 'date_th'
+      : dayString.endsWith('1')
+      ? 'date_st'
+      : dayString.endsWith('2')
+      ? 'date_nd'
+      : dayString.endsWith('3')
+      ? 'date_rd'
+      : 'date_th'
 
-  return firstWord + ' ' + day + numberExtension + ' ' + month + '\n' + habitsLeft.value + ' ' + t('habits_left_welcome_text_hub')
+  return firstWord + ' ' + day + t(numberExtension) + ' ' + month + '\n' + habitsLeft.value + ' ' + t('habits_left_welcome_text_hub')
 })
 
 const onDateChange = (date: Date) => {

@@ -5,8 +5,8 @@
       v-for="date in allDates"
       ref="dateRefs"
       :key="date.id"
-      :class="{ 'bg-primary': selectedDateId === date.id }"
-      @click="updateSelectedDate(date.id)"
+      :class="[{ 'bg-primary': selectedDateId === date.id }, { 'border-2 border-dark2': todaysDateId === date.id }]"
+      @click="onSelectedDateClick(date.id)"
     >
       <p
         :class="[selectedDateId === date.id ? 'text-dark' : '']"
@@ -31,17 +31,18 @@ const emits = defineEmits(['dateChange'])
 
 const { t } = useI18n()
 const daysInEachDirec: number = parseInt(props.daysInEachDirec)
+const todaysDateId = ref<number>(daysInEachDirec)
 const selectedDateId = ref<number>(daysInEachDirec)
 const dateRefs = ref<HTMLElement[] | []>([])
 const weekdays: string[] = [
-  t('sunday_short'),
-  t('monday_short'),
-  t('tuesday_short'),
-  t('wednesday_short'),
-  t('thursday_short'),
-  t('friday_short'),
-  t('saturday_short'),
-  t('sunday_short'),
+  'sunday_short',
+  'monday_short',
+  'tuesday_short',
+  'wednesday_short',
+  'thursday_short',
+  'friday_short',
+  'saturday_short',
+  'sunday_short',
 ]
 const dates: Date[] = []
 
@@ -85,7 +86,7 @@ const allDates = computed<CalendarDay[]>(() => {
     calendarDays.push({
       id: i,
       day: newDate.getDate(),
-      weekday: weekdays[newDate.getDay()],
+      weekday: t(weekdays[newDate.getDay()]),
     })
 
     dates.push(newDate)
@@ -97,5 +98,13 @@ const updateSelectedDate = (dateId: number) => {
   selectedDateId.value = dateId
   scrollToSelectedDate(dateId)
   emits('dateChange', dates[dateId + 1])
+}
+
+const onSelectedDateClick = (dateId: number) => {
+  if (selectedDateId.value === dateId) {
+    updateSelectedDate(todaysDateId.value)
+  } else {
+    updateSelectedDate(dateId)
+  }
 }
 </script>
