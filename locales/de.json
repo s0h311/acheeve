@@ -48,6 +48,7 @@
   "diary": "Tagebuch",
   "habits": "Habits",
   "habit": "Habit",
+  "habit_streak": "TAGE STREAK",
   "habits_left_welcome_text_hub": "Habits übrig",
   "go_back_btn_error_page": "Zurück",
   "add_new_habit_or_diary_entry": "Füge ein neues Habit oder einen neuen Tagebucheintrag hinzu",
@@ -69,5 +70,6 @@
   "validation_error_other": "Irgendetwas stimmt nicht",
   "error_message_password_confirm": "Die Passwörter stimmen nicht überein", 
   "login_error_incorrect_info": "Email oder Passwort falsch, versuch bitte nochmal",
-  "already_registered_error": "Du hast bereits ein Konto, bitte einloggen"
+  "already_registered_error": "Du hast bereits ein Konto, bitte einloggen",
+  "welcome_profile": "Schön, dass du hier bist"
 }

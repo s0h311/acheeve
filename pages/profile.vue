@@ -1,6 +1,12 @@
 <template>
-  <div class="grid place-items-center m-auto">
-    <h1 class="text-primary text-5xl font-semibold mb-14">{{ $t('profile') }}</h1>
+  <div class="grid place-items-center gap-4 m-auto">
+    <h1 class="text-primary text-3xl font-semibold">{{ $t('profile') }}</h1>
+
+    <span class="flex">
+      <p class="text-xl font-thin">{{ $t('welcome_profile') }}</p>
+      <p>&ensp;</p>
+      <p class="text-xl italic">{{ userName }}</p>
+    </span>
 
     <InputButton
       :text="$t('logout')"
@@ -9,14 +15,17 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 definePageMeta({
   layout: 'centered',
   middleware: ['auth'],
 })
-
-const supabase = useSupabaseClient()
 const l = useLocalePath()
+const supabase = useSupabaseClient()
+const user = useSupabaseUser()
+const profile = await useUserProfile(user.value.id)
+
+const userName = computed<string | null | null[]>(() => profile.data[0].name)
 
 const handleLogout = async () => {
   await supabase.auth.signOut()

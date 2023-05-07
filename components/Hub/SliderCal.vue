@@ -10,7 +10,7 @@
     >
       <p
         :class="[selectedDateId === date.id ? 'text-dark' : 'text-primary']"
-        class="unselectable font-semibold"
+        class="font-semibold"
       >
         {{ date.weekday }} <br />
         {{ date.day }}
@@ -99,14 +99,3 @@ const updateSelectedDate = (dateId: number) => {
   emits('dateChange', dates[dateId + 1])
 }
 </script>
-
-<style scoped>
-.unselectable {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-</style>

@@ -23,16 +23,12 @@
       @click="handleDaytimeChange(daytime.id)"
     >
       <div class="flex items-center space-x-3">
-        <img
-          :src="daytime.icon"
-          alt=""
-        />
-        <p class="text-primary text-lg leading-none font-semibold">{{ daytime.name }}</p>
+        <nuxt-img :src="daytime.icon" />
+        <p class="text-primary text-lg leading-none font-semibold">{{ `${daytime.name} (${daytime.left})` }}</p>
       </div>
-      <img
+      <nuxt-img
         class="place-self-end"
         :src="daytime.id === selectedDaytime ? '/icons/hub/drop_down_active.png' : '/icons/hub/drop_down_inactive.png'"
-        alt=""
       />
     </div>
   </div>
@@ -56,16 +52,19 @@ const daytimes = [
     id: 1,
     name: t('morning'),
     icon: '/icons/hub/morning.png',
+    left: props.morningLeft,
   },
   {
     id: 2,
     name: t('evening'),
     icon: '/icons/hub/evening.png',
+    left: props.eveningLeft,
   },
   {
     id: 3,
     name: t('allday'),
     icon: '/icons/hub/allday.png',
+    left: props.alldayLeft,
   },
 ]
 

@@ -18,9 +18,16 @@
         />
       </div>
     </div>
-    <HubFilter />
-    <HabitListing />
-    <div class="relative">
+    <HubFilter
+      morningLeft="5"
+      eveningLeft="2"
+      alldayLeft="3"
+    />
+    <HabitListing
+      class="h-full"
+      @onCounterClick="onCounterClick"
+    />
+    <div class="relative mt-10">
       <NavBar
         v-if="!addEntryMenuActive"
         @onClick="addEntryMenuActive = true"
@@ -42,24 +49,24 @@ const todaysDate: string = new Date().toLocaleDateString()
 const selectedDate = ref<Date>(new Date())
 const habitsLeft = ref<number>(4)
 const addEntryMenuActive = ref<boolean>(false)
-const months = [
-  t('january'),
-  t('february'),
-  t('march'),
-  t('april'),
-  t('may'),
-  t('june'),
-  t('july'),
-  t('august'),
-  t('september'),
-  t('october'),
-  t('november'),
-  t('december'),
+const months: string[] = [
+  'january',
+  'february',
+  'march',
+  'april',
+  'may',
+  'june',
+  'july',
+  'august',
+  'september',
+  'october',
+  'november',
+  'december',
 ]
 
 const welcomeText = computed<string>((): string => {
   let day = selectedDate.value.getDate()
-  let month = months[selectedDate.value.getMonth()]
+  let month = t(months[selectedDate.value.getMonth()])
 
   let firstWord = selectedDate.value.toLocaleDateString() === todaysDate ? t('today') : ''
   let dayString = day.toString()
@@ -78,6 +85,8 @@ const onDateChange = (date: Date) => {
   selectedDate.value = date
   // update to do and habit cards
 }
-</script>
 
-<style scoped></style>
+const onCounterClick = (habitId: number) => {
+  // update habit counter
+}
+</script>

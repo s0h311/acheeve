@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-[65%] hideScrollbar whitespace-nowrap space-y-5 overflow-y-scroll overflow-x-hidden">
+  <div class="w-full hideScrollbar whitespace-nowrap space-y-5 overflow-y-scroll overflow-x-hidden">
     <HabitCard
       v-for="habit in dummyHabits"
       :key="habit.id"
@@ -9,17 +9,18 @@
       :streak="habit.streak"
       :counter="habit.counter"
       :goal="habit.goal"
+      @onCounterClick="onCounterClick"
     />
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const dummyHabits = [
   {
     id: 1,
     title: 'GEH MIT DEM HUND',
     schedule: 'Jeden Morgen',
-    streak: 'X- DAY SUCCESSION',
+    streak: 'X',
     counter: 2,
     goal: 5,
   },
@@ -27,7 +28,7 @@ const dummyHabits = [
     id: 2,
     title: 'GEH MIT DEM HUND',
     schedule: 'ABEND',
-    streak: '2- DAY SUCCESSION',
+    streak: '2',
     counter: 2,
     goal: 5,
   },
@@ -35,7 +36,7 @@ const dummyHabits = [
     id: 3,
     title: 'GEH MIT DEM HUND',
     schedule: 'ABEND',
-    streak: '2- DAY SUCCESSION',
+    streak: '2',
     counter: 2,
     goal: 5,
   },
@@ -43,7 +44,7 @@ const dummyHabits = [
     id: 4,
     title: 'GEH MIT DEM HUND',
     schedule: 'ABEND',
-    streak: '2- DAY SUCCESSION',
+    streak: '2',
     counter: 2,
     goal: 5,
   },
@@ -51,26 +52,23 @@ const dummyHabits = [
     id: 5,
     title: 'GEH MIT DEM HUND',
     schedule: 'ABEND',
-    streak: '2- DAY SUCCESSION',
-    counter: 2,
-    goal: 5,
+    streak: '2',
+    counter: 7,
+    goal: 7,
   },
   {
     id: 6,
     title: 'GEH MIT DEM HUND',
     schedule: 'ABEND',
-    streak: '2- DAY SUCCESSION',
+    streak: '2',
     counter: 2,
     goal: 5,
   },
 ]
 
-const habitList = ref([])
+const emits = defineEmits(['onCounterClick'])
 
-const addHabit = (title) => {
-  habitList.value.push({
-    title,
-    isDone: false,
-  })
+const onCounterClick = (habitId: number) => {
+  emits('onCounterClick', habitId)
 }
 </script>

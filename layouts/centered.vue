@@ -1,5 +1,5 @@
 <template>
-  <div class="p-10 flex h-screen md:py-0 md:px-20">
+  <div class="px-6 flex h-screen py-10 md:px-20">
     <slot />
   </div>
 </template>
