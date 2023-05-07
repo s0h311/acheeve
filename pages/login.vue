@@ -1,7 +1,7 @@
 <template>
   <div class="grid place-items-center gap-6 responsive-w m-auto">
     <Logo />
-    <h1 class="text-primary text-xl font-semibold">{{ $t('welcome_text') }}</h1>
+    <h1 class="text-xl font-semibold">{{ $t('welcome_text') }}</h1>
 
     <InputField
       v-for="input in inputs"
@@ -22,7 +22,7 @@
     </p>
     <NuxtLink
       :to="l('/resetPassword')"
-      class="place-self-start -mt-6 underline text-primary text-sm"
+      class="place-self-start -mt-6 underline text-sm"
       >{{ $t('button_forgot_password') }}</NuxtLink
     >
     <div class="space-y-4 w-full -mt-6 mb-6">

@@ -1,6 +1,6 @@
 <template>
   <div class="grid place-items-center responsive-w m-auto">
-    <h1 class="text-primary text-5xl font-semibold mb-14">{{ $t('new_password') }}</h1>
+    <h1 class="text-5xl font-semibold mb-14">{{ $t('new_password') }}</h1>
 
     <InputField
       class="mb-6"

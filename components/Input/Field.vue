@@ -4,10 +4,10 @@
       :class="[{ errorBorder: !!errorMessage }, 'focus:border-0']"
       class="rounded-3xl w-full h-14 px-4 bg-dark2"
     >
-      <label class="text-primary text-xs">{{ label }}</label>
+      <label class="text-xs">{{ label }}</label>
       <br />
       <input
-        class="text-primary bg-transparent outline-none"
+        class="bg-transparent outline-none"
         :type="`${type ? type : 'text'}`"
         :placeholder="placeholder"
         v-model="input"

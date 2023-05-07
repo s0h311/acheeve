@@ -9,7 +9,7 @@
       @click="updateSelectedDate(date.id)"
     >
       <p
-        :class="[selectedDateId === date.id ? 'text-dark' : 'text-primary']"
+        :class="[selectedDateId === date.id ? 'text-dark' : '']"
         class="font-semibold"
       >
         {{ date.weekday }} <br />

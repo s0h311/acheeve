@@ -1,6 +1,6 @@
 <template>
   <div class="grid place-items-center responsive-w m-auto">
-    <h1 class="text-primary text-5xl font-semibold mb-14">{{ $t('create_new_account') }}</h1>
+    <h1 class="text-5xl font-semibold mb-14">{{ $t('create_new_account') }}</h1>
 
     <InputField
       class="mb-6"

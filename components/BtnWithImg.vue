@@ -8,7 +8,7 @@
         :alt="`Button for ${name}`"
       />
     </button>
-    <p class="text-primary text-center text-xs">{{ label }}</p>
+    <p class="text-center text-xs">{{ label }}</p>
   </div>
 </template>
 

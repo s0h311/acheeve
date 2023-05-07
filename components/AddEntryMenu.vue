@@ -1,9 +1,9 @@
 <template>
   <div class="grid gap-8 pb-8 pt-4 px-6 bg-[#1b2a4a] rounded-t-3xl">
     <div class="flex items-center justify-center relative">
-      <h1 class="text-center text-primary text-xl">{{ $t('add') }}</h1>
+      <h1 class="text-center text-xl">{{ $t('add') }}</h1>
       <button
-        class="text-primary font-semibold text-2xl absolute right-0"
+        class="font-semibold text-2xl absolute right-0"
         @click="emits('onClick')"
       >
         X

@@ -10,7 +10,7 @@
     />
     <div>
       <h2 class="text-xl text-red-400 font-semibold">{{ name }}</h2>
-      <p class="text-primary text-sm">{{ label }}</p>
+      <p class="text-sm">{{ label }}</p>
     </div>
   </div>
 </template>

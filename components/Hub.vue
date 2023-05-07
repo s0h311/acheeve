@@ -11,7 +11,7 @@
         />
       </button>
       <div class="grid place-items-center gap-8">
-        <h1 class="text-primary font-semibold text-[26px] leading-8 whitespace-pre-wrap text-center">{{ welcomeText }}</h1>
+        <h1 class="font-semibold text-[26px] leading-8 whitespace-pre-wrap text-center">{{ welcomeText }}</h1>
         <HubSliderCal
           days-in-each-direc="14"
           @date-change="onDateChange"
