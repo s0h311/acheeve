@@ -14,21 +14,18 @@
       :errorMessage="input.errorMessage"
       @change-input="onchange"
     />
-
+    <p
+      class="place-self-start -mt-6 text-red-500"
+      v-if="errorMessage"
+    >
+      {{ $t(errorMessage) }}
+    </p>
+    <NuxtLink
+      :to="l('/resetPassword')"
+      class="place-self-start -mt-6 underline text-primary text-sm"
+      >{{ $t('button_forgot_password') }}</NuxtLink
+    >
     <div class="space-y-4 w-full -mt-6 mb-6">
-      <div class="flex relative items-center">
-        <NuxtLink
-          :to="l('/resetPassword')"
-          class="underline text-primary text-sm"
-          >{{ $t('button_forgot_password') }}</NuxtLink
-        >
-        <p
-          class="absolute right-0 text-red-500"
-          v-if="errorMessage"
-        >
-          {{ $t(errorMessage) }}
-        </p>
-      </div>
       <div class="grid grid-cols-2 gap-6">
         <InputButton
           :text="$t('button_login')"
@@ -130,7 +127,7 @@ const emailLogin = async () => {
 
   if (emailValidationError) inputs.value[0].errorMessage = emailValidationError
   if (passwordValidationError) inputs.value[1].errorMessage = passwordValidationError
-  else {
+  if (!emailValidationError && !passwordValidationError) {
     const { error } = await supabase.auth.signInWithPassword({
       email: credentials.value.email,
       password: credentials.value.password,

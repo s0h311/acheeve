@@ -17,7 +17,11 @@ export default (password: string): string | null => {
     if (errorMessage.includes('string.pattern.base')) {
       return 'validation_error_password_pattern'
     }
-    return 'validation_error_other'
+
+    if (errorMessage.includes('string.empty')) {
+      return 'validation_error_password_required'
+    }
+    return 'validation_error_password_other'
   }
   return null
 }

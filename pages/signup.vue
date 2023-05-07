@@ -1,6 +1,5 @@
 <template>
   <div class="grid place-items-center responsive-w m-auto">
-    <!---pt-32-->
     <h1 class="text-primary text-5xl font-semibold mb-14">{{ $t('create_new_account') }}</h1>
 
     <InputField
@@ -47,7 +46,7 @@ const supabase = useSupabaseClient()
 
 const errorMessage = ref<string | null>(null)
 
-interface Credential {
+interface SignupInputs {
   id: Number
   name: String
   label: String
@@ -56,7 +55,13 @@ interface Credential {
   errorMessage: String
 }
 
-const inputs = ref<Credential[]>([
+interface Credentials {
+  name: string
+  email: string
+  password: string
+}
+
+const inputs = ref<SignupInputs[]>([
   {
     id: 1,
     name: 'name',
@@ -81,7 +86,7 @@ const inputs = ref<Credential[]>([
   },
 ])
 
-const credentials = useState('credentials', () => {
+const credentials = useState('credentials', (): Credentials => {
   return {
     name: '',
     email: '',
@@ -94,10 +99,10 @@ const handle = async () => {
   let emailValidationError: string | null = useValidateMail(credentials.value.email)
   let passwordValidationError: string | null = useValidatePassword(credentials.value.password)
 
-  if (nameValidationError) inputs.value[0].errorMessage = t(nameValidationError)
-  if (emailValidationError) inputs.value[1].errorMessage = t(emailValidationError)
-  if (passwordValidationError) inputs.value[2].errorMessage = t(passwordValidationError)
-  else {
+  if (nameValidationError) inputs.value[0].errorMessage = nameValidationError
+  if (emailValidationError) inputs.value[1].errorMessage = emailValidationError
+  if (passwordValidationError) inputs.value[2].errorMessage = passwordValidationError
+  if (!nameValidationError && !emailValidationError && !passwordValidationError) {
     const { data: user, error } = await supabase.auth.signUp({
       email: credentials.value.email,
       password: credentials.value.password,

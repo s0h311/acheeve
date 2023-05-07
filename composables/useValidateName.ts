@@ -15,7 +15,7 @@ export default (name: string): string | null => {
     if (errorMessage.includes('string.empty')) {
       return 'validation_error_name_required'
     }
-    return 'validation_error_other'
+    return 'validation_error_name_other'
   }
 
   return null

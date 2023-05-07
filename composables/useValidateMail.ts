@@ -1,6 +1,8 @@
 import Joi from 'joi'
 
-const schema = Joi.string().email({ tlds: { allow: false } })
+const schema = Joi.string()
+  .email({ tlds: { allow: false } })
+  .required()
 
 export default (email: string): string | null => {
   const { error } = schema.validate(email)
@@ -15,7 +17,7 @@ export default (email: string): string | null => {
     if (errorMessage.includes('string.empty')) {
       return 'validation_error_email_required'
     }
-    return 'validation_error_other'
+    return 'validation_error_email_other'
   }
   return null
 }

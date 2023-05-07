@@ -57,9 +57,10 @@ const passwords = useState('passwords', () => {
 
 const handle = async () => {
   let passwordValidationError: string | null = useValidatePassword(passwords.value.password)
+  let passwordMismatchError: boolean = passwords.value.password !== passwords.value.passwordConfirm ? true : false
   if (passwordValidationError) validationErrorMessage.value = passwordValidationError
-  if (passwords.value.password !== passwords.value.passwordConfirm) mismatchErrorMessage.value = 'error_message_password_confirm'
-  else {
+  if (passwordMismatchError) mismatchErrorMessage.value = 'error_message_password_confirm'
+  if (!passwordValidationError && !passwordMismatchError) {
     const { error } = await supabase.auth.updateUser({
       password: passwords.value.password,
     })

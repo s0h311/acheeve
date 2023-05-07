@@ -9,6 +9,9 @@ export default defineNuxtConfig({
         {rel: 'icon', type:'image/svg+xml', href:'/a.svg'},
         {rel: 'apple-touch-icon', href:'/a-logo.svg'},
       ],
+      meta: [
+        {name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'}
+      ],
       htmlAttrs: {
         lang: 'en' //should be auto detected
       } 
