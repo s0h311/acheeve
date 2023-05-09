@@ -16,16 +16,19 @@
 </template>
 
 <script setup lang="ts">
+import { UserProfile } from '../types'
+
 definePageMeta({
   layout: 'centered',
   middleware: ['auth'],
 })
 const l = useLocalePath()
+
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
-const profile = await useUserProfile(user.value.id)
+const profile: UserProfile | string = await useUserProfile(user.value.id)
 
-const userName = computed<string | null | null[]>(() => profile.data[0].name)
+const userName = computed<string>(() => profile.name || profile)
 
 const handleLogout = async () => {
   await supabase.auth.signOut()
