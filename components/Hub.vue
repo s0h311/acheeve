@@ -34,7 +34,7 @@
       />
     </div>
     <AddEntryMenu
-      class="w-full absolute bottom-0 left-0 md:left-auto"
+      class="responsive-w absolute bottom-0 left-0 md:left-auto md:mx-auto"
       v-if="addEntryMenuActive"
       @onClick="addEntryMenuActive = false"
     />
