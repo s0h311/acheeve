@@ -1,5 +1,5 @@
 import { NuxtConfig } from 'nuxt/schema'
-import manifest from '@/manifest.json'
+import manifest from '../manifest.json'
 
 export const pwa: NuxtConfig['pwa'] = {
   registerType: 'autoUpdate',
