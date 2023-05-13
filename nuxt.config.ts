@@ -17,7 +17,6 @@ export default defineNuxtConfig({
       } 
     },
   },
-  ssr: ('true' === process.env.SSR),
   modules: [
     '@vueuse/nuxt',
     '@nuxtjs/supabase',
