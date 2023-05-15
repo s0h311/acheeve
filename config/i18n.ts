@@ -20,5 +20,5 @@ export const i18n: NuxtI18nOptions = {
       name: 'Deutsch',
     },
   ],
-  vueI18n: './config/i18n.config.ts',
+  vueI18n: 'config/i18n.config.ts',
 }
