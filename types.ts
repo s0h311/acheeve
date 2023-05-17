@@ -19,4 +19,14 @@ interface SignUpCredentials {
   password: string
 }
 
-export { UserProfile, SignupInputs, SignUpCredentials }
+interface HabitData {
+  titel: String
+  description: String | null
+  start_date: Date
+  end_date: Date
+  frequency: String
+  history: Date[] | null
+  type: String | null
+}
+
+export { UserProfile, SignupInputs, SignUpCredentials, HabitData }
