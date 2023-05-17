@@ -35,6 +35,8 @@
 </template>
 
 <script setup lang="ts">
+import { SignUpCredentials, SignupInputs } from '~/types'
+
 definePageMeta({
   layout: 'centered',
   middleware: ['not-auth'],
@@ -45,21 +47,6 @@ const l = useLocalePath()
 const supabase = useSupabaseClient()
 
 const errorMessage = ref<string | null>(null)
-
-interface SignupInputs {
-  id: Number
-  name: String
-  label: String
-  placeholder: String
-  type?: String
-  errorMessage: String
-}
-
-interface Credentials {
-  name: string
-  email: string
-  password: string
-}
 
 const inputs = ref<SignupInputs[]>([
   {
@@ -86,7 +73,7 @@ const inputs = ref<SignupInputs[]>([
   },
 ])
 
-const credentials = useState('credentials', (): Credentials => {
+const credentials = useState('credentials', (): SignUpCredentials => {
   return {
     name: '',
     email: '',

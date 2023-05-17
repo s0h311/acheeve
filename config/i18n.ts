@@ -1,4 +1,4 @@
-import { NuxtI18nOptions } from '@nuxtjs/i18n/dist/module'
+import { NuxtI18nOptions } from '@nuxtjs/i18n-edge/dist/module'
 
 export const i18n: NuxtI18nOptions = {
   defaultLocale: 'en',

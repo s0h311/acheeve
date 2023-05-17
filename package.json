@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@nuxt/image-edge": "^1.0.0-28000486.357efad",
-    "@nuxtjs/i18n": "^8.0.0-beta.12",
+    "@nuxtjs/i18n-edge": "^8.0.0-beta.12-28065601.76e2626",
     "@nuxtjs/supabase": "^0.3.1",
     "@vite-pwa/nuxt": "^0.0.8",
     "@vueuse/core": "^10.0.2",
@@ -24,7 +24,7 @@
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-vue": "^9.10.0",
-    "nuxt": "^3.4.3",
+    "nuxt": "^3.5.0",
     "postcss": "^8.4.21",
     "prettier": "2.8.8",
     "prisma": "^4.12.0",
