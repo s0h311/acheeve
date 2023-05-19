@@ -24,7 +24,11 @@
     >
       <div class="flex items-center space-x-3">
         <nuxt-img :src="daytime.icon" />
-        <p class="text-lg leading-none font-semibold">{{ `${daytime.name} (${daytime.left})` }}</p>
+        <span class="flex items-center">
+          <p class="text-lg leading-none font-semibold">{{ daytime.name }}</p>
+          <p>&nbsp;</p>
+          <p class="text-[#8c8d93] leading-none font-semibold">{{ `(${daytime.left})` }}</p>
+        </span>
       </div>
       <nuxt-img
         class="place-self-end"
