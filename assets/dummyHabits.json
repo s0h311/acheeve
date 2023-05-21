@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Zähne putzen",
+    "description": "Zähne putzen",
+    "start_date": "2023-05-18",
+    "end_date": "2023-06-18",
+    "cron": "2 allday 1 t f *",
+    "history": ["2023-04-01", "2020-04-02"],
+    "type": "h-01"
+  },
+  {
+    "id": 2,
+    "title": "Frühstücken",
+    "description": "Frühstücken",
+    "start_date": "2023-05-18",
+    "end_date": "2023-06-18",
+    "cron": "1 morning 2 t f *",
+    "history": ["2023-05-17", "2020-04-02"],
+    "type": "h-01"
+  },
+  {
+    "id": 3,
+    "title": "Arbeiten",
+    "description": "Arbeiten",
+    "start_date": "2023-01-10",
+    "end_date": "2024-06-18",
+    "cron": "1 noon 3 t f *",
+    "history": ["2022-12-16", "2020-04-02"],
+    "type": "h-01"
+  },
+  {
+    "id": 4,
+    "title": "Mittagessen",
+    "description": "Mittagessen",
+    "start_date": "2022-07-18",
+    "end_date": "2023-06-18",
+    "cron": "4 noon 1 f t *",
+    "history": ["2022-11-01", "2020-04-02"],
+    "type": "h-01"
+  },
+  {
+    "id": 5,
+    "title": "Buch lesen",
+    "description": "Buch lesen",
+    "start_date": "2023-05-04",
+    "end_date": "2099-01-01",
+    "cron": "2 evening 2 f t *",
+    "history": ["2023-01-01", "2020-04-02"],
+    "type": "h-01"
+  },
+  {
+    "id": 6,
+    "title": "Hautroutine",
+    "description": "Hautroutine",
+    "start_date": "2023-02-18",
+    "end_date": "2099-06-18",
+    "cron": "3 morning 5 t f *",
+    "history": ["2023-02-17", "2020-04-02"],
+    "type": "h-01"
+  }
+]

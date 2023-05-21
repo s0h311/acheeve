@@ -3,14 +3,14 @@
     <div class="grid grid-cols-2 h-1/5">
       <button
         class="rounded-md rounded-r-none font-semibold"
-        :class="[selectedState === 1 ? 'bg-[#595b63]' : 'bg-black']"
+        :class="[selectedTodoState === 1 ? 'bg-[#595b63]' : 'bg-black']"
         @click="handleStateChange(1)"
       >
         {{ $t('todo') }}
       </button>
       <button
         class="rounded-md rounded-l-none font-semibold"
-        :class="[selectedState === 2 ? 'bg-[#595b63]' : 'bg-black']"
+        :class="[selectedTodoState === 2 ? 'bg-[#595b63]' : 'bg-black']"
         @click="handleStateChange(2)"
       >
         {{ $t('done') }}
@@ -20,20 +20,21 @@
       class="grid grid-cols-2 cursor-pointer"
       v-for="daytime in daytimes"
       :key="daytime.id"
-      @click="handleDaytimeChange(daytime.id)"
+      @click="handleDaytimeChange(daytime.name)"
     >
       <div class="flex items-center space-x-3">
         <nuxt-img :src="daytime.icon" />
         <span class="flex items-center">
-          <p class="text-lg leading-none font-semibold">{{ daytime.name }}</p>
+          <p class="text-lg leading-none font-semibold">{{ daytime.title }}</p>
           <p>&nbsp;</p>
           <p class="text-[#8c8d93] leading-none font-semibold">{{ `(${daytime.left})` }}</p>
         </span>
       </div>
       <nuxt-img
         class="place-self-end"
-        :src="daytime.id === selectedDaytime ? '/icons/hub/drop_down_active.png' : '/icons/hub/drop_down_inactive.png'"
+        :src="daytime.name === selectedDaytime ? '/icons/hub/drop_down_active.png' : '/icons/hub/drop_down_inactive.png'"
       />
+      <!--muss zentriert werden-->
     </div>
   </div>
 </template>
@@ -42,43 +43,54 @@
 const { t } = useI18n()
 
 const props = defineProps({
-  morningLeft: String,
-  eveningLeft: String,
   alldayLeft: String,
+  morningLeft: String,
+  noonLeft: String,
+  eveningLeft: String,
 })
-const emits = defineEmits(['onStateChange', 'onDaytimeChange'])
+const emits = defineEmits(['onTodoStateChange', 'onDaytimeChange'])
 
-const selectedState = ref<number>(1) // 1 = ToDo, 2 = Done
-const selectedDaytime = ref<number>(0) // 1 = morning, 2 = evening, 3 = allday
+const selectedTodoState = ref<number>(1) // 1 = ToDo, 2 = Done
+const selectedDaytime = ref<string>('allday')
 
 const daytimes = [
   {
     id: 1,
-    name: t('morning'),
+    name: 'allday',
+    title: t('allday'),
+    icon: '/icons/hub/allday.png',
+    left: props.alldayLeft,
+  },
+  {
+    id: 2,
+    name: 'morning',
+    title: t('morning'),
     icon: '/icons/hub/morning.png',
     left: props.morningLeft,
   },
   {
-    id: 2,
-    name: t('evening'),
+    id: 3,
+    name: 'noon',
+    title: t('noon'),
+    icon: '/icons/hub/morning.png',
+    left: props.noonLeft,
+  },
+  {
+    id: 4,
+    name: 'evening',
+    title: t('evening'),
     icon: '/icons/hub/evening.png',
     left: props.eveningLeft,
   },
-  {
-    id: 3,
-    name: t('allday'),
-    icon: '/icons/hub/allday.png',
-    left: props.alldayLeft,
-  },
 ]
 
-const handleStateChange = (state: number) => {
-  selectedState.value = state
-  emits('onStateChange', state)
+const handleStateChange = (todoState: number) => {
+  selectedTodoState.value = todoState
+  emits('onTodoStateChange', todoState)
 }
 
-const handleDaytimeChange = (daytime: number) => {
-  selectedDaytime.value = selectedDaytime.value === daytime ? 0 : daytime
-  emits('onDaytimeChange', daytime)
+const handleDaytimeChange = (daytime: string) => {
+  selectedDaytime.value = selectedDaytime.value === daytime ? 'allday' : daytime
+  emits('onDaytimeChange', selectedDaytime.value)
 }
 </script>

@@ -1,38 +1,47 @@
 <template>
-  <div class="responsive-w grid gap-10 mx-auto">
-    <div>
-      <button
-        class="absolute right-3 top-3"
-        @click="navigateTo(l('/profile'))"
-      >
-        <img
-          src="/icons/hub/settings.svg"
-          alt=""
-        />
-      </button>
-      <div class="grid place-items-center gap-8">
-        <h1 class="font-semibold text-[26px] leading-8 whitespace-pre-wrap text-center">{{ welcomeText }}</h1>
-        <HubSliderCal
-          days-in-each-direc="14"
-          @date-change="onDateChange"
-        />
-      </div>
+  <div
+    :class="[selectedDaytime === 'allday' ? '' : 'auto-rows-min']"
+    class="grid responsive-w mx-auto gap-10 relative -mt-4"
+  >
+    <button
+      class="place-self-end"
+      @click="navigateTo(l('/profile'))"
+    >
+      <img
+        src="/icons/hub/settings.svg"
+        alt=""
+      />
+    </button>
+    <div class="grid place-items-center gap-8 -mt-8">
+      <h1 class="font-semibold text-[26px] leading-8 whitespace-pre-wrap text-center">{{ welcomeText }}</h1>
+      <HubSliderCal
+        days-in-each-direc="14"
+        @date-change="onDateChange"
+      />
     </div>
     <HubFilter
       morningLeft="5"
+      noonLeft="4"
       eveningLeft="2"
       alldayLeft="3"
+      @onDaytimeChange="onDaytimeChange"
+      @onTodoStateChange="onTodoStateChange"
     />
+
     <HabitListing
-      class="h-full"
+      class="mb-20"
+      :selectedDaytime="selectedDaytime"
+      :selectedDate="selectedDate"
+      :selectedTodoState="selectedTodoState"
       @onCounterClick="onCounterClick"
     />
-    <div class="relative mt-10">
-      <NavBar
-        v-if="!addEntryMenuActive"
-        @onClick="addEntryMenuActive = true"
-      />
-    </div>
+
+    <NavBar
+      class="absolute bottom-0 left-0"
+      v-if="!addEntryMenuActive"
+      @onClick="addEntryMenuActive = true"
+    />
+
     <AddEntryMenu
       class="responsive-w absolute bottom-0 left-0 md:left-auto md:mx-auto"
       v-if="addEntryMenuActive"
@@ -45,6 +54,8 @@
 const { t } = useI18n()
 const l = useLocalePath()
 
+const selectedTodoState = ref<number>(1) // 1 = ToDo, 2 = Done
+const selectedDaytime = ref<string>('allday')
 const todaysDate: string = new Date().toLocaleDateString()
 const selectedDate = ref<Date>(new Date())
 const habitsLeft = ref<number>(4)
@@ -84,9 +95,16 @@ const welcomeText = computed<string>((): string => {
   return firstWord + ' ' + day + t(numberExtension) + ' ' + month + '\n' + habitsLeft.value + ' ' + t('habits_left_welcome_text_hub')
 })
 
+const onTodoStateChange = (todoState: number) => {
+  selectedTodoState.value = todoState
+}
+
+const onDaytimeChange = (dayTime: string) => {
+  selectedDaytime.value = dayTime
+}
+
 const onDateChange = (date: Date) => {
   selectedDate.value = date
-  // update to do and habit cards
 }
 
 const onCounterClick = (habitId: number) => {

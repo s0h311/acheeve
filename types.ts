@@ -20,13 +20,14 @@ interface SignUpCredentials {
 }
 
 interface HabitData {
-  titel: String
-  description: String | null
+  id: number
+  title: string
+  description: string | null
   start_date: Date
   end_date: Date
-  frequency: String
+  cron: string
   history: Date[] | null
-  type: String | null
+  type: string | null
 }
 
 export { UserProfile, SignupInputs, SignUpCredentials, HabitData }

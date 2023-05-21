@@ -1,0 +1,27 @@
+[
+  {
+    "habit_id": 1,
+    "counter": 1
+  },
+  {
+    "habit_id": 2,
+    "counter": 0
+  },
+  {
+    "habit_id": 3,
+    "counter": 1
+  },
+  {
+    "habit_id": 4,
+    "counter": 0
+  },
+
+  {
+    "habit_id": 5,
+    "counter": 1
+  },
+  {
+    "habit_id": 6,
+    "counter": 0
+  }
+]
