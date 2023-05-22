@@ -1,6 +1,5 @@
 <template>
-  <div class="grid responsive-w gap-5 mx-auto -mt-3">
-    <!-- -mt-3 wegmachen, wenn die Navigation ohne layout:centered funktioniert-->
+  <div class="grid responsive-w gap-5 mx-auto p-7">
     <div class="flex relative justify-center mb-5">
       <button
         class="absolute left-0"
@@ -91,7 +90,11 @@
 import { HabitCron, HabitData, WeekDays } from '~/types'
 
 definePageMeta({
+<<<<<<< HEAD
   layout: 'centered',
+=======
+  layout: '',
+>>>>>>> c012f9c (AC-39)
 })
 
 const l = useLocalePath()
