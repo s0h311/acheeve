@@ -13,7 +13,6 @@
 defineProps({
   text: String,
 })
-
 const emits = defineEmits(['click'])
 
 const onClick = () => {

@@ -20,14 +20,33 @@ interface SignUpCredentials {
 }
 
 interface HabitData {
-  id: number
+  id?: number
   title: string
-  description: string | null
+  description?: string | null
   start_date: Date
   end_date: Date
   cron: string
-  history: Date[] | null
-  type: string | null
+  history?: Date[] | null
+  type?: string | null
 }
 
-export { UserProfile, SignupInputs, SignUpCredentials, HabitData }
+interface HabitCron {
+  howOften: number
+  dayTime: string
+  frequency: number
+  dailyOrWeekly: string
+  weekDays?: number[]
+}
+
+const WeekDays: string[] = [
+  'sunday_short',
+  'monday_short',
+  'tuesday_short',
+  'wednesday_short',
+  'thursday_short',
+  'friday_short',
+  'saturday_short',
+  'sunday_short',
+]
+
+export { UserProfile, SignupInputs, SignUpCredentials, HabitData, HabitCron, WeekDays }

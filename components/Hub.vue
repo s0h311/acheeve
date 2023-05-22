@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[selectedDaytime === 'allday' ? '' : 'auto-rows-min']"
-    class="grid responsive-w mx-auto gap-10 relative -mt-4"
+    class="grid responsive-w mx-auto gap-10 -mt-4"
   >
     <button
       class="place-self-end"
@@ -16,7 +16,7 @@
       <h1 class="font-semibold text-[26px] leading-8 whitespace-pre-wrap text-center">{{ welcomeText }}</h1>
       <HubSliderCal
         days-in-each-direc="14"
-        @date-change="onDateChange"
+        @onDateChange="onDateChange"
       />
     </div>
     <HubFilter
@@ -37,7 +37,7 @@
     />
 
     <NavBar
-      class="absolute bottom-0 left-0"
+      class="responsive-w absolute bottom-10 left-0"
       v-if="!addEntryMenuActive"
       @onClick="addEntryMenuActive = true"
     />
@@ -58,6 +58,7 @@ const selectedTodoState = ref<number>(1) // 1 = ToDo, 2 = Done
 const selectedDaytime = ref<string>('allday')
 const todaysDate: string = new Date().toLocaleDateString()
 const selectedDate = ref<Date>(new Date())
+selectedDate.value.setHours(0, 0, 0, 0)
 const habitsLeft = ref<number>(4)
 const addEntryMenuActive = ref<boolean>(false)
 const months: string[] = [

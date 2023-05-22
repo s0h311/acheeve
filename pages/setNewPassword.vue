@@ -40,6 +40,7 @@ definePageMeta({
   layout: 'centered',
   //middleware: ['password-recovery'],
 })
+
 const l = useLocalePath()
 const { t } = useI18n()
 const supabase = useSupabaseClient()

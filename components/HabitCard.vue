@@ -7,7 +7,7 @@
     </div>
     <button
       class="absolute right-4 rounded-full border-2 border-indigo-300 w-[40px] h-[40px] text-sm text-center leading-8 opacity-70 text-opacity-75 font-semibold italic max-w-xs"
-      @click="emits('onCounterClick', props.id)"
+      @click="emits('onCounterClick', id)"
     >
       {{ counter }} / {{ goal }}
     </button>

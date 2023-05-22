@@ -5,7 +5,7 @@
     "description": "Zähne putzen",
     "start_date": "2023-05-18",
     "end_date": "2023-06-18",
-    "cron": "2 allday 1 t f *",
+    "cron": "2 allday 1 d * *",
     "history": ["2023-04-01", "2020-04-02"],
     "type": "h-01"
   },
@@ -15,7 +15,7 @@
     "description": "Frühstücken",
     "start_date": "2023-05-18",
     "end_date": "2023-06-18",
-    "cron": "1 morning 2 t f *",
+    "cron": "1 morning 2 d * *",
     "history": ["2023-05-17", "2020-04-02"],
     "type": "h-01"
   },
@@ -25,7 +25,7 @@
     "description": "Arbeiten",
     "start_date": "2023-01-10",
     "end_date": "2024-06-18",
-    "cron": "1 noon 3 t f *",
+    "cron": "1 morning 3 d * *",
     "history": ["2022-12-16", "2020-04-02"],
     "type": "h-01"
   },
@@ -35,7 +35,7 @@
     "description": "Mittagessen",
     "start_date": "2022-07-18",
     "end_date": "2023-06-18",
-    "cron": "4 noon 1 f t *",
+    "cron": "4 evening 1 w 1,2 *",
     "history": ["2022-11-01", "2020-04-02"],
     "type": "h-01"
   },
@@ -45,7 +45,7 @@
     "description": "Buch lesen",
     "start_date": "2023-05-04",
     "end_date": "2099-01-01",
-    "cron": "2 evening 2 f t *",
+    "cron": "2 evening 2 w 3,4 *",
     "history": ["2023-01-01", "2020-04-02"],
     "type": "h-01"
   },
@@ -55,8 +55,48 @@
     "description": "Hautroutine",
     "start_date": "2023-02-18",
     "end_date": "2099-06-18",
-    "cron": "3 morning 5 t f *",
+    "cron": "3 morning 5 d * *",
     "history": ["2023-02-17", "2020-04-02"],
+    "type": "h-01"
+  },
+  {
+    "id": 7,
+    "title": "Test1",
+    "description": "Frühstücken",
+    "start_date": "2002-05-17",
+    "end_date": "2023-06-18",
+    "cron": "1 morning 1 d * *",
+    "history": ["2023-05-17", "2020-04-02"],
+    "type": "h-01"
+  },
+  {
+    "id": 8,
+    "title": "Test2",
+    "description": "Arbeiten",
+    "start_date": "2023-01-10",
+    "end_date": "2024-06-18",
+    "cron": "1 evening 1 d * *",
+    "history": ["2022-12-16", "2020-04-02"],
+    "type": "h-01"
+  },
+  {
+    "id": 9,
+    "title": "Weekly Test1",
+    "description": "Frühstücken",
+    "start_date": "2002-05-17",
+    "end_date": "2023-06-18",
+    "cron": "1 morning 1 w 1,2 *",
+    "history": ["2023-05-17", "2020-04-02"],
+    "type": "h-01"
+  },
+  {
+    "id": 10,
+    "title": "Weekly Test2",
+    "description": "Arbeiten",
+    "start_date": "2023-01-10",
+    "end_date": "2024-06-18",
+    "cron": "1 evening 1 w 3,4 *",
+    "history": ["2022-12-16", "2020-04-02"],
     "type": "h-01"
   }
 ]

@@ -10,12 +10,13 @@
       :counter="habit.counter"
       :goal="habit.goal"
       @onCounterClick="onCounterClick"
+      @onChange="handleHabitAdded"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { HabitData } from '~/types'
+import { HabitCron, HabitData } from '~/types'
 import dummyHabits from '~/assets/dummyHabits.json'
 import dummyTodoStates from '~/assets/dummyTodoState.json'
 
@@ -71,10 +72,11 @@ const isActiveOnSelectedDate = (habit: HabitData) => {
   }
 
   let habitCron = getHabitCron(habit.cron)
-  let multiplier = habitCron.weekly ? habitCron.frequency * 7 : habitCron.frequency
+  let multiplier = habitCron.dailyOrWeekly === 'w' ? habitCron.frequency * 7 : habitCron.frequency
 
   while (selectedDate >= startDate) {
-    if (selectedDate == startDate) {
+    let weekDay = props.selectedDate.getDay()
+    if (selectedDate == startDate || (habitCron.dailyOrWeekly === 'w' && habitCron.weekDays?.includes(weekDay))) {
       return true
     }
     startDate += multiplier
@@ -82,14 +84,20 @@ const isActiveOnSelectedDate = (habit: HabitData) => {
   return false
 }
 
-const getHabitCron = (habitCron: string) => {
+const getHabitCron = (habitCron: string): HabitCron => {
   let expression = habitCron.split(' ')
+  let weekDaysString = expression[4]
+  let weekDays: number[] = []
+  if (weekDaysString !== '*') {
+    weekDays = weekDaysString.split(',').map((weekDay) => parseInt(weekDay))
+  }
+
   return {
     howOften: parseInt(expression[0]),
     dayTime: expression[1],
     frequency: parseInt(expression[2]),
-    daily: expression[3] === 't' ? true : false,
-    weekly: expression[4] === 't' ? true : false,
+    dailyOrWeekly: expression[3],
+    weekDays,
   }
 }
 

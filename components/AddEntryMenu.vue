@@ -16,7 +16,7 @@
       :name="$t('habit')"
       image-url="/icons/hub/goal_icon.png"
       :label="$t('add_habit')"
-      @on-click="emits('onClick')"
+      @onClick="navigateTo(l('/addHabit'))"
     />
     <AddEntry
       class=""
@@ -25,11 +25,13 @@
       :name="$t('diary_entry')"
       image-url="/icons/hub/diary_icon.png"
       :label="$t('add_diary_entry')"
-      @on-click="emits('onClick')"
+      @onClick="navigateTo(l('/addDiaryEntry'))"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 const emits = defineEmits(['onClick'])
+
+const l = useLocalePath()
 </script>

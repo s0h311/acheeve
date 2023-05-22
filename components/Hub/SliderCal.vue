@@ -12,7 +12,7 @@
         :class="[selectedDateId === date.id ? 'text-dark' : '']"
         class="font-semibold"
       >
-        {{ date.weekday }} <br />
+        {{ date.weekDay }} <br />
         {{ date.day }}
       </p>
     </div>
@@ -20,6 +20,7 @@
 </template>
 
 <script setup lang="ts">
+import { WeekDays } from '~/types'
 const props = defineProps({
   daysInEachDirec: {
     type: String,
@@ -27,29 +28,19 @@ const props = defineProps({
   },
 })
 
-const emits = defineEmits(['dateChange'])
+const emits = defineEmits(['onDateChange'])
 
 const { t } = useI18n()
 const daysInEachDirec: number = parseInt(props.daysInEachDirec)
 const todaysDateId = ref<number>(daysInEachDirec)
 const selectedDateId = ref<number>(daysInEachDirec)
 const dateRefs = ref<HTMLElement[] | []>([])
-const weekdays: string[] = [
-  'sunday_short',
-  'monday_short',
-  'tuesday_short',
-  'wednesday_short',
-  'thursday_short',
-  'friday_short',
-  'saturday_short',
-  'sunday_short',
-]
 const dates: Date[] = []
 
 interface CalendarDay {
   id: number
   day: number
-  weekday: string
+  weekDay: string
 }
 
 onMounted(() => {
@@ -86,7 +77,7 @@ const allDates = computed<CalendarDay[]>(() => {
     calendarDays.push({
       id: i,
       day: newDate.getDate(),
-      weekday: t(weekdays[newDate.getDay()]),
+      weekDay: t(WeekDays[newDate.getDay()]),
     })
 
     dates.push(newDate)
@@ -97,7 +88,9 @@ const allDates = computed<CalendarDay[]>(() => {
 const updateSelectedDate = (dateId: number) => {
   selectedDateId.value = dateId
   scrollToSelectedDate(dateId)
-  emits('dateChange', dates[dateId + 1])
+  let date = dates[dateId + 1]
+  date.setHours(0, 0, 0, 0)
+  emits('onDateChange', date)
 }
 
 const onSelectedDateClick = (dateId: number) => {

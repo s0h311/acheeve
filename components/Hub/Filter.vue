@@ -45,7 +45,6 @@ const { t } = useI18n()
 const props = defineProps({
   alldayLeft: String,
   morningLeft: String,
-  noonLeft: String,
   eveningLeft: String,
 })
 const emits = defineEmits(['onTodoStateChange', 'onDaytimeChange'])
@@ -70,13 +69,6 @@ const daytimes = [
   },
   {
     id: 3,
-    name: 'noon',
-    title: t('noon'),
-    icon: '/icons/hub/morning.png',
-    left: props.noonLeft,
-  },
-  {
-    id: 4,
     name: 'evening',
     title: t('evening'),
     icon: '/icons/hub/evening.png',
