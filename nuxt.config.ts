@@ -22,10 +22,10 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@nuxt/image-edge',
     '@nuxtjs/i18n-edge',
-    //'@vite-pwa/nuxt',
+    '@vite-pwa/nuxt',
     '@pinia/nuxt',
   ],
-  //pwa,
+  pwa,
   i18n,
   css: ['@/assets/css/main.css'],
   postcss: {

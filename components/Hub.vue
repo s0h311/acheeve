@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[selectedDaytime === 'allday' ? '' : 'auto-rows-min']"
-    class="grid responsive-w mx-auto gap-10 -mt-4"
+    class="grid responsive-w mx-auto gap-10 relative -mt-4"
   >
     <button
       class="place-self-end"
@@ -37,13 +37,13 @@
     />
 
     <NavBar
-      class="responsive-w absolute bottom-10 left-0"
+      class="responsive-w absolute bottom-0 left-0"
       v-if="!addEntryMenuActive"
       @onClick="addEntryMenuActive = true"
     />
 
     <AddEntryMenu
-      class="responsive-w absolute bottom-0 left-0 md:left-auto md:mx-auto"
+      class="w-screen md:w-full absolute -mb-10 bottom-0 -ml-6 md:left-auto md:mx-auto"
       v-if="addEntryMenuActive"
       @onClick="addEntryMenuActive = false"
     />

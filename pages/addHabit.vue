@@ -90,11 +90,7 @@
 import { HabitCron, HabitData, WeekDays } from '~/types'
 
 definePageMeta({
-<<<<<<< HEAD
-  layout: 'centered',
-=======
   layout: '',
->>>>>>> c012f9c (AC-39)
 })
 
 const l = useLocalePath()

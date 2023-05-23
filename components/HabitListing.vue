@@ -10,7 +10,6 @@
       :counter="habit.counter"
       :goal="habit.goal"
       @onCounterClick="onCounterClick"
-      @onChange="handleHabitAdded"
     />
   </div>
 </template>
