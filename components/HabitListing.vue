@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import { useHabitStore } from '~/stores/habitStore.vue'
 import { HabitCron, HabitData } from '~/types'
 import dummyHabits from '~/assets/dummyHabits.json'
 import dummyTodoStates from '~/assets/dummyTodoState.json'
@@ -28,6 +29,59 @@ const props = defineProps({
   },
 })
 const emits = defineEmits(['onCounterClick'])
+
+const habitStore = useHabitStore()
+const updateHL = habitStore.updateHabitsLeft
+
+const getHabitCron = (habitCron: string): HabitCron => {
+  let expression = habitCron.split(' ')
+  let weekDaysString = expression[4]
+  let weekDays: number[] = []
+  if (weekDaysString !== '*') {
+    weekDays = weekDaysString.split(',').map((weekDay) => parseInt(weekDay))
+  }
+
+  return {
+    howOften: parseInt(expression[0]),
+    dayTime: expression[1],
+    frequency: parseInt(expression[2]),
+    dailyOrWeekly: expression[3],
+    weekDays,
+  }
+}
+
+const isActiveOnSelectedDate = (habit: HabitData) => {
+  let startDate = habit.start_date.getTime() / 86400000 // milliseconds to days
+  let endDate = habit.end_date.getTime() / 86400000
+  let selectedDate = parseInt((props.selectedDate.getTime() / 86400000).toFixed(1))
+
+  if (selectedDate < startDate || selectedDate > endDate) {
+    return false
+  }
+
+  let habitCron = getHabitCron(habit.cron)
+  let multiplier = habitCron.dailyOrWeekly === 'w' ? habitCron.frequency * 7 : habitCron.frequency
+
+  while (selectedDate >= startDate) {
+    let weekDay = props.selectedDate.getDay()
+    if (selectedDate == startDate || (habitCron.dailyOrWeekly === 'w' && habitCron.weekDays?.includes(weekDay))) {
+      return true
+    }
+    startDate += multiplier
+  }
+  return false
+}
+
+const getHabitCounter = (habitId: number): number => {
+  return dummyTodoStates.find((habit) => habit.habit_id == habitId)?.counter || 0
+}
+
+const getStreak = (failedDays: string[]): string => {
+  let dates = failedDays.map((dateString) => new Date(dateString)) //TODO Ändern, nur für dummy
+  let lastDate = dates.reduce((a, b) => (a > b ? a : b))
+  let todaysDate = new Date()
+  return ((todaysDate.getTime() - lastDate.getTime()) / 86400000).toFixed(0)
+}
 
 const habits = computed(() => {
   return dummyHabits
@@ -54,55 +108,15 @@ const habits = computed(() => {
     .filter((habit) => (props.selectedDaytime === 'allday' ? true : getHabitCron(habit.cron).dayTime === props.selectedDaytime))
 })
 
-const getStreak = (failedDays: string[]): string => {
-  let dates = failedDays.map((dateString) => new Date(dateString)) //TODO Ändern, nur für dummy
-  let lastDate = dates.reduce((a, b) => (a > b ? a : b))
-  let todaysDate = new Date()
-  return ((todaysDate.getTime() - lastDate.getTime()) / 86400000).toFixed(0)
-}
-
-const isActiveOnSelectedDate = (habit: HabitData) => {
-  let startDate = habit.start_date.getTime() / 86400000 // milliseconds to days
-  let endDate = habit.end_date.getTime() / 86400000
-  let selectedDate = parseInt((props.selectedDate.getTime() / 86400000).toFixed(1))
-
-  if (selectedDate < startDate || selectedDate > endDate) {
-    return false
-  }
-
-  let habitCron = getHabitCron(habit.cron)
-  let multiplier = habitCron.dailyOrWeekly === 'w' ? habitCron.frequency * 7 : habitCron.frequency
-
-  while (selectedDate >= startDate) {
-    let weekDay = props.selectedDate.getDay()
-    if (selectedDate == startDate || (habitCron.dailyOrWeekly === 'w' && habitCron.weekDays?.includes(weekDay))) {
-      return true
-    }
-    startDate += multiplier
-  }
-  return false
-}
-
-const getHabitCron = (habitCron: string): HabitCron => {
-  let expression = habitCron.split(' ')
-  let weekDaysString = expression[4]
-  let weekDays: number[] = []
-  if (weekDaysString !== '*') {
-    weekDays = weekDaysString.split(',').map((weekDay) => parseInt(weekDay))
-  }
-
-  return {
-    howOften: parseInt(expression[0]),
-    dayTime: expression[1],
-    frequency: parseInt(expression[2]),
-    dailyOrWeekly: expression[3],
-    weekDays,
-  }
-}
-
-const getHabitCounter = (habitId: number): number => {
-  return dummyTodoStates.find((habit) => habit.habit_id == habitId)?.counter || 0
-}
+watch(
+  habits,
+  (newValue, _oldValue) => {
+    newValue.forEach((habit) =>
+      habit.daytime === 'allday' ? updateHL('allday') : habit.daytime === 'morning' ? updateHL('morning') : updateHL('evening')
+    )
+  },
+  { deep: true }
+)
 
 const onCounterClick = (habitId: number) => {
   //dummyTodoStates.find((habit) => habit.habit_id == habitId) //TODO aktulisieren des counter in der entprechenden Tabelle

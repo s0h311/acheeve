@@ -13,7 +13,7 @@ export default defineNuxtConfig({
         {name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'}
       ],
       htmlAttrs: {
-        lang: 'en' //should be auto detected
+        lang: 'en' //should be auto detected //TODO maybe with i18nHead = useLocaleHead
       } 
     },
   },
@@ -40,4 +40,7 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'],
     ],
   },
+  experimental: {
+    watcher: 'chokidar' //TODO Delete later https://github.com/nuxt/nuxt/issues/20990
+  }
 })

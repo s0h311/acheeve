@@ -71,5 +71,8 @@
   "error_message_password_confirm": "Die Passwörter stimmen nicht überein", 
   "login_error_incorrect_info": "Email oder Passwort falsch, versuch bitte nochmal",
   "already_registered_error": "Du hast bereits ein Konto, bitte einloggen",
-  "welcome_profile": "Schön, dass du hier bist"
+  "welcome_profile": "Schön, dass du hier bist",
+  "cancel": "Abbrechen",
+  "language": "de",
+  "save": "Speichern"
 }

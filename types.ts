@@ -25,8 +25,8 @@ interface HabitData {
   description?: string | null
   start_date: Date
   end_date: Date
-  cron: string
-  history?: Date[] | null
+  cron: string //TODO vielleicht noch zu 'frequency' ändern
+  history?: Date[]
   type?: string | null
 }
 

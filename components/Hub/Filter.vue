@@ -40,41 +40,41 @@
 </template>
 
 <script setup lang="ts">
+import { useHabitStore } from '~/stores/habitStore.vue'
+
 const { t } = useI18n()
 
-const props = defineProps({
-  alldayLeft: String,
-  morningLeft: String,
-  eveningLeft: String,
-})
 const emits = defineEmits(['onTodoStateChange', 'onDaytimeChange'])
 
 const selectedTodoState = ref<number>(1) // 1 = ToDo, 2 = Done
 const selectedDaytime = ref<string>('allday')
 
-const daytimes = [
+const habitStore = useHabitStore()
+const habitsLeft = computed(() => habitStore.habitsLeft)
+
+const daytimes = ref([
   {
     id: 1,
     name: 'allday',
     title: t('allday'),
     icon: '/icons/hub/allday.png',
-    left: props.alldayLeft,
+    left: habitsLeft.value.alldayLeft,
   },
   {
     id: 2,
     name: 'morning',
     title: t('morning'),
     icon: '/icons/hub/morning.png',
-    left: props.morningLeft,
+    left: habitsLeft.value.morningLeft,
   },
   {
     id: 3,
     name: 'evening',
     title: t('evening'),
     icon: '/icons/hub/evening.png',
-    left: props.eveningLeft,
+    left: habitsLeft.value.eveningLeft,
   },
-]
+])
 
 const handleStateChange = (todoState: number) => {
   selectedTodoState.value = todoState

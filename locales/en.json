@@ -71,5 +71,8 @@
   "error_message_password_confirm": "Passwords do not match",
   "login_error_incorrect_info": "Incorrect email or password, please try again.",
   "already_registered_error": "You already have an account, please login",
-  "welcome_profile": "Nice having you here"
+  "welcome_profile": "Nice having you here",
+  "cancel": "Cancel",
+  "language": "en",
+  "save": "Save"
 }
