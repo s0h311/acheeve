@@ -261,6 +261,6 @@ const onSave = () => {
     //TODO error anzeigen
   }
   habitData.cron = getHabitCronString(habitCron)
-  //TODO Habitdata speichern
+  const save = useSaveHabit(habitData)
 }
 </script>
