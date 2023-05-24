@@ -26,7 +26,10 @@ const props = defineProps({
   id: Number,
   title: String,
   schedule: String,
-  streak: Number,
+  streak: {
+    type: Number,
+    required: true,
+  },
   counter: Number,
   goal: Number,
 })
