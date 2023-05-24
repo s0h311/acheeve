@@ -49,4 +49,19 @@ const WeekDays: string[] = [
   'sunday_short',
 ]
 
-export { UserProfile, SignupInputs, SignUpCredentials, HabitData, HabitCron, WeekDays }
+const months: string[] = [
+  'january',
+  'february',
+  'march',
+  'april',
+  'may',
+  'june',
+  'july',
+  'august',
+  'september',
+  'october',
+  'november',
+  'december',
+]
+
+export { UserProfile, SignupInputs, SignUpCredentials, HabitData, HabitCron, WeekDays, months }

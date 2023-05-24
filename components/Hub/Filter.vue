@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { useHabitStore } from '~/stores/habitStore.vue'
+import { useHabitStore } from '~/stores/habitStore'
 
 const { t } = useI18n()
 
@@ -52,7 +52,7 @@ const selectedDaytime = ref<string>('allday')
 const habitStore = useHabitStore()
 const habitsLeft = computed(() => habitStore.habitsLeft)
 
-const daytimes = ref([
+const daytimes = computed(() => [
   {
     id: 1,
     name: 'allday',

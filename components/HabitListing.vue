@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { useHabitStore } from '~/stores/habitStore.vue'
+import { useHabitStore } from '~/stores/habitStore'
 import { HabitCron, HabitData } from '~/types'
 import dummyHabits from '~/assets/dummyHabits.json'
 import dummyTodoStates from '~/assets/dummyTodoState.json'
@@ -31,7 +31,6 @@ const props = defineProps({
 const emits = defineEmits(['onCounterClick'])
 
 const habitStore = useHabitStore()
-const updateHL = habitStore.updateHabitsLeft
 
 const getHabitCron = (habitCron: string): HabitCron => {
   let expression = habitCron.split(' ')
@@ -84,6 +83,7 @@ const getStreak = (failedDays: string[]): string => {
 }
 
 const habits = computed(() => {
+  habitStore.resetHabitsLeft()
   return dummyHabits
     .map((habit) => {
       return {
@@ -99,6 +99,10 @@ const habits = computed(() => {
     })
     .filter((habit) => isActiveOnSelectedDate(habit))
     .filter((habit) => {
+      habitStore.updateHabitsLeft(habit.daytime)
+      return true
+    })
+    .filter((habit) => {
       if (props.selectedTodoState == 1) {
         return habit.counter < habit.goal
       } else {
@@ -107,16 +111,6 @@ const habits = computed(() => {
     })
     .filter((habit) => (props.selectedDaytime === 'allday' ? true : getHabitCron(habit.cron).dayTime === props.selectedDaytime))
 })
-
-watch(
-  habits,
-  (newValue, _oldValue) => {
-    newValue.forEach((habit) =>
-      habit.daytime === 'allday' ? updateHL('allday') : habit.daytime === 'morning' ? updateHL('morning') : updateHL('evening')
-    )
-  },
-  { deep: true }
-)
 
 const onCounterClick = (habitId: number) => {
   //dummyTodoStates.find((habit) => habit.habit_id == habitId) //TODO aktulisieren des counter in der entprechenden Tabelle

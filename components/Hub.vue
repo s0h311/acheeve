@@ -20,7 +20,6 @@
       />
     </div>
     <HubFilter
-      :habitsLeft="habitsLeft"
       @onDaytimeChange="onDaytimeChange"
       @onTodoStateChange="onTodoStateChange"
     />
@@ -31,7 +30,6 @@
       :selectedDate="selectedDate"
       :selectedTodoState="selectedTodoState"
       @onCounterClick="onCounterClick"
-      @leftHabits="updateLeftHabits"
     />
 
     <NavBar
@@ -49,7 +47,8 @@
 </template>
 
 <script setup lang="ts">
-import { useHabitStore } from '~/stores/habitStore.vue'
+import { months } from '~/types'
+import { useHabitStore } from '~/stores/habitStore'
 const { t } = useI18n()
 const l = useLocalePath()
 
@@ -63,20 +62,6 @@ const habitStore = useHabitStore()
 const habitsLeft = computed(() => habitStore.habitsLeft)
 
 const addEntryMenuActive = ref<boolean>(false)
-const months: string[] = [
-  'january',
-  'february',
-  'march',
-  'april',
-  'may',
-  'june',
-  'july',
-  'august',
-  'september',
-  'october',
-  'november',
-  'december',
-]
 
 const welcomeText = computed<string>((): string => {
   let day = selectedDate.value.getDate()
@@ -96,7 +81,7 @@ const welcomeText = computed<string>((): string => {
       : 'date_th'
 
   return (
-    firstWord + ' ' + day + t(numberExtension) + ' ' + month + '\n' + habitsLeft.value.alldayLeft + ' ' + t('habits_left_welcome_text_hub')
+    firstWord + ' ' + day + t(numberExtension) + ' ' + month + '\n' + habitsLeft.value.allLeft + ' ' + t('habits_left_welcome_text_hub')
   )
 })
 
