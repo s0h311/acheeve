@@ -15,20 +15,20 @@
           class="absolute left-0"
           @click="navigateTo(l('/'))"
         >
-          Cancel
+          {{ $t('cancel') }}
         </button>
-        <h1 class="text-lg font-semibold">Add Habit</h1>
+        <h1 class="text-lg font-semibold">{{ $t('add_new_habit') }}</h1>
         <button
           class="absolute right-0"
           @click="onSave"
         >
-          Save
+          {{ $t('save') }}
         </button>
       </div>
       <input
         class="bg-transparent outline-none text-lg"
         type="text"
-        placeholder="Habit name..."
+        :placeholder="$t('add_habit_habit_name')"
         v-model="habitData.title"
         @input="errorMessage = ''"
       />
@@ -40,29 +40,29 @@
       </p>
       <hr />
       <InputMultiInlineSelection
-        title="When do you want to start"
+        :title="$t('add_habit_start_date_title')"
         :options="startDateSelections"
         :activeOption="activeStartDate"
         :withDivider="true"
         @onChange="onStartDateChange"
       />
       <InputMultiInlineSelection
-        title="Frequency"
+        :title="$t('frequency')"
         :options="frequencySelections"
         @onChange="onDailyOrWeeklyChange"
       />
       <InputNumber
         v-if="habitCron.dailyOrWeekly === 'w'"
-        title="Every..."
-        unit="week"
+        :title="$t('add_habit_interval_title')"
+        :unit="$t('week_weeks')"
         :min="1"
         :max="8"
         v-model="habitCron.frequency"
       />
       <InputNumber
         v-else
-        title="Every..."
-        unit="day"
+        :title="$t('add_habit_interval_title')"
+        :unit="$t('day_days')"
         :min="1"
         :max="6"
         :withDivider="true"
@@ -82,14 +82,14 @@
         @onChange="onWeekDaySelectionsChange"
       />
       <InputNumber
-        title="How often in a day"
+        :title="$t('add_habit_how_often_in_a_day')"
         :min="1"
         :max="10"
         :withDivider="true"
         v-model="habitCron.howOften"
       />
       <InputMultiInlineSelection
-        title="At what time of day"
+        :title="$t('add_habit_what_time_of_day_title')"
         :options="dayTimeSelections"
         :withDivider="true"
         @onChange="onDayTimeChange"
@@ -105,6 +105,7 @@ definePageMeta({
   layout: '',
 })
 
+const { t } = useI18n()
 const l = useLocalePath()
 
 const errorMessage = ref('')
@@ -145,22 +146,22 @@ const habitData = reactive<HabitData>({
 const frequencySelections = [
   {
     id: 'f1',
-    title: 'daily',
+    title: t('daily'),
   },
   {
     id: 'f2',
-    title: 'weekly',
+    title: t('weekly'),
   },
 ]
 
 const thisDayOrWeekDaySelections = [
   {
     id: 'towd1',
-    title: 'this day',
+    title: t('add_habit_this_day'),
   },
   {
     id: 'towd2',
-    title: 'week day',
+    title: t('add_habit_weekday'),
   },
 ]
 
@@ -198,15 +199,15 @@ const weekDaySelections = [
 const dayTimeSelections = [
   {
     id: 'dt1',
-    title: 'morning',
+    title: t('morning'),
   },
   {
     id: 'dt2',
-    title: 'evening',
+    title: t('evening'),
   },
   {
     id: 'dt3',
-    title: 'allday',
+    title: t('add_habit_selection_allday'),
   },
 ]
 
@@ -214,11 +215,11 @@ const activeStartDate = ref('s1')
 const startDateSelections = ref([
   {
     id: 's1',
-    title: 'today',
+    title: t('today'),
   },
   {
     id: 's2',
-    title: 'tomorrow',
+    title: t('tomorrow'),
   },
   {
     id: 's3',
@@ -278,7 +279,7 @@ const onWeekDaySelectionsChange = (optionId: number) => {
 
 const onSave = () => {
   if (!habitData.title) {
-    errorMessage.value = 'Habit name cannot be empty'
+    errorMessage.value = t('add_habit_habit_name_empty_error')
     return
   }
   if (showWeekDays.value && habitCron.weekDays?.length == 0) {

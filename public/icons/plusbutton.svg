@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="25px"
+   height="25px"
+   viewBox="0 0 25 25"
+   version="1.1"
+   id="SVGRoot"
+   sodipodi:docname="plusbutton.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview20699"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="32.816738"
+     inkscape:cx="6.7648406"
+     inkscape:cy="11.868943"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid20709" />
+  </sodipodi:namedview>
+  <defs
+     id="defs20694" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <ellipse
+       style="fill:#647cb2;stroke-width:0.223;fill-opacity:1;stroke:#2a5493;stroke-opacity:0.5032258;stroke-dasharray:none;opacity:1"
+       id="path34487"
+       cx="12.5"
+       cy="13"
+       rx="10.5"
+       ry="10" />
+    <path
+       id="rect35080"
+       style="fill:#ffffff;fill-opacity:1;stroke:#2a5493;stroke-opacity:0.5032258;stroke-width:0.2;stroke-dasharray:none;stroke-linejoin:bevel;stroke-linecap:round;stroke-dashoffset:0"
+       d="M 11 6 L 11 11.5 L 5 11.5 L 5 14.5 L 11 14.5 L 11 20 L 14 20 L 14 14.5 L 20 14.5 L 20 11.5 L 14 11.5 L 14 6 L 11 6 z " />
+  </g>
+</svg>

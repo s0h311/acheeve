@@ -32,7 +32,7 @@
       </div>
       <nuxt-img
         class="place-self-end"
-        :src="daytime.name === selectedDaytime ? '/icons/hub/drop_down_active.png' : '/icons/hub/drop_down_inactive.png'"
+        :src="daytime.name === selectedDaytime ? '/icons/hub/drop_down_active.svg' : '/icons/hub/drop_down_inactive.svg'"
       />
       <!--muss zentriert werden-->
     </div>
@@ -57,21 +57,21 @@ const daytimes = computed(() => [
     id: 1,
     name: 'allday',
     title: t('allday'),
-    icon: '/icons/hub/allday.png',
+    icon: '/icons/hub/allday.svg',
     left: habitsLeft.value.alldayLeft,
   },
   {
     id: 2,
     name: 'morning',
     title: t('morning'),
-    icon: '/icons/hub/morning.png',
+    icon: '/icons/hub/morning.svg',
     left: habitsLeft.value.morningLeft,
   },
   {
     id: 3,
     name: 'evening',
     title: t('evening'),
-    icon: '/icons/hub/evening.png',
+    icon: '/icons/hub/evening.svg',
     left: habitsLeft.value.eveningLeft,
   },
 ])

@@ -6,7 +6,7 @@
       :id="habit.id"
       :title="habit.title"
       :schedule="habit.daytime"
-      :streak="habit.streak"
+      :streak="parseInt(habit.streak)"
       :counter="habit.counter"
       :goal="habit.goal"
       @onCounterClick="onCounterClick"

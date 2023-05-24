@@ -1,11 +1,11 @@
 <template>
-  <div class="grid grid-cols-3 w-full absolute bottom-0 px-10 -mb-4 md:left-auto">
+  <div class="grid grid-cols-3 w-full px-10">
     <BtnWithImg
       class="place-self-start"
       :width="45"
       :height="45"
       :name="$t('habits')"
-      image-url="/icons/hub/habits_icon.png"
+      image-url="/icons/hub/habits_icon.svg"
       :label="$t('habits')"
       @on-click="navigateTo(l('/'))"
     />
@@ -14,7 +14,7 @@
       :width="55"
       :height="55"
       :name="$t('add_new_habit_or_diary_entry')"
-      image-url="/icons/hub/add_icon.png"
+      image-url="/icons/plusbutton.svg"
       @on-click="emits('onClick')"
     />
     <BtnWithImg

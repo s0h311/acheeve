@@ -33,7 +33,7 @@
     />
 
     <NavBar
-      class="responsive-w absolute bottom-0 left-0"
+      class="responsive-w absolute -mb-5 bottom-0 left-0"
       v-if="!addEntryMenuActive"
       @onClick="addEntryMenuActive = true"
     />

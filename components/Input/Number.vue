@@ -2,19 +2,19 @@
   <div class="space-y-5">
     <h1>{{ title }}</h1>
     <div class="flex space-x-3 justify-center items-center">
-      <button
-        class="rounded-full bg-primary text-black w-8 h-8 font-bold text-lg"
-        @click="onClick(-1)"
-      >
-        -
+      <button @click="onClick(-1)">
+        <nuxt-img
+          src="/icons/minusbutton.svg"
+          :alt="$t('decrease')"
+        />
       </button>
       <p>{{ currentValue }}</p>
       <p v-if="unit">{{ unit }}</p>
-      <button
-        class="rounded-full bg-primary text-black w-8 h-8 font-bold text-lg"
-        @click="onClick(1)"
-      >
-        +
+      <button @click="onClick(1)">
+        <nuxt-img
+          src="/icons/plusbutton.svg"
+          :alt="$t('increase')"
+        />
       </button>
     </div>
     <div v-if="withDivider">
@@ -33,7 +33,7 @@ const props = defineProps({
 })
 const emits = defineEmits(['input'])
 
-const currentValue = ref(props.min || 0)
+const currentValue = ref(props.min)
 
 const onClick = (step: number) => {
   if (step == -1 && currentValue.value == props.min) {

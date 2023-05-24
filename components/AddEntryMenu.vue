@@ -1,5 +1,5 @@
 <template>
-  <div class="grid gap-8 pb-8 pt-4 px-6 bg-[#1b2a4a] rounded-t-3xl">
+  <div class="grid gap-8 p-5 bg-[#1b2a4a] rounded-t-3xl">
     <div class="flex items-center justify-center relative">
       <h1 class="text-center text-xl">{{ $t('add') }}</h1>
       <button
