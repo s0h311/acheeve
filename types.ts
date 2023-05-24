@@ -1,7 +1,7 @@
 interface UserProfile {
-  id: String
-  name: String
-  authProvider: String
+  id: string
+  name: string
+  authProvider: string | undefined
 }
 
 interface SignupInputs {
@@ -20,14 +20,14 @@ interface SignUpCredentials {
 }
 
 interface HabitData {
-  id?: number
+  id: number
   title: string
-  description?: string | null
+  description: string | null
   start_date: Date
   end_date: Date
   cron: string //TODO vielleicht noch zu 'frequency' ändern
-  history?: Date[]
-  type?: string | null
+  history: Date[]
+  type: string | null
 }
 
 interface HabitCron {

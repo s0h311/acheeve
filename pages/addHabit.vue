@@ -286,6 +286,7 @@ const onSave = () => {
     //TODO error anzeigen
   }
   habitData.cron = getHabitCronString(habitCron)
-  const save = useSaveHabit(habitData)
+  useSaveHabit(habitData)
+  navigateTo(l('/'))
 }
 </script>

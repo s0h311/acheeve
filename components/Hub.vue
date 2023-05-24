@@ -81,7 +81,7 @@ const welcomeText = computed<string>((): string => {
       : 'date_th'
 
   return (
-    firstWord + ' ' + day + t(numberExtension) + ' ' + month + '\n' + habitsLeft.value.allLeft + ' ' + t('habits_left_welcome_text_hub')
+    firstWord + ' ' + day + t(numberExtension) + ' ' + month + '\n' + habitsLeft.value.alldayLeft + ' ' + t('habits_left_welcome_text_hub')
   )
 })
 

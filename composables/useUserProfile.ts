@@ -1,8 +1,10 @@
 import { UserProfile } from '../types'
 
-export default async (id: string): Promise<UserProfile | string> => {
+export default async (): Promise<UserProfile> => {
   const user = useSupabaseUser()
-  if (user.value?.app_metadata.provider) {
+  let id = user.value.id
+
+  if (user.value && user.value.app_metadata.provider !== 'email') {
     return {
       id,
       name: user.value.user_metadata.full_name,
@@ -10,13 +12,12 @@ export default async (id: string): Promise<UserProfile | string> => {
     }
   } else {
     const supabase = useSupabaseClient()
-    const { data, error } = await supabase.from('profiles').select().eq('id', id)
-    return data
-      ? {
-          id,
-          name: data[0].name,
-          authProvider: 'email',
-        }
-      : useGetSupabaseErrorMessage(error)
+    const { data, error } = await supabase.from('profiles').select('name').eq('id', id)
+
+    return {
+      id,
+      name: data[0].name,
+      authProvider: 'email',
+    }
   }
 }

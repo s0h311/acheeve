@@ -1,34 +1,29 @@
-import { HabitData, UserProfile } from '~/types'
+import { HabitData } from '~/types'
 
 export default async (habitData: HabitData) => {
   const supabase = useSupabaseClient()
   const user = useSupabaseUser()
 
-  const { data, error: habitInsertError } = await supabase.from('habit').insert({
-    title: habitData.title,
-    description: habitData.description || null,
-    start_date: habitData.start_date,
-    end_date: habitData.end_date,
-    frequency: habitData.cron,
-    history: habitData.history || [],
-    type: habitData.type || null,
-  })
+  const { data: habit, error: habitInsertError } = await supabase
+    .from('habit')
+    .insert({
+      ...habitData,
+    })
+    .select()
 
   if (habitInsertError) {
-    console.log(habitInsertError)
+    throw createError({ statusCode: 500, statusMessage: 'Internal Error' }) //TODO i18n für Errormessage
   }
-
-  console.log(data)
 
   const { error: profileHabitInsertError } = await supabase
     .from('profile_habit')
     .insert({
       user_id: user.value.id,
-      habit_id: data.value.id,
+      habit_id: habit[0].id,
     })
     .single()
 
   if (profileHabitInsertError) {
-    console.log(profileHabitInsertError)
+    throw createError({ statusCode: 500, statusMessage: 'Internal Error' })
   }
 }

@@ -17,7 +17,6 @@ export default defineNuxtConfig({
       } 
     },
   },
-  ssr: false,
   modules: [
     '@vueuse/nuxt',
     '@nuxtjs/supabase',
@@ -26,7 +25,7 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@pinia/nuxt',
   ],
-  pwa,
+  //pwa,
   i18n,
   css: ['@/assets/css/main.css'],
   postcss: {

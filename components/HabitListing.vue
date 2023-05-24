@@ -6,7 +6,7 @@
       :id="habit.id"
       :title="habit.title"
       :schedule="habit.daytime"
-      :streak="parseInt(habit.streak)"
+      :streak="habit.streak"
       :counter="habit.counter"
       :goal="habit.goal"
       @onCounterClick="onCounterClick"
@@ -32,11 +32,25 @@ const emits = defineEmits(['onCounterClick'])
 
 const habitStore = useHabitStore()
 
+const { data: rawHabits, refresh } = await useAsyncData('rawHabits', async () => await useGetHabit(), {
+  transform: (habits) =>
+    habits.map((habit) => ({
+      ...habit,
+      start_date: new Date(habit.start_date),
+      end_date: new Date(habit.end_date),
+    })),
+})
+
+watch(
+  () => rawHabits,
+  () => refresh()
+)
+
 const getHabitCron = (habitCron: string): HabitCron => {
   let expression = habitCron.split(' ')
   let weekDaysString = expression[4]
   let weekDays: number[] = []
-  if (weekDaysString !== '*') {
+  if (weekDaysString.length > 1) {
     weekDays = weekDaysString.split(',').map((weekDay) => parseInt(weekDay))
   }
 
@@ -72,44 +86,50 @@ const isActiveOnSelectedDate = (habit: HabitData) => {
 }
 
 const getHabitCounter = (habitId: number): number => {
-  return dummyTodoStates.find((habit) => habit.habit_id == habitId)?.counter || 0
+  return 0
+  //return dummyTodoStates.find((habit) => habit.habit_id == habitId)?.counter || 0
 }
 
-const getStreak = (failedDays: string[]): string => {
-  let dates = failedDays.map((dateString) => new Date(dateString)) //TODO Ändern, nur für dummy
-  let lastDate = dates.reduce((a, b) => (a > b ? a : b))
+const getStreak = (failedDays: Date[], startDate: Date): number => {
+  let lastDate = startDate
   let todaysDate = new Date()
-  return ((todaysDate.getTime() - lastDate.getTime()) / 86400000).toFixed(0)
+  if (failedDays.length > 0) {
+    let dates = failedDays.map((dateString) => new Date(dateString)) //TODO Ändern, nur für dummy
+    lastDate = dates.reduce((a, b) => (a > b ? a : b))
+  }
+  return parseInt(((todaysDate.getTime() - lastDate.getTime()) / 86400000).toFixed(0))
 }
 
 const habits = computed(() => {
   habitStore.resetHabitsLeft()
-  return dummyHabits
-    .map((habit) => {
-      return {
-        ...habit,
-        start_date: new Date(habit.start_date), //TODO nur für dummy
-        end_date: new Date(habit.end_date), //TODO nur für dummy
-        history: habit.history.map((date) => new Date(date)), //TODO nur für dummy
-        daytime: getHabitCron(habit.cron).dayTime,
-        streak: getStreak(habit.history),
-        counter: getHabitCounter(habit.id),
-        goal: getHabitCron(habit.cron).howOften,
-      }
-    })
-    .filter((habit) => isActiveOnSelectedDate(habit))
-    .filter((habit) => {
-      habitStore.updateHabitsLeft(habit.daytime)
-      return true
-    })
-    .filter((habit) => {
-      if (props.selectedTodoState == 1) {
-        return habit.counter < habit.goal
-      } else {
-        return habit.counter == habit.goal
-      }
-    })
-    .filter((habit) => (props.selectedDaytime === 'allday' ? true : getHabitCron(habit.cron).dayTime === props.selectedDaytime))
+  return rawHabits.value?.length > 0
+    ? rawHabits.value
+        .map((habit) => {
+          return {
+            ...habit,
+            //start_date: new Date(habit.start_date), //TODO nur für dummy
+            //end_date: new Date(habit.end_date), //TODO nur für dummy
+            //history: habit.history.map((date) => new Date(date)), //TODO nur für dummy
+            daytime: getHabitCron(habit.cron).dayTime,
+            streak: getStreak(habit.history || [], habit.start_date),
+            counter: getHabitCounter(habit.id),
+            goal: getHabitCron(habit.cron).howOften,
+          }
+        })
+        .filter((habit) => isActiveOnSelectedDate(habit))
+        .filter((habit) => {
+          habitStore.updateHabitsLeft(habit.daytime)
+          return true
+        })
+        .filter((habit) => {
+          if (props.selectedTodoState == 1) {
+            return habit.counter < habit.goal
+          } else {
+            return habit.counter == habit.goal
+          }
+        })
+        .filter((habit) => (props.selectedDaytime === 'allday' ? true : getHabitCron(habit.cron).dayTime === props.selectedDaytime))
+    : []
 })
 
 const onCounterClick = (habitId: number) => {

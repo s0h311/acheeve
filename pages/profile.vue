@@ -25,10 +25,10 @@ definePageMeta({
 const l = useLocalePath()
 
 const supabase = useSupabaseClient()
-const user = useSupabaseUser()
-const profile: UserProfile | string = await useUserProfile(user.value.id)
 
-const userName = computed<string>(() => profile.name || profile)
+const profile: UserProfile = await useUserProfile()
+
+const userName = computed<string>(() => profile.name.toUpperCase())
 
 const handleLogout = async () => {
   await supabase.auth.signOut()
