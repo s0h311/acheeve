@@ -22,7 +22,7 @@
       :width="45"
       :height="45"
       :name="$t('diary')"
-      image-url="/icons/hub/diary_icon.png"
+      image-url="/icons/hub/diary_icon.svg"
       :label="$t('diary')"
       @on-click="navigateTo(l('/diary'))"
     />
