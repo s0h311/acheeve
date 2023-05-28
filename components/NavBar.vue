@@ -14,7 +14,7 @@
       :width="55"
       :height="55"
       :name="$t('add_new_habit_or_diary_entry')"
-      image-url="/icons/plusbutton.svg"
+      image-url="/icons/add-btn.svg"
       @on-click="emits('onClick')"
     />
     <BtnWithImg
