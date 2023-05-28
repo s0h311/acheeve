@@ -3,10 +3,10 @@
     <div class="flex items-center justify-center relative">
       <h1 class="text-center text-xl">{{ $t('add') }}</h1>
       <button
-        class="font-semibold text-2xl absolute right-0"
+        class="text-slate-400 text-2xl absolute right-0"
         @click="emits('onClick')"
       >
-        X
+       &#9587
       </button>
     </div>
     <AddEntry
@@ -14,7 +14,7 @@
       :width="50"
       :height="50"
       :name="$t('habit')"
-      image-url="/icons/hub/goal_icon.png"
+      image-url="/icons/hub/goal_icon.svg"
       :label="$t('add_habit')"
       @onClick="navigateTo(l('/addHabit'))"
     />
@@ -23,7 +23,7 @@
       :width="50"
       :height="50"
       :name="$t('diary_entry')"
-      image-url="/icons/hub/diary_icon.png"
+      image-url="/icons/hub/diary_icon_blue.svg"
       :label="$t('add_diary_entry')"
       @onClick="navigateTo(l('/addDiaryEntry'))"
     />

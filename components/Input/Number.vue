@@ -4,7 +4,9 @@
     <div class="flex space-x-3 justify-center items-center">
       <button @click="onClick(-1)">
         <nuxt-img
-          src="/icons/minusbutton.svg"
+          src="/icons/minus-btn.svg"
+          :height="20"
+          :width="20"
           :alt="$t('decrease')"
         />
       </button>
@@ -12,7 +14,9 @@
       <p v-if="unit">{{ unit }}</p>
       <button @click="onClick(1)">
         <nuxt-img
-          src="/icons/plusbutton.svg"
+          src="/icons/plus-btn.svg"
+          :height="20"
+          :width="20"
           :alt="$t('increase')"
         />
       </button>

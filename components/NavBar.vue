@@ -14,7 +14,7 @@
       :width="55"
       :height="55"
       :name="$t('add_new_habit_or_diary_entry')"
-      image-url="/icons/plusbutton.svg"
+      image-url="/icons/add-btn.svg"
       @on-click="emits('onClick')"
     />
     <BtnWithImg
@@ -22,7 +22,7 @@
       :width="45"
       :height="45"
       :name="$t('diary')"
-      image-url="/icons/hub/diary_icon.png"
+      image-url="/icons/hub/diary_icon.svg"
       :label="$t('diary')"
       @on-click="navigateTo(l('/diary'))"
     />
