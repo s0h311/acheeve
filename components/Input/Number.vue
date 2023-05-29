@@ -35,7 +35,7 @@ const props = defineProps({
   max: Number,
   withDivider: Boolean,
 })
-const emits = defineEmits(['input'])
+const emits = defineEmits(['onNumberChange'])
 
 const currentValue = ref(props.min)
 
@@ -47,6 +47,6 @@ const onClick = (step: number) => {
     return
   }
   currentValue.value += step
-  emits('input', currentValue.value)
+  emits('onNumberChange', currentValue.value)
 }
 </script>

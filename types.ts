@@ -20,14 +20,15 @@ interface SignUpCredentials {
 }
 
 interface HabitData {
-  id: number
+  id?: number
   title: string
-  description: string | null
-  start_date: Date
-  end_date: Date
-  cron: string //TODO vielleicht noch zu 'frequency' ändern
-  history: Date[]
-  type: string | null
+  description?: string | null
+  start_date: Date | string
+  end_date: Date | string
+  cron: string
+  counter: number
+  history?: Date[]
+  type?: string | null
 }
 
 interface HabitCron {

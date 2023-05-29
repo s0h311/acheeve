@@ -17,8 +17,6 @@
 <script setup lang="ts">
 import { useHabitStore } from '~/stores/habitStore'
 import { HabitCron, HabitData } from '~/types'
-import dummyHabits from '~/assets/dummyHabits.json'
-import dummyTodoStates from '~/assets/dummyTodoState.json'
 
 const props = defineProps({
   selectedTodoState: Number,
@@ -28,11 +26,13 @@ const props = defineProps({
     required: true,
   },
 })
-const emits = defineEmits(['onCounterClick'])
 
+const habitService = await useHabitService()
 const habitStore = useHabitStore()
 
-const { data: rawHabits, refresh } = await useAsyncData('rawHabits', async () => await useGetHabit(), {
+const todaysDate = ref(new Date(new Date().toDateString()))
+
+const { data: rawHabits, refresh } = await useAsyncData('rawHabits', async () => await habitService?.getHabits(), {
   transform: (habits) =>
     habits.map((habit) => ({
       ...habit,
@@ -64,12 +64,16 @@ const getHabitCron = (habitCron: string): HabitCron => {
 }
 
 const isActiveOnSelectedDate = (habit: HabitData) => {
-  let startDate = habit.start_date.getTime() / 86400000 // milliseconds to days
-  let endDate = habit.end_date.getTime() / 86400000
+  let startDate = parseInt((habit.start_date.getTime() / 86400000).toFixed(1)) // milliseconds to days
+  let endDate = parseInt((habit.end_date.getTime() / 86400000).toFixed(1))
   let selectedDate = parseInt((props.selectedDate.getTime() / 86400000).toFixed(1))
 
   if (selectedDate < startDate || selectedDate > endDate) {
     return false
+  }
+
+  if (selectedDate == startDate) {
+    return true
   }
 
   let habitCron = getHabitCron(habit.cron)
@@ -85,19 +89,12 @@ const isActiveOnSelectedDate = (habit: HabitData) => {
   return false
 }
 
-const getHabitCounter = (habitId: number): number => {
-  return 0
-  //return dummyTodoStates.find((habit) => habit.habit_id == habitId)?.counter || 0
-}
-
 const getStreak = (failedDays: Date[], startDate: Date): number => {
   let lastDate = startDate
-  let todaysDate = new Date()
   if (failedDays.length > 0) {
-    let dates = failedDays.map((dateString) => new Date(dateString)) //TODO Ändern, nur für dummy
-    lastDate = dates.reduce((a, b) => (a > b ? a : b))
+    lastDate = failedDays.reduce((a, b) => (a > b ? a : b))
   }
-  return parseInt(((todaysDate.getTime() - lastDate.getTime()) / 86400000).toFixed(0))
+  return parseInt(((todaysDate.value.getTime() - lastDate.getTime()) / 86400000).toFixed(0))
 }
 
 const habits = computed(() => {
@@ -107,33 +104,27 @@ const habits = computed(() => {
         .map((habit) => {
           return {
             ...habit,
-            //start_date: new Date(habit.start_date), //TODO nur für dummy
-            //end_date: new Date(habit.end_date), //TODO nur für dummy
-            //history: habit.history.map((date) => new Date(date)), //TODO nur für dummy
             daytime: getHabitCron(habit.cron).dayTime,
             streak: getStreak(habit.history || [], habit.start_date),
-            counter: getHabitCounter(habit.id),
             goal: getHabitCron(habit.cron).howOften,
           }
+        })
+        .filter((habit) => {
+          habit.start_date.setHours(0, 0, 0, 0)
+          habit.end_date.setHours(0, 0, 0, 0)
+          return true
         })
         .filter((habit) => isActiveOnSelectedDate(habit))
         .filter((habit) => {
           habitStore.updateHabitsLeft(habit.daytime)
           return true
         })
-        .filter((habit) => {
-          if (props.selectedTodoState == 1) {
-            return habit.counter < habit.goal
-          } else {
-            return habit.counter == habit.goal
-          }
-        })
+        .filter((habit) => (props.selectedTodoState == 1 ? habit.counter < habit.goal : habit.counter == habit.goal))
         .filter((habit) => (props.selectedDaytime === 'allday' ? true : getHabitCron(habit.cron).dayTime === props.selectedDaytime))
     : []
 })
 
 const onCounterClick = (habitId: number) => {
-  //dummyTodoStates.find((habit) => habit.habit_id == habitId) //TODO aktulisieren des counter in der entprechenden Tabelle
-  emits('onCounterClick', habitId)
+  habitService?.updateCounter(habitId)
 }
 </script>

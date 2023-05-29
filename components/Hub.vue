@@ -29,7 +29,6 @@
       :selectedDaytime="selectedDaytime"
       :selectedDate="selectedDate"
       :selectedTodoState="selectedTodoState"
-      @onCounterClick="onCounterClick"
     />
 
     <NavBar
@@ -95,9 +94,5 @@ const onDaytimeChange = (dayTime: string) => {
 
 const onDateChange = (date: Date) => {
   selectedDate.value = date
-}
-
-const onCounterClick = (habitId: number) => {
-  // update habit counter
 }
 </script>

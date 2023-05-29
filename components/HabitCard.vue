@@ -14,7 +14,7 @@
     </div>
     <button
       class="absolute right-4 rounded-full border-2 border-indigo-300 w-[40px] h-[40px] text-sm text-center leading-8 opacity-70 text-opacity-75 font-semibold italic max-w-xs"
-      @click="emits('onCounterClick', id)"
+      @click="onCounterClick"
     >
       {{ counter }} / {{ goal }}
     </button>
@@ -42,4 +42,11 @@ const streakIcon = computed(() => {
     ? '/icons/hub/streak_half_full.svg'
     : '/icons/hub/streak_empty.svg'
 })
+
+const onCounterClick = () => {
+  if (props.counter == props.goal) {
+    return
+  }
+  emits('onCounterClick', props.id)
+}
 </script>

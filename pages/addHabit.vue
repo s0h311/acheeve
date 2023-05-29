@@ -57,7 +57,7 @@
         :unit="$t('week_weeks')"
         :min="1"
         :max="8"
-        v-model="habitCron.frequency"
+        @onNumberChange="(number) => (habitCron.frequency = number)"
       />
       <InputNumber
         v-else
@@ -66,7 +66,7 @@
         :min="1"
         :max="6"
         :withDivider="true"
-        v-model="habitCron.frequency"
+        @onNumberChange="(number) => (habitCron.frequency = number)"
       />
       <InputMultiInlineSelection
         v-if="habitCron.dailyOrWeekly === 'w'"
@@ -86,7 +86,7 @@
         :min="1"
         :max="10"
         :withDivider="true"
-        v-model="habitCron.howOften"
+        @onNumberChange="(number) => (habitCron.howOften = number)"
       />
       <InputMultiInlineSelection
         :title="$t('add_habit_what_time_of_day_title')"
@@ -103,10 +103,12 @@ import { HabitCron, HabitData, WeekDays } from '~/types'
 
 definePageMeta({
   layout: '',
+  middleware: ['auth'],
 })
 
 const { t } = useI18n()
 const l = useLocalePath()
+const habitService = await useHabitService()
 
 const errorMessage = ref('')
 const showWeekDays = ref(false)
@@ -133,12 +135,11 @@ const habitCron = reactive<HabitCron>({
   weekDays: [1],
 })
 
-const todaysDate = new Date()
-todaysDate.setHours(0, 0, 0, 0)
+let todaysDate = new Date()
 
 const habitData = reactive<HabitData>({
   title: '',
-  start_date: new Date(),
+  start_date: todaysDate,
   end_date: new Date('2999-01-01'),
   cron: getHabitCronString(habitCron),
 })
@@ -285,8 +286,9 @@ const onSave = () => {
   if (showWeekDays.value && habitCron.weekDays?.length == 0) {
     //TODO error anzeigen
   }
+  habitData.start_date = habitData.start_date.toDateString()
   habitData.cron = getHabitCronString(habitCron)
-  useSaveHabit(habitData)
+  habitService?.saveHabit(habitData)
   navigateTo(l('/'))
 }
 </script>
