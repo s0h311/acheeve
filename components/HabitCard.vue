@@ -54,6 +54,6 @@ const onCounterClick = () => {
   if (props.counter == props.goal) {
     return
   }
-  emits('onCounterClick', props.id)
+  emits('onCounterClick', props.id, props.counter, props.goal)
 }
 </script>

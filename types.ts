@@ -25,9 +25,10 @@ interface HabitData {
   description?: string | null
   start_date: Date | string
   end_date: Date | string
+  streak?: number
   cron: string
   counter: number
-  history?: Date[]
+  done_today?: boolean
   type?: string | null
 }
 

@@ -46,12 +46,32 @@ export default async () => {
     return habits
   }
 
-  const updateCounter = async (habitId: number) => {
-    const { error } = await supabase.rpc('update_counter', {
+  const updateCounter = async (habitId: number, counter: number, goal: number) => {
+    const { error: counterUpdateError } = await supabase.rpc('update_counter', {
       habit_id: habitId,
     })
 
-    if (error) {
+    if (counter + 1 == goal) {
+      const { error: doneTodayUpdateError } = await supabase
+        .from('habit')
+        .update({
+          done_today: true,
+        })
+        .eq('id', habitId)
+
+      const { error: streakUpdateError } = await supabase.rpc('update_streak', {
+        habit_id: habitId,
+      })
+
+      if (doneTodayUpdateError || streakUpdateError) {
+        throw createError({
+          statusCode: 500,
+          message: 'Internal Error',
+        })
+      }
+    }
+
+    if (counterUpdateError) {
       throw createError({
         statusCode: 500,
         message: 'Internal Error',

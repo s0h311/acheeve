@@ -92,14 +92,6 @@ const isActiveOnSelectedDate = (habit: HabitData) => {
   return false
 }
 
-const getStreak = (failedDays: Date[], startDate: Date): number => {
-  let lastDate = startDate
-  if (failedDays.length > 1) {
-    lastDate = failedDays.reduce((a, b) => (a > b ? a : b)) || failedDays[0]
-  }
-  return parseInt(((todaysDate.value.getTime() - lastDate.getTime()) / 86400000).toFixed(0))
-}
-
 const habits = computed(() => {
   return rawHabits.value?.length > 0
     ? rawHabits.value
@@ -107,7 +99,6 @@ const habits = computed(() => {
           return {
             ...habit,
             daytime: getHabitCron(habit.cron).dayTime,
-            streak: getStreak(habit.history, habit.start_date),
             goal: getHabitCron(habit.cron).howOften,
           }
         })
@@ -139,7 +130,7 @@ const updateHabitStore = () => {
   }
 }
 
-const onCounterClick = (habitId: number) => {
-  habitService?.updateCounter(habitId)
+const onCounterClick = (habitId: number, counter: number, goal: number) => {
+  habitService?.updateCounter(habitId, counter, goal)
 }
 </script>
