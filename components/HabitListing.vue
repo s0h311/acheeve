@@ -10,6 +10,7 @@
       :counter="habit.counter"
       :goal="habit.goal"
       @onCounterClick="onCounterClick"
+      :disableCounterAndStreak="selectedDate.getTime() !== todaysDate.getTime()"
     />
   </div>
 </template>
@@ -31,6 +32,8 @@ const habitService = await useHabitService()
 const habitStore = useHabitStore()
 
 const todaysDate = ref(new Date(new Date().toDateString()))
+
+onMounted(() => updateHabitStore())
 
 const { data: rawHabits, refresh } = await useAsyncData('rawHabits', async () => await habitService?.getHabits(), {
   transform: (habits) =>
@@ -91,21 +94,20 @@ const isActiveOnSelectedDate = (habit: HabitData) => {
 
 const getStreak = (failedDays: Date[], startDate: Date): number => {
   let lastDate = startDate
-  if (failedDays.length > 0) {
-    lastDate = failedDays.reduce((a, b) => (a > b ? a : b))
+  if (failedDays.length > 1) {
+    lastDate = failedDays.reduce((a, b) => (a > b ? a : b)) || failedDays[0]
   }
   return parseInt(((todaysDate.value.getTime() - lastDate.getTime()) / 86400000).toFixed(0))
 }
 
 const habits = computed(() => {
-  habitStore.resetHabitsLeft()
   return rawHabits.value?.length > 0
     ? rawHabits.value
         .map((habit) => {
           return {
             ...habit,
             daytime: getHabitCron(habit.cron).dayTime,
-            streak: getStreak(habit.history || [], habit.start_date),
+            streak: getStreak(habit.history, habit.start_date),
             goal: getHabitCron(habit.cron).howOften,
           }
         })
@@ -115,14 +117,27 @@ const habits = computed(() => {
           return true
         })
         .filter((habit) => isActiveOnSelectedDate(habit))
-        .filter((habit) => {
-          habitStore.updateHabitsLeft(habit.daytime)
-          return true
-        })
-        .filter((habit) => (props.selectedTodoState == 1 ? habit.counter < habit.goal : habit.counter == habit.goal))
         .filter((habit) => (props.selectedDaytime === 'allday' ? true : getHabitCron(habit.cron).dayTime === props.selectedDaytime))
+        .filter((habit) => {
+          if (props.selectedDate.getTime() > todaysDate.value.getTime()) {
+            return true
+          }
+
+          return props.selectedTodoState == 1 ? habit.counter < habit.goal : habit.counter == habit.goal
+        })
     : []
 })
+
+watch(habits, (_newValue, _oldValue) => {
+  updateHabitStore()
+})
+
+const updateHabitStore = () => {
+  if (props.selectedTodoState == 1) {
+    habitStore.resetHabitsLeft()
+    habits.value.forEach((habit) => habitStore.updateHabitsLeft(habit.daytime, 1))
+  }
+}
 
 const onCounterClick = (habitId: number) => {
   habitService?.updateCounter(habitId)

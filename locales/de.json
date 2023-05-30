@@ -25,7 +25,7 @@
   "done": "Fertig",
   "morning": "Morgens",
   "evening": "Abends",
-  "allday": "Heute",
+  "allday": "Ganzen Tag",
   "monday_short": "Mo",
   "tuesday_short": "Di",
   "wednesday_short": "Mi",
@@ -92,5 +92,5 @@
   "week_weeks": "Woche(n)",
   "add_habit_how_often_in_a_day": "Wie oft am Tag",
   "add_habit_what_time_of_day_title": "Wann",
-  "add_habit_selection_allday": "Ganztäglich"
+  "add_habit_selection_allday": "Ganztägig"
 }

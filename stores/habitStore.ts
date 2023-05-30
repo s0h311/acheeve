@@ -7,14 +7,14 @@ export const useHabitStore = defineStore('habit', () => {
     eveningLeft: 0,
   })
 
-  const updateHabitsLeft = (daytime: string) => {
-    habitsLeft.value.alldayLeft += 1
+  const updateHabitsLeft = (daytime: string, delta: number) => {
+    habitsLeft.value.alldayLeft += delta
     if (daytime === 'allday') {
-      habitsLeft.value.alldayLeft += 1
+      habitsLeft.value.alldayLeft += delta
     } else if (daytime === 'morning') {
-      habitsLeft.value.morningLeft += 1
+      habitsLeft.value.morningLeft += delta
     } else if (daytime === 'evening') {
-      habitsLeft.value.eveningLeft += 1
+      habitsLeft.value.eveningLeft += delta
     }
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full grid place-items-center">
+  <div class="w-full grid">
     <div
       :class="[{ errorBorder: !!errorMessage }, 'focus:border-0']"
       class="rounded-3xl w-full h-14 px-4 bg-dark2"
