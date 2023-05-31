@@ -49,15 +49,15 @@
       <InputMultiInlineSelection
         :title="$t('frequency')"
         :options="frequencySelections"
-        @onChange="onDailyOrWeeklyChange"
+        @onChange="(value) => (habitData.daily_or_weekly = value)"
       />
       <InputNumber
-        v-if="habitCron.dailyOrWeekly === 'w'"
+        v-if="habitData.daily_or_weekly === 'w'"
         :title="$t('add_habit_interval_title')"
         :unit="$t('week_weeks')"
         :min="1"
         :max="8"
-        @onNumberChange="(number) => (habitCron.frequency = number)"
+        @onNumberChange="(number) => (habitData.frequency = number)"
       />
       <InputNumber
         v-else
@@ -66,10 +66,10 @@
         :min="1"
         :max="6"
         :withDivider="true"
-        @onNumberChange="(number) => (habitCron.frequency = number)"
+        @onNumberChange="(number) => (habitData.frequency = number)"
       />
       <InputMultiInlineSelection
-        v-if="habitCron.dailyOrWeekly === 'w'"
+        v-if="habitData.daily_or_weekly === 'w'"
         :options="thisDayOrWeekDaySelections"
         @onChange="onThisDayOrWeekDayChange"
         :withDivider="!showWeekDays"
@@ -77,7 +77,7 @@
       <InputInlineWeekDaySelection
         v-if="showWeekDays"
         :options="weekDaySelections"
-        :activeOptions="habitCron.weekDays"
+        :activeOptions="habitData.weekdays"
         :withDivider="true"
         @onChange="onWeekDaySelectionsChange"
       />
@@ -86,20 +86,20 @@
         :min="1"
         :max="10"
         :withDivider="true"
-        @onNumberChange="(number) => (habitCron.howOften = number)"
+        @onNumberChange="(number) => (habitData.how_often = number)"
       />
       <InputMultiInlineSelection
         :title="$t('add_habit_what_time_of_day_title')"
         :options="dayTimeSelections"
         :withDivider="true"
-        @onChange="onDayTimeChange"
+        @onChange="(value) => (habitData.daytime = value)"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { HabitCron, HabitData, WeekDays } from '~/types'
+import { HabitData, WeekDays } from '~/types'
 
 definePageMeta({
   layout: '',
@@ -114,43 +114,25 @@ const errorMessage = ref('')
 const showWeekDays = ref(false)
 const showDatePicker = ref(false)
 
-const getHabitCronString = (habitCron: HabitCron): string => {
-  let cron = ''
-  for (let attribute in habitCron) {
-    if (habitCron[attribute] instanceof Array) {
-      cron += habitCron[attribute].join() + ' '
-    } else {
-      cron += habitCron[attribute] + ' '
-    }
-  }
-  cron += '*'
-  return cron
-}
-
-const habitCron = reactive<HabitCron>({
-  howOften: 1,
-  dayTime: 'morning',
-  frequency: 1,
-  dailyOrWeekly: 'd',
-  weekDays: [1],
-})
-
 let todaysDate = new Date()
 
 const habitData = reactive<HabitData>({
   title: '',
   start_date: todaysDate,
-  end_date: new Date('2999-01-01'),
-  cron: getHabitCronString(habitCron),
+  how_often: 1,
+  daytime: 'morning',
+  frequency: 1,
+  daily_or_weekly: 'd',
+  weekdays: [],
 })
 
 const frequencySelections = [
   {
-    id: 'f1',
+    id: 'd',
     title: t('daily'),
   },
   {
-    id: 'f2',
+    id: 'w',
     title: t('weekly'),
   },
 ]
@@ -169,45 +151,45 @@ const thisDayOrWeekDaySelections = [
 const weekDaySelections = [
   {
     id: 1,
-    title: WeekDays[0],
-  },
-  {
-    id: 2,
     title: WeekDays[1],
   },
   {
-    id: 3,
+    id: 2,
     title: WeekDays[2],
   },
   {
-    id: 4,
+    id: 3,
     title: WeekDays[3],
   },
   {
-    id: 5,
+    id: 4,
     title: WeekDays[4],
   },
   {
-    id: 6,
+    id: 5,
     title: WeekDays[5],
   },
   {
-    id: 7,
+    id: 6,
     title: WeekDays[6],
+  },
+  {
+    id: 7,
+    title: WeekDays[7],
   },
 ]
 
 const dayTimeSelections = [
   {
-    id: 'dt1',
+    id: 'morning',
     title: t('morning'),
   },
   {
-    id: 'dt2',
+    id: 'evening',
     title: t('evening'),
   },
   {
-    id: 'dt3',
+    id: 'allday',
     title: t('add_habit_selection_allday'),
   },
 ]
@@ -250,32 +232,14 @@ const onStartDateChange = (optionId: string) => {
   }
 }
 
-const onDailyOrWeeklyChange = (optionId: string) => {
-  if (optionId === 'f1') {
-    habitCron.dailyOrWeekly = 'd'
-  } else {
-    habitCron.dailyOrWeekly = 'w'
-  }
-}
-
-const onDayTimeChange = (optionId: string) => {
-  if (optionId === 'dt1') {
-    habitCron.dayTime = 'morning'
-  } else if (optionId === 'dt2') {
-    habitCron.dayTime = 'evening'
-  } else {
-    habitCron.dayTime = 'allday'
-  }
-}
-
 const onThisDayOrWeekDayChange = (optionId: string) => {
   showWeekDays.value = optionId === 'towd2' ? true : false
 }
 
 const onWeekDaySelectionsChange = (optionId: number) => {
-  habitCron.weekDays?.includes(optionId)
-    ? (habitCron.weekDays = habitCron.weekDays?.filter((o) => o !== optionId))
-    : habitCron.weekDays?.push(optionId)
+  habitData.weekdays?.includes(optionId)
+    ? (habitData.weekdays = habitData.weekdays?.filter((o) => o !== optionId))
+    : habitData.weekdays?.push(optionId)
 }
 
 const onSave = () => {
@@ -283,11 +247,10 @@ const onSave = () => {
     errorMessage.value = t('add_habit_habit_name_empty_error')
     return
   }
-  if (showWeekDays.value && habitCron.weekDays?.length == 0) {
+  if (showWeekDays.value && habitData.weekdays?.length == 0) {
     //TODO error anzeigen
   }
   habitData.start_date = habitData.start_date.toDateString()
-  habitData.cron = getHabitCronString(habitCron)
   habitService?.saveHabit(habitData)
   navigateTo(l('/'))
 }

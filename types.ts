@@ -22,22 +22,14 @@ interface SignUpCredentials {
 interface HabitData {
   id?: number
   title: string
-  description?: string | null
   start_date: Date | string
-  end_date: Date | string
   streak?: number
-  cron: string
-  counter: number
-  done_today?: boolean
-  type?: string | null
-}
-
-interface HabitCron {
-  howOften: number
-  dayTime: string
+  counter?: number
+  how_often: number
+  daytime: string
   frequency: number
-  dailyOrWeekly: string
-  weekDays?: number[]
+  daily_or_weekly: string
+  weekdays: number[] | null
 }
 
 const WeekDays: string[] = [
@@ -66,4 +58,4 @@ const months: string[] = [
   'december',
 ]
 
-export { UserProfile, SignupInputs, SignUpCredentials, HabitData, HabitCron, WeekDays, months }
+export { UserProfile, SignupInputs, SignUpCredentials, HabitData, WeekDays, months }

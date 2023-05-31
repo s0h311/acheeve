@@ -8,7 +8,7 @@
       :schedule="habit.daytime"
       :streak="habit.streak"
       :counter="habit.counter"
-      :goal="habit.goal"
+      :goal="habit.how_often"
       @onCounterClick="onCounterClick"
       :disableCounterAndStreak="selectedDate.getTime() !== todaysDate.getTime()"
     />
@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { useHabitStore } from '~/stores/habitStore'
-import { HabitCron, HabitData } from '~/types'
+import { HabitData } from '~/types'
 
 const props = defineProps({
   selectedTodoState: Number,
@@ -40,7 +40,6 @@ const { data: rawHabits, refresh } = await useAsyncData('rawHabits', async () =>
     habits.map((habit) => ({
       ...habit,
       start_date: new Date(habit.start_date),
-      end_date: new Date(habit.end_date),
     })),
 })
 
@@ -49,29 +48,11 @@ watch(
   () => refresh()
 )
 
-const getHabitCron = (habitCron: string): HabitCron => {
-  let expression = habitCron.split(' ')
-  let weekDaysString = expression[4]
-  let weekDays: number[] = []
-  if (weekDaysString.length > 1) {
-    weekDays = weekDaysString.split(',').map((weekDay) => parseInt(weekDay))
-  }
-
-  return {
-    howOften: parseInt(expression[0]),
-    dayTime: expression[1],
-    frequency: parseInt(expression[2]),
-    dailyOrWeekly: expression[3],
-    weekDays,
-  }
-}
-
 const isActiveOnSelectedDate = (habit: HabitData) => {
   let startDate = parseInt((habit.start_date.getTime() / 86400000).toFixed(1)) // milliseconds to days
-  let endDate = parseInt((habit.end_date.getTime() / 86400000).toFixed(1))
   let selectedDate = parseInt((props.selectedDate.getTime() / 86400000).toFixed(1))
 
-  if (selectedDate < startDate || selectedDate > endDate) {
+  if (selectedDate < startDate) {
     return false
   }
 
@@ -79,12 +60,11 @@ const isActiveOnSelectedDate = (habit: HabitData) => {
     return true
   }
 
-  let habitCron = getHabitCron(habit.cron)
-  let multiplier = habitCron.dailyOrWeekly === 'w' ? habitCron.frequency * 7 : habitCron.frequency
+  let multiplier = habit.daily_or_weekly === 'w' ? habit.frequency * 7 : habit.frequency
 
   while (selectedDate >= startDate) {
     let weekDay = props.selectedDate.getDay()
-    if (selectedDate == startDate || (habitCron.dailyOrWeekly === 'w' && habitCron.weekDays?.includes(weekDay))) {
+    if (selectedDate == startDate || (habit.daily_or_weekly === 'w' && habit.weekdays?.includes(weekDay))) {
       return true
     }
     startDate += multiplier
@@ -95,26 +75,18 @@ const isActiveOnSelectedDate = (habit: HabitData) => {
 const habits = computed(() => {
   return rawHabits.value?.length > 0
     ? rawHabits.value
-        .map((habit) => {
-          return {
-            ...habit,
-            daytime: getHabitCron(habit.cron).dayTime,
-            goal: getHabitCron(habit.cron).howOften,
-          }
-        })
         .filter((habit) => {
           habit.start_date.setHours(0, 0, 0, 0)
-          habit.end_date.setHours(0, 0, 0, 0)
           return true
         })
         .filter((habit) => isActiveOnSelectedDate(habit))
-        .filter((habit) => (props.selectedDaytime === 'allday' ? true : getHabitCron(habit.cron).dayTime === props.selectedDaytime))
+        .filter((habit) => (props.selectedDaytime === 'allday' ? true : habit.dayTime === props.selectedDaytime))
         .filter((habit) => {
           if (props.selectedDate.getTime() > todaysDate.value.getTime()) {
             return true
           }
 
-          return props.selectedTodoState == 1 ? habit.counter < habit.goal : habit.counter == habit.goal
+          return props.selectedTodoState == 1 ? habit.counter < habit.how_often : habit.counter == habit.how_often
         })
     : []
 })
@@ -130,7 +102,7 @@ const updateHabitStore = () => {
   }
 }
 
-const onCounterClick = (habitId: number, counter: number, goal: number) => {
-  habitService?.updateCounter(habitId, counter, goal)
+const onCounterClick = (habitId: number) => {
+  habitService?.updateCounter(habitId)
 }
 </script>
