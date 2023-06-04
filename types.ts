@@ -32,6 +32,15 @@ interface HabitData {
   weekdays: number[] | null
 }
 
+interface DiaryData {
+  id?: number
+  created_at?: Date | string
+  title: string
+  type: number
+  content: object
+  pictures: object
+}
+
 const WeekDays: string[] = [
   'sunday_short',
   'monday_short',
@@ -58,4 +67,4 @@ const months: string[] = [
   'december',
 ]
 
-export { UserProfile, SignupInputs, SignUpCredentials, HabitData, WeekDays, months }
+export { UserProfile, SignupInputs, SignUpCredentials, HabitData, DiaryData, WeekDays, months }
