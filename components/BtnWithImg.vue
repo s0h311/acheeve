@@ -8,7 +8,12 @@
         :alt="`Button for ${name}`"
       />
     </button>
-    <p class="text-center text-xs">{{ label }}</p>
+    <p
+      v-if="label"
+      class="text-center text-xs"
+    >
+      {{ label }}
+    </p>
   </div>
 </template>
 

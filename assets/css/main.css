@@ -4,7 +4,7 @@
 
 :root {
   background-color: #282A37;
-  touch-action: pan-x pan-y;
+  touch-action: pan-x pan-y; /** DEACTIVATE ZOOMING **/
   height: 100%;
   color: #EDEDEE;
 
@@ -14,6 +14,12 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+html, body { /** DEACTIVATE SCROLLING **/
+  margin: 0;
+  height: 100%;
+  overflow: hidden
 }
 
 @layer base {

@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-flow-col place-items-center">
+  <div class="grid gap-10 p-5 bg-dark2 rounded-xl">
     <BtnWithImg
       v-for="option in options"
       :key="option.id"
@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-const emits = defineEmits(['onClick'])
 const l = useLocalePath()
 const { t } = useI18n()
 
@@ -24,20 +23,27 @@ const options = [
     imageUrl: '/icons/hub/habits_icon.svg',
     action: () => navigateTo(l('/')),
   },
+
   {
     id: 2,
-    name: t('add_new_habit_or_diary_entry'),
-    imageUrl: '/icons/add-btn.svg',
-    action: () => emits('onClick'),
-  },
-  {
-    id: 3,
     name: t('diary'),
     imageUrl: '/icons/hub/diary_icon.png',
     action: () => navigateTo(l('/diary')),
   },
   {
     id: 4,
+    name: t('habit'),
+    imageUrl: '/icons/hub/goal_icon.svg',
+    action: () => navigateTo(l('/addHabit')),
+  },
+  {
+    id: 4,
+    name: t('diary_entry'),
+    imageUrl: '/icons/hub/diary_icon_blue.svg',
+    action: () => navigateTo(l('/addDiaryEntry')),
+  },
+  {
+    id: 5,
     name: t('profile'),
     imageUrl: '/icons/profile.png',
     action: () => navigateTo(l('/profile')),

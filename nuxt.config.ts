@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@pinia/nuxt',
   ],
-  //pwa,
+  pwa,
   i18n,
   css: ['@/assets/css/main.css'],
   postcss: {
