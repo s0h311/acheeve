@@ -102,7 +102,6 @@
 import { HabitData, WeekDays } from '~/types'
 
 definePageMeta({
-  layout: '',
   middleware: ['auth'],
 })
 

@@ -11,7 +11,6 @@
         @onTodoStateChange="onTodoStateChange"
       />
     </div>
-
     <div class="habitList hideScrollbar overflow-y-scroll overflow-x-hidden">
       <HabitListing
         :selectedDaytime="selectedDaytime"
@@ -19,14 +18,12 @@
         :selectedTodoState="selectedTodoState"
       />
     </div>
-
     <ClientOnly>
       <NavBar
         class="absolute bottom-2 w-full"
         v-if="isPhone && !addEntryMenuActive"
         @onClick="addEntryMenuActive = true"
       />
-
       <AddEntryMenu
         class="fixed bottom-0 w-[100dvw] left-0 md:w-fit md:left-auto"
         v-if="isPhone && addEntryMenuActive"

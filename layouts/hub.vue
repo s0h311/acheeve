@@ -1,7 +1,7 @@
 <template>
   <div class="px-6 pt-6">
     <ClientOnly>
-      <hub-side-menu
+      <HubSideMenu
         class="absolute left-5"
         v-if="!isPhone"
       />

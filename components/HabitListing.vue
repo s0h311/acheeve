@@ -35,7 +35,7 @@ const todaysDate = ref(new Date(new Date().toDateString()))
 
 onMounted(() => updateHabitStore())
 
-const { data: rawHabits, refresh } = await useAsyncData('rawHabits', async () => await habitService?.getHabits(), {
+const { data: rawHabits } = await useAsyncData('rawHabits', async () => await habitService?.getHabits(), {
   transform: (habits) =>
     habits.map((habit) => ({
       ...habit,
@@ -43,10 +43,7 @@ const { data: rawHabits, refresh } = await useAsyncData('rawHabits', async () =>
     })),
 })
 
-watch(
-  () => rawHabits,
-  () => refresh()
-)
+watch(rawHabits, () => habits.value)
 
 const isActiveOnSelectedDate = (habit: HabitData) => {
   let startDate = parseInt((habit.start_date.getTime() / 86400000).toFixed(1)) // milliseconds to days

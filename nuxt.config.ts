@@ -40,7 +40,4 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'],
     ],
   },
-  experimental: {
-    watcher: 'chokidar' //TODO Delete later https://github.com/nuxt/nuxt/issues/20990
-  }
 })
