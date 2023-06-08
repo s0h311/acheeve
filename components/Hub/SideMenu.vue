@@ -31,7 +31,7 @@ const options = [
     action: () => navigateTo(l('/diary')),
   },
   {
-    id: 4,
+    id: 3,
     name: t('habit'),
     imageUrl: '/icons/hub/goal_icon.svg',
     action: () => navigateTo(l('/addHabit')),

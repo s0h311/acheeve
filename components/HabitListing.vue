@@ -43,8 +43,6 @@ const { data: rawHabits } = await useAsyncData('rawHabits', async () => await ha
     })),
 })
 
-watch(rawHabits, () => habits.value)
-
 const isActiveOnSelectedDate = (habit: HabitData) => {
   let startDate = parseInt((habit.start_date.getTime() / 86400000).toFixed(1)) // milliseconds to days
   let selectedDate = parseInt((props.selectedDate.getTime() / 86400000).toFixed(1))
@@ -101,5 +99,14 @@ const updateHabitStore = () => {
 
 const onCounterClick = (habitId: number) => {
   habitService?.updateCounter(habitId)
+  rawHabits.value = rawHabits.value?.map((habit) => {
+    if (habit.id == habitId) {
+      return {
+        ...habit,
+        counter: habit.counter + 1,
+      }
+    }
+    return habit
+  })
 }
 </script>
