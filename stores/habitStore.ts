@@ -1,6 +1,9 @@
 import { ref } from 'vue'
+import { HabitData } from '~/types'
 
 export const useHabitStore = defineStore('habit', () => {
+  const rawHabits = ref<HabitData[]>([])
+
   const habitsLeft = ref({
     alldayLeft: 0,
     morningLeft: 0,
@@ -24,5 +27,7 @@ export const useHabitStore = defineStore('habit', () => {
     habitsLeft.value.eveningLeft = 0
   }
 
-  return { habitsLeft, updateHabitsLeft, resetHabitsLeft }
+  const updateRawHabits = (habits: HabitData[]) => (rawHabits.value = habits)
+
+  return { rawHabits, habitsLeft, updateHabitsLeft, resetHabitsLeft, updateRawHabits }
 })

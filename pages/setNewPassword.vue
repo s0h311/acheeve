@@ -36,10 +36,10 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({
-  layout: 'centered',
-  //middleware: ['password-recovery'],
-})
+// definePageMeta({
+//   middleware: ['password-recovery'],
+// })
+// TODO enable after AC-11
 
 const l = useLocalePath()
 const { t } = useI18n()

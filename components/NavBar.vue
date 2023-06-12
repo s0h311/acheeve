@@ -26,15 +26,15 @@ const options = [
   },
   {
     id: 2,
-    name: t('add_new_habit_or_diary_entry'),
-    imageUrl: '/icons/add-btn.svg',
-    action: () => emits('onClick'),
-  },
-  {
-    id: 3,
     name: t('diary'),
     imageUrl: '/icons/hub/diary_icon.png',
     action: () => navigateTo(l('/diary')),
+  },
+  {
+    id: 3,
+    name: t('add_new_habit_or_diary_entry'),
+    imageUrl: '/icons/add-btn.png',
+    action: () => emits('onClick'),
   },
   {
     id: 4,

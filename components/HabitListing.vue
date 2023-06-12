@@ -35,13 +35,7 @@ const todaysDate = ref(new Date(new Date().toDateString()))
 
 onMounted(() => updateHabitStore())
 
-const { data: rawHabits } = await useAsyncData('rawHabits', async () => await habitService?.getHabits(), {
-  transform: (habits) =>
-    habits.map((habit) => ({
-      ...habit,
-      start_date: new Date(habit.start_date),
-    })),
-})
+const rawHabits = computed<HabitData[]>(() => habitStore.rawHabits)
 
 const isActiveOnSelectedDate = (habit: HabitData) => {
   let startDate = parseInt((habit.start_date.getTime() / 86400000).toFixed(1)) // milliseconds to days
@@ -68,19 +62,24 @@ const isActiveOnSelectedDate = (habit: HabitData) => {
 }
 
 const habits = computed(() => {
-  return rawHabits.value?.length > 0
+  return rawHabits.value.length > 0
     ? rawHabits.value
+        .map((habit) => {
+          return {
+            ...habit,
+            start_date: new Date(habit.start_date),
+          }
+        })
         .filter((habit) => {
           habit.start_date.setHours(0, 0, 0, 0)
           return true
         })
         .filter((habit) => isActiveOnSelectedDate(habit))
-        .filter((habit) => (props.selectedDaytime === 'allday' ? true : habit.dayTime === props.selectedDaytime))
+        .filter((habit) => (props.selectedDaytime === 'allday' ? true : habit.daytime === props.selectedDaytime))
         .filter((habit) => {
           if (props.selectedDate.getTime() > todaysDate.value.getTime()) {
             return true
           }
-
           return props.selectedTodoState == 1 ? habit.counter < habit.how_often : habit.counter == habit.how_often
         })
     : []
@@ -99,14 +98,16 @@ const updateHabitStore = () => {
 
 const onCounterClick = (habitId: number) => {
   habitService?.updateCounter(habitId)
-  rawHabits.value = rawHabits.value?.map((habit) => {
-    if (habit.id == habitId) {
-      return {
-        ...habit,
-        counter: habit.counter + 1,
+  habitStore.updateRawHabits(
+    rawHabits.value?.map((habit) => {
+      if (habit.id == habitId) {
+        return {
+          ...habit,
+          counter: habit.counter + 1,
+        }
       }
-    }
-    return habit
-  })
+      return habit
+    })
+  )
 }
 </script>

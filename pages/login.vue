@@ -57,7 +57,6 @@
 
 <script setup lang="ts">
 definePageMeta({
-  layout: 'centered',
   middleware: ['not-auth'],
 })
 

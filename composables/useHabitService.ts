@@ -1,4 +1,5 @@
 import { HabitData } from '~/types'
+import { useHabitStore } from '~/stores/habitStore'
 
 export default async () => {
   const supabase = useSupabaseClient()
@@ -59,5 +60,11 @@ export default async () => {
     }
   }
 
-  return { saveHabit, getHabits, updateCounter }
+  const load = async () => {
+    let rawHabits = await getHabits()
+    const habitStore = useHabitStore()
+    habitStore.updateRawHabits(rawHabits)
+  }
+
+  return { saveHabit, getHabits, updateCounter, load }
 }

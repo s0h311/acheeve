@@ -38,7 +38,6 @@
 import { SignUpCredentials, SignupInputs } from '~/types'
 
 definePageMeta({
-  layout: 'centered',
   middleware: ['not-auth'],
 })
 

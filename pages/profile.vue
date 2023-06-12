@@ -19,7 +19,6 @@
 import { UserProfile } from '../types'
 
 definePageMeta({
-  layout: 'centered',
   middleware: ['auth'],
 })
 const l = useLocalePath()
