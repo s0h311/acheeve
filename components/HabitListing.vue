@@ -28,7 +28,7 @@ const props = defineProps({
   },
 })
 
-const habitService = await useHabitService()
+const habitService = useHabitService()
 const habitStore = useHabitStore()
 
 const todaysDate = ref(new Date(new Date().toDateString()))

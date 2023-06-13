@@ -38,7 +38,6 @@ import { months } from '~/types'
 import { useHabitStore } from '~/stores/habitStore'
 
 const { t } = useI18n()
-const l = useLocalePath()
 const { isPhone } = useWindowSize()
 
 const selectedTodoState = ref<number>(1) // 1 = ToDo, 2 = Done

@@ -17,7 +17,7 @@ definePageMeta({
   layout: false,
 })
 
-const habitService = await useHabitService()
+const habitService = useHabitService()
 
 onBeforeMount(() => {
   habitService?.load()

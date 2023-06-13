@@ -1,7 +1,7 @@
 import { HabitData } from '~/types'
 import { useHabitStore } from '~/stores/habitStore'
 
-export default async () => {
+export default () => {
   const supabase = useSupabaseClient()
   const user = useSupabaseUser()
 

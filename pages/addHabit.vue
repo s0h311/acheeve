@@ -108,7 +108,7 @@ definePageMeta({
 
 const { t } = useI18n()
 const l = useLocalePath()
-const habitService = await useHabitService()
+const habitService = useHabitService()
 
 const errorMessage = ref('')
 const showWeekDays = ref(false)
@@ -242,7 +242,7 @@ const onWeekDaySelectionsChange = (optionId: number) => {
     : habitData.weekdays?.push(optionId)
 }
 
-const onSave = () => {
+const onSave = async () => {
   if (!habitData.title) {
     errorMessage.value = t('add_habit_habit_name_empty_error')
     return
@@ -251,7 +251,8 @@ const onSave = () => {
     //TODO error anzeigen
   }
   habitData.start_date = habitData.start_date.toDateString()
-  habitService?.saveHabit(habitData)
+  await habitService?.saveHabit(habitData)
+  await habitService?.load()
   navigateTo(l('/'))
 }
 </script>
