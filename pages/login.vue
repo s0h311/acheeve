@@ -63,6 +63,7 @@ definePageMeta({
 const l = useLocalePath()
 const { t } = useI18n()
 const supabase = useSupabaseClient()
+const habitService = useHabitService()
 
 const errorMessage = ref<string | null>(null)
 
@@ -115,6 +116,7 @@ const handle = async (authProvider: any) => {
       let message = useGetSupabaseErrorMessage(error)
       errorMessage.value = message
     } else {
+      await habitService?.load()
       navigateTo(l('/'))
     }
   }
@@ -136,6 +138,7 @@ const emailLogin = async () => {
       let message = useGetSupabaseErrorMessage(error)
       errorMessage.value = message
     } else {
+      await habitService?.load()
       navigateTo(l('/'))
     }
   }
