@@ -18,18 +18,6 @@
         :selectedTodoState="selectedTodoState"
       />
     </div>
-    <ClientOnly>
-      <NavBar
-        class="absolute bottom-2 w-full"
-        v-if="isPhone && !addEntryMenuActive"
-        @onClick="addEntryMenuActive = true"
-      />
-      <AddEntryMenu
-        class="fixed bottom-0 w-[100dvw] left-0 md:w-fit md:left-auto"
-        v-if="isPhone && addEntryMenuActive"
-        @onClick="addEntryMenuActive = false"
-      />
-    </ClientOnly>
   </div>
 </template>
 
@@ -38,7 +26,6 @@ import { months } from '~/types'
 import { useHabitStore } from '~/stores/habitStore'
 
 const { t } = useI18n()
-const { isPhone } = useWindowSize()
 
 const selectedTodoState = ref<number>(1) // 1 = ToDo, 2 = Done
 const selectedDaytime = ref<string>('allday')
@@ -48,8 +35,6 @@ selectedDate.value.setHours(0, 0, 0, 0)
 
 const habitStore = useHabitStore()
 const habitsLeft = computed(() => habitStore.habitsLeft)
-
-const addEntryMenuActive = ref<boolean>(false)
 
 const welcomeText = computed<string>((): string => {
   let day = selectedDate.value.getDate()

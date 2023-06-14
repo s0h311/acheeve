@@ -1,20 +1,10 @@
 <template>
-  <div class="px-6 pt-6">
-    <ClientOnly>
-      <HubSideMenu
-        class="absolute left-5 opacity-0 md:opacity-100"
-        v-if="!isPhone"
-      />
-    </ClientOnly>
-    <div class="responsive-w mx-auto">
-      <Hub />
-    </div>
-  </div>
+  <Hub />
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-  layout: false,
+  layout: 'with-nav-bar',
 })
 
 const habitService = useHabitService()
@@ -22,6 +12,4 @@ const habitService = useHabitService()
 onBeforeMount(() => {
   habitService?.load()
 })
-
-const { isPhone } = useWindowSize()
 </script>
