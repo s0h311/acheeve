@@ -36,9 +36,9 @@ interface DiaryData {
   id?: number
   created_at?: Date | string
   title: string
-  type: number
+  type: number // 1 = Regular Entry, 2 = Gratitude, 3 = Anxiety
   content: object
-  pictures: object
+  pictures?: object
 }
 
 const WeekDays: string[] = [
