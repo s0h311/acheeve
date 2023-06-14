@@ -18,7 +18,7 @@
 
 html, body { /** DEACTIVATE SCROLLING **/
   margin: 0;
-  height: 100%;
+  height: 100dvh;
   overflow: hidden
 }
 
@@ -37,7 +37,7 @@ html, body { /** DEACTIVATE SCROLLING **/
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
+input:-webkit-autofill:active  { /** REMOVE AUTOFILL COLOR **/
     -webkit-box-shadow: 0 0 0 30px #323645 inset !important;
 }
 

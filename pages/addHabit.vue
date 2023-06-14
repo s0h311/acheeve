@@ -8,7 +8,7 @@
     </div>
     <div
       v-else
-      class="grid gap-5"
+      class="space-y-5"
     >
       <div class="flex relative justify-center mb-5">
         <BtnWithImg
@@ -26,84 +26,86 @@
           {{ $t('save') }}
         </button>
       </div>
-      <span class="flex relative">
-        <input
-          class="bg-transparent outline-none text-lg"
-          type="text"
-          :placeholder="$t('add_habit_habit_name')"
-          v-model="habitData.title"
-          @input="errorMessage = ''"
+      <div class="space-y-5 h-[85dvh] overflow-y-scroll hideScrollbar">
+        <span class="flex relative">
+          <input
+            class="bg-transparent outline-none text-lg"
+            type="text"
+            :placeholder="$t('add_habit_habit_name')"
+            v-model="habitData.title"
+            @input="errorMessage = ''"
+          />
+          <BtnWithImg
+            class="absolute right-0"
+            v-if="habitEditingId != 0"
+            image-url="/icons/delete-btn.png"
+            :width="20"
+            @onClick="onDeleteClick"
+          />
+        </span>
+        <p
+          v-if="errorMessage"
+          class="place-self-start text-red-500 max-w-fit"
+        >
+          {{ $t(errorMessage) }}
+        </p>
+        <hr />
+        <InputMultiInlineSelection
+          :title="$t('add_habit_start_date_title')"
+          :options="startDateSelections"
+          :activeOption="activeStartDate"
+          :withDivider="true"
+          @onChange="onStartDateChange"
         />
-        <BtnWithImg
-          class="absolute right-0"
-          v-if="habitEditingId != 0"
-          image-url="/icons/delete-btn.png"
-          :width="20"
-          @onClick="onDeleteClick"
+        <InputMultiInlineSelection
+          :title="$t('frequency')"
+          :options="frequencySelections"
+          @onChange="(value) => (habitData.daily_or_weekly = value)"
         />
-      </span>
-      <p
-        v-if="errorMessage"
-        class="place-self-start text-red-500 max-w-fit"
-      >
-        {{ $t(errorMessage) }}
-      </p>
-      <hr />
-      <InputMultiInlineSelection
-        :title="$t('add_habit_start_date_title')"
-        :options="startDateSelections"
-        :activeOption="activeStartDate"
-        :withDivider="true"
-        @onChange="onStartDateChange"
-      />
-      <InputMultiInlineSelection
-        :title="$t('frequency')"
-        :options="frequencySelections"
-        @onChange="(value) => (habitData.daily_or_weekly = value)"
-      />
-      <InputNumber
-        v-if="habitData.daily_or_weekly === 'w'"
-        :title="$t('add_habit_interval_title')"
-        :unit="$t('week_weeks')"
-        :min="1"
-        :max="8"
-        @onNumberChange="(number) => (habitData.frequency = number)"
-      />
-      <InputNumber
-        v-else
-        :title="$t('add_habit_interval_title')"
-        :unit="$t('day_days')"
-        :min="1"
-        :max="6"
-        :withDivider="true"
-        @onNumberChange="(number) => (habitData.frequency = number)"
-      />
-      <InputMultiInlineSelection
-        v-if="habitData.daily_or_weekly === 'w'"
-        :options="thisDayOrWeekDaySelections"
-        @onChange="onThisDayOrWeekDayChange"
-        :withDivider="!showWeekDays"
-      />
-      <InputInlineWeekDaySelection
-        v-if="showWeekDays"
-        :options="weekDaySelections"
-        :activeOptions="habitData.weekdays"
-        :withDivider="true"
-        @onChange="onWeekDaySelectionsChange"
-      />
-      <InputNumber
-        :title="$t('add_habit_how_often_in_a_day')"
-        :min="1"
-        :max="10"
-        :withDivider="true"
-        @onNumberChange="(number) => (habitData.how_often = number)"
-      />
-      <InputMultiInlineSelection
-        :title="$t('add_habit_what_time_of_day_title')"
-        :options="dayTimeSelections"
-        :withDivider="true"
-        @onChange="(value) => (habitData.daytime = value)"
-      />
+        <InputNumber
+          v-if="habitData.daily_or_weekly === 'w'"
+          :title="$t('add_habit_interval_title')"
+          :unit="$t('week_weeks')"
+          :min="1"
+          :max="8"
+          @onNumberChange="(number) => (habitData.frequency = number)"
+        />
+        <InputNumber
+          v-else
+          :title="$t('add_habit_interval_title')"
+          :unit="$t('day_days')"
+          :min="1"
+          :max="6"
+          :withDivider="true"
+          @onNumberChange="(number) => (habitData.frequency = number)"
+        />
+        <InputMultiInlineSelection
+          v-if="habitData.daily_or_weekly === 'w'"
+          :options="thisDayOrWeekDaySelections"
+          @onChange="onThisDayOrWeekDayChange"
+          :withDivider="!showWeekDays"
+        />
+        <InputInlineWeekDaySelection
+          v-if="showWeekDays"
+          :options="weekDaySelections"
+          :activeOptions="habitData.weekdays"
+          :withDivider="true"
+          @onChange="onWeekDaySelectionsChange"
+        />
+        <InputNumber
+          :title="$t('add_habit_how_often_in_a_day')"
+          :min="1"
+          :max="10"
+          :withDivider="true"
+          @onNumberChange="(number) => (habitData.how_often = number)"
+        />
+        <InputMultiInlineSelection
+          :title="$t('add_habit_what_time_of_day_title')"
+          :options="dayTimeSelections"
+          :withDivider="true"
+          @onChange="(value) => (habitData.daytime = value)"
+        />
+      </div>
     </div>
   </div>
 </template>
