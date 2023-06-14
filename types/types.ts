@@ -41,30 +41,4 @@ interface DiaryData {
   pictures?: object
 }
 
-const WeekDays: string[] = [
-  'sunday_short',
-  'monday_short',
-  'tuesday_short',
-  'wednesday_short',
-  'thursday_short',
-  'friday_short',
-  'saturday_short',
-  'sunday_short',
-]
-
-const months: string[] = [
-  'january',
-  'february',
-  'march',
-  'april',
-  'may',
-  'june',
-  'july',
-  'august',
-  'september',
-  'october',
-  'november',
-  'december',
-]
-
-export { UserProfile, SignupInputs, SignUpCredentials, HabitData, DiaryData, WeekDays, months }
+export { UserProfile, SignupInputs, SignUpCredentials, HabitData, DiaryData }

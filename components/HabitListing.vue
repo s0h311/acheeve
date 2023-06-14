@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import { useGlobalStore } from '~/stores/global'
 import { useHabitStore } from '~/stores/habitStore'
-import { HabitData } from '~/types'
+import { HabitData } from '~/types/types'
 
 const props = defineProps({
   selectedTodoState: Number,

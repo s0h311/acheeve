@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { HabitData } from '~/types'
+import { HabitData } from '~/types/types'
 
 export const useHabitStore = defineStore('habit', () => {
   const rawHabits = ref<HabitData[]>([])

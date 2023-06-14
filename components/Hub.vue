@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { months } from '~/types'
+import { months } from '~/types/helpers'
 import { useHabitStore } from '~/stores/habitStore'
 
 const { t } = useI18n()

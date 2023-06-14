@@ -1,4 +1,4 @@
-import { UserProfile } from '../types'
+import { UserProfile } from '../types/types'
 
 export default async (): Promise<UserProfile> => {
   const user = useSupabaseUser()

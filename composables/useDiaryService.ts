@@ -1,4 +1,4 @@
-import { DiaryData } from '~/types'
+import { DiaryData } from '~/types/types'
 
 export default () => {
   const supabase = useSupabaseClient()

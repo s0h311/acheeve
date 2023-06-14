@@ -1,4 +1,4 @@
-import { HabitData } from '~/types'
+import { HabitData } from '~/types/types'
 import { useHabitStore } from '~/stores/habitStore'
 
 export default () => {

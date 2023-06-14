@@ -119,7 +119,8 @@
 <script setup lang="ts">
 import { useGlobalStore } from '~/stores/global'
 import { useHabitStore } from '~/stores/habitStore'
-import { HabitData, WeekDays } from '~/types'
+import { frequencySelections, thisDayOrWeekDaySelections, weekDaySelections, daytimeSelections } from '~/types/helpers'
+import { HabitData } from '~/types/types'
 
 definePageMeta({
   layout: false,
@@ -173,74 +174,6 @@ const preSelected = computed(() => {
     thisDayOrWeekDay: habitData.value.daily_or_weekly === 'w' && habitData.value.weekdays?.length > 0 ? 'towd2' : 'towd1',
   }
 })
-
-const frequencySelections = [
-  {
-    id: 'd',
-    title: t('daily'),
-  },
-  {
-    id: 'w',
-    title: t('weekly'),
-  },
-]
-
-const thisDayOrWeekDaySelections = [
-  {
-    id: 'towd1',
-    title: t('add_habit_this_day'),
-  },
-  {
-    id: 'towd2',
-    title: t('add_habit_weekday'),
-  },
-]
-
-const weekDaySelections = [
-  {
-    id: 1,
-    title: WeekDays[1],
-  },
-  {
-    id: 2,
-    title: WeekDays[2],
-  },
-  {
-    id: 3,
-    title: WeekDays[3],
-  },
-  {
-    id: 4,
-    title: WeekDays[4],
-  },
-  {
-    id: 5,
-    title: WeekDays[5],
-  },
-  {
-    id: 6,
-    title: WeekDays[6],
-  },
-  {
-    id: 7,
-    title: WeekDays[7],
-  },
-]
-
-const daytimeSelections = [
-  {
-    id: 'morning',
-    title: t('morning'),
-  },
-  {
-    id: 'evening',
-    title: t('evening'),
-  },
-  {
-    id: 'allday',
-    title: t('add_habit_selection_allday'),
-  },
-]
 
 const startDateSelections = ref([
   {

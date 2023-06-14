@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { UserProfile } from '../types'
+import { UserProfile } from '../types/types'
 
 definePageMeta({
   middleware: ['auth'],

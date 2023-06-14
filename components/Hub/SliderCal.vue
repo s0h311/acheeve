@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { WeekDays } from '~/types'
+import { weekdays } from '~/types/helpers'
 const props = defineProps({
   daysInEachDirec: {
     type: String,
@@ -77,7 +77,7 @@ const allDates = computed<CalendarDay[]>(() => {
     calendarDays.push({
       id: i,
       day: newDate.getDate(),
-      weekDay: t(WeekDays[newDate.getDay()]),
+      weekDay: t(weekdays[newDate.getDay()]),
     })
 
     dates.push(newDate)

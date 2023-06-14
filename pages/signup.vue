@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { SignUpCredentials, SignupInputs } from '~/types'
+import { SignUpCredentials, SignupInputs } from '~/types/types'
 
 definePageMeta({
   middleware: ['not-auth'],
