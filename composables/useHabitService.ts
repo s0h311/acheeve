@@ -47,7 +47,7 @@ export default () => {
     return habits.map((habit) => {
       return {
         ...habit,
-        start_date: new Date(habit.start_date),
+        start_date: new Date(new Date(habit.start_date).toDateString()),
       }
     })
   }
@@ -78,14 +78,15 @@ export default () => {
     }
   }
 
+  const deleteHabit = async (habitId: number) => {
+    await supabase.from('habit').delete().eq('id', habitId)
+  }
+
   const load = async () => {
     let rawHabits = await getHabits()
     const habitStore = useHabitStore()
     habitStore.updateRawHabits(rawHabits)
-
-    console.log('called') //TODO REMOVE
-    console.log(habitStore.rawHabits) //TODO REMOVE
   }
 
-  return { saveHabit, getHabits, updateCounter, load, updateHabit }
+  return { saveHabit, getHabits, updateCounter, load, updateHabit, deleteHabit }
 }

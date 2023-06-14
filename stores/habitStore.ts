@@ -29,20 +29,11 @@ export const useHabitStore = defineStore('habit', () => {
 
   const updateRawHabits = (habits: HabitData[]) => (rawHabits.value = habits)
 
-  const getHabitById = (habitId: number): HabitData | null => {
+  const getHabitById = (habitId: number): HabitData => {
     let result = rawHabits.value.find((habit) => habit.id === habitId)
-    result?.start_date.setHours(0, 0, 0, 0)
-    return (
-      {
-        title: result?.title,
-        start_date: result?.start_date,
-        how_often: result?.how_often,
-        daytime: result?.daytime,
-        frequency: result?.frequency,
-        daily_or_weekly: result?.daily_or_weekly,
-        weekdays: result?.weekdays,
-      } || null
-    )
+    return {
+      ...result,
+    } as HabitData
   }
 
   return { rawHabits, habitsLeft, updateHabitsLeft, resetHabitsLeft, updateRawHabits, getHabitById }

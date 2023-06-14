@@ -75,9 +75,15 @@ const onDateChange = (date: Date) => {
   height: 28dvh;
 }
 
-@media (min-width: 400px) {
+@media (min-height: 600px) {
   .habitList {
     height: 40dvh;
+  }
+}
+
+@media (min-height: 1000) {
+  .habitList {
+    height: 60dvh;
   }
 }
 </style>

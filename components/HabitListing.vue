@@ -9,10 +9,9 @@
       :streak="habit.streak"
       :counter="habit.counter"
       :goal="habit.how_often"
-      @onCounterClick="onCounterClick"
       :disableCounterAndStreak="selectedDate.getTime() !== todaysDate.getTime()"
-      @click="onHabitCardClick(habit.id)"
-      class="cursor-pointer"
+      @onCounterClick="onCounterClick"
+      @onCardClick="onCardClick(habit.id)"
     />
     <!--TODO: Nicht der ganze Div sollte anclickbar sein-->
   </div>
@@ -106,7 +105,7 @@ const onCounterClick = (habitId: number) => {
   )
 }
 
-const onHabitCardClick = (id: number) => {
+const onCardClick = (id: number) => {
   globalStore.setEditingHabit(id)
   navigateTo(l('/addHabit'))
 }

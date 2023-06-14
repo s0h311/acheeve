@@ -53,13 +53,14 @@
         <InputMultiInlineSelection
           :title="$t('add_habit_start_date_title')"
           :options="startDateSelections"
-          :activeOption="activeStartDate"
-          :withDivider="true"
+          :preSelected="preSelected.start_date"
+          withDivider
           @onChange="onStartDateChange"
         />
         <InputMultiInlineSelection
           :title="$t('frequency')"
           :options="frequencySelections"
+          :preSelected="preSelected.daily_or_weekly"
           @onChange="(value) => (habitData.daily_or_weekly = value)"
         />
         <InputNumber
@@ -68,6 +69,7 @@
           :unit="$t('week_weeks')"
           :min="1"
           :max="8"
+          :preSelected="preSelected.frequency"
           @onNumberChange="(number) => (habitData.frequency = number)"
         />
         <InputNumber
@@ -76,33 +78,37 @@
           :unit="$t('day_days')"
           :min="1"
           :max="6"
-          :withDivider="true"
+          :preSelected="preSelected.frequency"
+          withDivider
           @onNumberChange="(number) => (habitData.frequency = number)"
         />
         <InputMultiInlineSelection
           v-if="habitData.daily_or_weekly === 'w'"
           :options="thisDayOrWeekDaySelections"
-          @onChange="onThisDayOrWeekDayChange"
+          :preSelected="preSelected.thisDayOrWeekDay"
           :withDivider="!showWeekDays"
+          @onChange="onThisDayOrWeekDayChange"
         />
         <InputInlineWeekDaySelection
           v-if="showWeekDays"
           :options="weekDaySelections"
-          :activeOptions="habitData.weekdays"
-          :withDivider="true"
+          :preSelected="preSelected.weekdays"
+          withDivider
           @onChange="onWeekDaySelectionsChange"
         />
         <InputNumber
           :title="$t('add_habit_how_often_in_a_day')"
           :min="1"
           :max="10"
-          :withDivider="true"
+          :preSelected="preSelected.how_often"
+          withDivider
           @onNumberChange="(number) => (habitData.how_often = number)"
         />
         <InputMultiInlineSelection
           :title="$t('add_habit_what_time_of_day_title')"
-          :options="dayTimeSelections"
-          :withDivider="true"
+          :options="daytimeSelections"
+          :preSelected="preSelected.daytime"
+          withDivider
           @onChange="(value) => (habitData.daytime = value)"
         />
       </div>
@@ -135,9 +141,13 @@ const showDatePicker = ref(false)
 let todaysDate = new Date()
 todaysDate.setHours(0, 0, 0, 0)
 
+let tomorrowsDate = new Date(todaysDate.getFullYear(), todaysDate.getMonth(), todaysDate.getDate() + 1)
+
 onBeforeMount(() => {
   if (habitEditingId.value != 0) {
     habitData.value = habitStore.getHabitById(habitEditingId.value)
+    showWeekDays.value = habitData.value.weekdays?.length > 0 || false
+    startDateSelections.value[2].title = habitData.value.start_date.toLocaleDateString()
   }
 })
 
@@ -149,6 +159,19 @@ const habitData = ref<HabitData>({
   frequency: 1,
   daily_or_weekly: 'd',
   weekdays: [],
+})
+
+const preSelected = computed(() => {
+  return {
+    ...habitData.value,
+    start_date:
+      habitData.value.start_date.getTime() === todaysDate.getTime()
+        ? 's1'
+        : habitData.value.start_date.getTime() === tomorrowsDate.getTime()
+        ? 's2'
+        : 's3',
+    thisDayOrWeekDay: habitData.value.daily_or_weekly === 'w' && habitData.value.weekdays?.length > 0 ? 'towd2' : 'towd1',
+  }
 })
 
 const frequencySelections = [
@@ -204,7 +227,7 @@ const weekDaySelections = [
   },
 ]
 
-const dayTimeSelections = [
+const daytimeSelections = [
   {
     id: 'morning',
     title: t('morning'),
@@ -219,7 +242,6 @@ const dayTimeSelections = [
   },
 ]
 
-const activeStartDate = ref('s1')
 const startDateSelections = ref([
   {
     id: 's1',
@@ -231,7 +253,7 @@ const startDateSelections = ref([
   },
   {
     id: 's3',
-    title: todaysDate.toLocaleDateString(),
+    title: habitData.value.start_date.toLocaleDateString(),
   },
 ])
 
@@ -244,21 +266,22 @@ const onDatePickerSave = (date: Date) => {
 }
 
 const onStartDateChange = (optionId: string) => {
-  activeStartDate.value = optionId
   if (optionId === 's1') {
     habitData.value.start_date = todaysDate
   } else if (optionId === 's2') {
-    let year: number = todaysDate.getFullYear()
-    let month: number = todaysDate.getMonth()
-    let date: number = todaysDate.getDate() + 1
-    habitData.value.start_date = new Date(year, month, date)
+    habitData.value.start_date = tomorrowsDate
   } else if (optionId === 's3') {
     showDatePicker.value = true
   }
 }
 
 const onThisDayOrWeekDayChange = (optionId: string) => {
-  showWeekDays.value = optionId === 'towd2' ? true : false
+  if (optionId === 'towd1') {
+    showWeekDays.value = false
+    habitData.value.weekdays = []
+  } else {
+    showWeekDays.value = true
+  }
 }
 
 const onWeekDaySelectionsChange = (optionId: number) => {
@@ -280,6 +303,7 @@ const onSave = async () => {
   if (showWeekDays.value && habitData.value.weekdays?.length == 0) {
     //TODO error anzeigen
   }
+  habitData.value.start_date.setHours(2, 0, 0, 0) // Damit in der Datenbank auch das richtige Datum gespeichert wird
   if (habitEditingId.value != 0) {
     await habitService?.updateHabit(habitEditingId.value, habitData.value)
     globalStore.setEditingHabit(0)
@@ -291,5 +315,9 @@ const onSave = async () => {
   navigateTo(l('/'))
 }
 
-const onDeleteClick = () => {}
+const onDeleteClick = () => {
+  habitService?.deleteHabit(habitEditingId.value)
+  globalStore.setEditingHabit(0)
+  navigateTo(l('/'))
+}
 </script>

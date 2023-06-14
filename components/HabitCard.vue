@@ -1,6 +1,9 @@
 <template>
   <div class="relative flex px-4 py-3 bg-[#2b4276] rounded-3xl">
-    <div class="grid gap-1">
+    <div
+      class="grid gap-1 cursor-pointer"
+      @click="emits('onCardClick')"
+    >
       <p class="text-indigo-300 opacity-80 font-semibold text-sm">{{ schedule.toUpperCase() }}</p>
       <p class="text-red-400 text-opacity-90 font-semibold max-w-sm md:max-w-none">{{ title.toUpperCase() }}</p>
       <span
@@ -40,7 +43,7 @@ const props = defineProps({
   goal: Number,
   disableCounterAndStreak: Boolean,
 })
-const emits = defineEmits(['onCounterClick'])
+const emits = defineEmits(['onCounterClick', 'onCardClick'])
 
 const streakIcon = computed(() => {
   return props.streak >= 30

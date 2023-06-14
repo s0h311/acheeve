@@ -33,11 +33,12 @@ const props = defineProps({
   unit: String,
   min: Number,
   max: Number,
+  preSelected: Number,
   withDivider: Boolean,
 })
 const emits = defineEmits(['onNumberChange'])
 
-const currentValue = ref(props.min)
+const currentValue = ref(props.preSelected || props.min)
 
 const onClick = (step: number) => {
   if (step == -1 && currentValue.value == props.min) {

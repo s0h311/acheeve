@@ -3,7 +3,7 @@
     <h1>{{ title }}</h1>
     <div class="flex justify-center space-x-6">
       <button
-        :class="[activeOption === option.id || currentActiveOption === option.id ? 'bg-primary text-dark2' : 'bg-blue-400']"
+        :class="[preSelected === option.id || currentActiveOption === option.id ? 'bg-primary text-dark2' : 'bg-blue-400']"
         class="rounded-3xl px-2 py-1.5 text-sm font-bold w-20 md:w-24"
         v-for="option in options"
         :key="option.id"
@@ -22,12 +22,12 @@
 const props = defineProps({
   title: String,
   options: Object,
-  activeOption: String,
+  preSelected: String,
   withDivider: Boolean,
 })
 const emits = defineEmits(['onChange'])
 
-const currentActiveOption = ref<string>(props.activeOption || props.options[0].id)
+const currentActiveOption = ref<string>(props.preSelected || props.options[0].id)
 
 const onChange = (optionId: string) => {
   currentActiveOption.value = optionId
