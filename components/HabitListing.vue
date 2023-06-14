@@ -11,11 +11,15 @@
       :goal="habit.how_often"
       @onCounterClick="onCounterClick"
       :disableCounterAndStreak="selectedDate.getTime() !== todaysDate.getTime()"
+      @click="onHabitCardClick(habit.id)"
+      class="cursor-pointer"
     />
+    <!--TODO: Nicht der ganze Div sollte anclickbar sein-->
   </div>
 </template>
 
 <script setup lang="ts">
+import { useGlobalStore } from '~/stores/global'
 import { useHabitStore } from '~/stores/habitStore'
 import { HabitData } from '~/types'
 
@@ -28,13 +32,14 @@ const props = defineProps({
   },
 })
 
+const l = useLocalePath()
 const habitService = useHabitService()
 const habitStore = useHabitStore()
-
-const todaysDate = ref(new Date(new Date().toDateString()))
+const globalStore = useGlobalStore()
 
 onMounted(() => updateHabitStore())
 
+const todaysDate = ref(new Date(new Date().toDateString()))
 const rawHabits = computed<HabitData[]>(() => habitStore.rawHabits)
 
 const isActiveOnSelectedDate = (habit: HabitData) => {
@@ -64,16 +69,6 @@ const isActiveOnSelectedDate = (habit: HabitData) => {
 const habits = computed(() => {
   return rawHabits.value.length > 0
     ? rawHabits.value
-        .map((habit) => {
-          return {
-            ...habit,
-            start_date: new Date(habit.start_date),
-          }
-        })
-        .filter((habit) => {
-          habit.start_date.setHours(0, 0, 0, 0)
-          return true
-        })
         .filter((habit) => isActiveOnSelectedDate(habit))
         .filter((habit) => (props.selectedDaytime === 'allday' ? true : habit.daytime === props.selectedDaytime))
         .filter((habit) => {
@@ -109,5 +104,10 @@ const onCounterClick = (habitId: number) => {
       return habit
     })
   )
+}
+
+const onHabitCardClick = (id: number) => {
+  globalStore.setEditingHabit(id)
+  navigateTo(l('/addHabit'))
 }
 </script>

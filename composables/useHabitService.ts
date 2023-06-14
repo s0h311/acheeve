@@ -44,7 +44,12 @@ export default () => {
       throw createError({ statusCode: 500, statusMessage: 'Internal Error' })
     }
 
-    return habits
+    return habits.map((habit) => {
+      return {
+        ...habit,
+        start_date: new Date(habit.start_date),
+      }
+    })
   }
 
   const updateCounter = async (habitId: number) => {
@@ -60,11 +65,27 @@ export default () => {
     }
   }
 
+  const updateHabit = async (habitId: number, habit: HabitData) => {
+    const { error: updateHabitError } = await supabase
+      .from('habit')
+      .update({
+        ...habit,
+      })
+      .eq('id', habitId)
+
+    if (updateHabitError) {
+      throw createError({ statusCode: 500, statusMessage: 'Internal Error' })
+    }
+  }
+
   const load = async () => {
     let rawHabits = await getHabits()
     const habitStore = useHabitStore()
     habitStore.updateRawHabits(rawHabits)
+
+    console.log('called') //TODO REMOVE
+    console.log(habitStore.rawHabits) //TODO REMOVE
   }
 
-  return { saveHabit, getHabits, updateCounter, load }
+  return { saveHabit, getHabits, updateCounter, load, updateHabit }
 }

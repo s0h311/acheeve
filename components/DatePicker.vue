@@ -35,6 +35,7 @@ const emits = defineEmits(['onSave', 'onCancel'])
 const date = ref<Date | null>(null)
 
 const onSave = () => {
+  date.value?.setHours(0, 0, 0, 0) // TODO vielleicht gar nicht nötig
   emits('onSave', date.value)
 }
 

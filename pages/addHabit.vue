@@ -11,12 +11,13 @@
       class="grid gap-5"
     >
       <div class="flex relative justify-center mb-5">
-        <button
+        <BtnWithImg
           class="absolute left-0"
-          @click="navigateTo(l('/'))"
-        >
-          {{ $t('cancel') }}
-        </button>
+          imageUrl="/icons/cancel-btn.png"
+          :width="20"
+          :height="20"
+          @onClick="onCancel"
+        />
         <h1 class="text-lg font-semibold">{{ $t('add_new_habit') }}</h1>
         <button
           class="absolute right-0"
@@ -25,13 +26,22 @@
           {{ $t('save') }}
         </button>
       </div>
-      <input
-        class="bg-transparent outline-none text-lg"
-        type="text"
-        :placeholder="$t('add_habit_habit_name')"
-        v-model="habitData.title"
-        @input="errorMessage = ''"
-      />
+      <span class="flex relative">
+        <input
+          class="bg-transparent outline-none text-lg"
+          type="text"
+          :placeholder="$t('add_habit_habit_name')"
+          v-model="habitData.title"
+          @input="errorMessage = ''"
+        />
+        <BtnWithImg
+          class="absolute right-0"
+          v-if="habitEditingId != 0"
+          image-url="/icons/delete-btn.png"
+          :width="20"
+          @onClick="onDeleteClick"
+        />
+      </span>
       <p
         v-if="errorMessage"
         class="place-self-start text-red-500 max-w-fit"
@@ -99,6 +109,8 @@
 </template>
 
 <script setup lang="ts">
+import { useGlobalStore } from '~/stores/global'
+import { useHabitStore } from '~/stores/habitStore'
 import { HabitData, WeekDays } from '~/types'
 
 definePageMeta({
@@ -108,15 +120,26 @@ definePageMeta({
 
 const { t } = useI18n()
 const l = useLocalePath()
+
+const habitStore = useHabitStore()
 const habitService = useHabitService()
+const globalStore = useGlobalStore()
+const habitEditingId = computed(() => globalStore.editingHabitId)
 
 const errorMessage = ref('')
 const showWeekDays = ref(false)
 const showDatePicker = ref(false)
 
 let todaysDate = new Date()
+todaysDate.setHours(0, 0, 0, 0)
 
-const habitData = reactive<HabitData>({
+onBeforeMount(() => {
+  if (habitEditingId.value != 0) {
+    habitData.value = habitStore.getHabitById(habitEditingId.value)
+  }
+})
+
+const habitData = ref<HabitData>({
   title: '',
   start_date: todaysDate,
   how_often: 1,
@@ -212,21 +235,21 @@ const startDateSelections = ref([
 
 const onDatePickerSave = (date: Date) => {
   if (date) {
-    habitData.start_date = date
+    habitData.value.start_date = date
+    startDateSelections.value[2].title = date.toLocaleDateString()
   }
   showDatePicker.value = false
-  startDateSelections.value[2].title = date.toLocaleDateString()
 }
 
 const onStartDateChange = (optionId: string) => {
   activeStartDate.value = optionId
   if (optionId === 's1') {
-    habitData.start_date = todaysDate
+    habitData.value.start_date = todaysDate
   } else if (optionId === 's2') {
     let year: number = todaysDate.getFullYear()
     let month: number = todaysDate.getMonth()
     let date: number = todaysDate.getDate() + 1
-    habitData.start_date = new Date(year, month, date)
+    habitData.value.start_date = new Date(year, month, date)
   } else if (optionId === 's3') {
     showDatePicker.value = true
   }
@@ -237,22 +260,34 @@ const onThisDayOrWeekDayChange = (optionId: string) => {
 }
 
 const onWeekDaySelectionsChange = (optionId: number) => {
-  habitData.weekdays?.includes(optionId)
-    ? (habitData.weekdays = habitData.weekdays?.filter((o) => o !== optionId))
-    : habitData.weekdays?.push(optionId)
+  habitData.value.weekdays?.includes(optionId)
+    ? (habitData.value.weekdays = habitData.value.weekdays?.filter((o) => o !== optionId))
+    : habitData.value.weekdays?.push(optionId)
+}
+
+const onCancel = () => {
+  globalStore.setEditingHabit(0)
+  navigateTo(l('/'))
 }
 
 const onSave = async () => {
-  if (!habitData.title) {
+  if (!habitData.value.title) {
     errorMessage.value = t('add_habit_habit_name_empty_error')
     return
   }
-  if (showWeekDays.value && habitData.weekdays?.length == 0) {
+  if (showWeekDays.value && habitData.value.weekdays?.length == 0) {
     //TODO error anzeigen
   }
-  habitData.start_date = habitData.start_date.toDateString()
-  await habitService?.saveHabit(habitData)
+  if (habitEditingId.value != 0) {
+    await habitService?.updateHabit(habitEditingId.value, habitData.value)
+    globalStore.setEditingHabit(0)
+  } else {
+    await habitService?.saveHabit(habitData.value)
+  }
+
   await habitService?.load()
   navigateTo(l('/'))
 }
+
+const onDeleteClick = () => {}
 </script>

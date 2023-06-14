@@ -5,8 +5,8 @@
       <BtnWithImg
         class="absolute right-0"
         imageUrl="/icons/cancel-btn.png"
-        :width="25"
-        :height="25"
+        :width="20"
+        :height="20"
         @onClick="emits('onClick')"
       />
     </div>

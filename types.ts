@@ -22,7 +22,7 @@ interface SignUpCredentials {
 interface HabitData {
   id?: number
   title: string
-  start_date: Date | string
+  start_date: Date
   streak?: number
   counter?: number
   how_often: number
