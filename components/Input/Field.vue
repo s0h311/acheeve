@@ -7,7 +7,7 @@
       <label class="text-xs">{{ label }}</label>
       <br />
       <input
-        class="bg-transparent outline-none"
+        class="bg-transparent outline-none w-full"
         :type="`${type ? type : 'text'}`"
         :placeholder="placeholder"
         v-model="input"
