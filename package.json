@@ -1,11 +1,11 @@
 {
   "engines": {
-    "node": "16.20.0",
-    "npm": "9.6.6"
+    "node": "18.16.0",
+    "npm": "9.7.1"
   },
   "name": "acheeve",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "build": "nuxt build",

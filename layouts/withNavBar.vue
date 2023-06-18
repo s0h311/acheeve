@@ -11,7 +11,7 @@
     </div>
     <ClientOnly>
       <NavBar
-        class="absolute bottom-3 w-full left-0"
+        class="absolute bottom-5 w-full left-0"
         v-if="isPhone && !addEntryMenuActive"
         @onClick="addEntryMenuActive = true"
       />

@@ -5,12 +5,12 @@ interface UserProfile {
 }
 
 interface SignupInputs {
-  id: Number
-  name: String
-  label: String
-  placeholder: String
-  type?: String
-  errorMessage: String
+  id: number
+  name: string
+  label: string
+  placeholder: string
+  type?: string
+  errorMessage: string
 }
 
 interface SignUpCredentials {
@@ -34,7 +34,7 @@ interface HabitData {
 
 interface DiaryData {
   id?: number
-  created_at?: Date | string
+  created_at?: Date
   title: string
   type: number // 1 = Regular Entry, 2 = Gratitude, 3 = Anxiety
   content: object
