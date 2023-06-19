@@ -155,7 +155,6 @@ const handleSave = async () => {
   const picturePaths = await Promise.all(pictures)
 
   if (editingEntry.value != null) {
-    oldImages.value.filter((image) => !picturePaths.includes(image))
     await diaryService?.updateEntry(editingEntry.value.id, {
       title: title.value,
       type: 1,
