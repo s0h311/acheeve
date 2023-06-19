@@ -149,17 +149,13 @@ const generateUniqueFileName = (fileName) => {
 const handleSave = async () => {
   const pictures = images.value.map(async (file) => {
     const uniqueFileName = generateUniqueFileName(file.name)
-    const { data, error } = await supabase.storage.from(`diary_pictures`).upload(uniqueFileName, file)
-
-    if (error) {
-      console.error('Fehler beim Hochladen des Bildes:', error)
-    }
-
+    const { data } = await supabase.storage.from(`diary_pictures`).upload(uniqueFileName, file)
     return data?.path
   })
   const picturePaths = await Promise.all(pictures)
 
   if (editingEntry.value != null) {
+    const imagesToDelete = oldImages.value.filter((image) => !picturePaths.includes(image))
     await diaryService?.updateEntry(editingEntry.value.id, {
       title: title.value,
       type: 1,
@@ -202,10 +198,27 @@ const deleteEntry = async () => {
   navigateTo(l('/diary'))
 }
 
-const onImageDelete = () => {
-  oldImages.value.splice(previewIndex.value, 1)
+const deleteImagesFromStorage = async (imagesToDelete) => {
+  const deletePromises = imagesToDelete.map(async (image) => {
+    await supabase.storage.from('diary_pictures').remove([image])
+  })
+  await Promise.all(deletePromises)
+}
+
+const onImageDelete = async () => {
+  let deletedImage
+
+  if (previewIndex.value < oldImages.value.length) {
+    deletedImage = oldImages.value.splice(previewIndex.value, 1)[0]
+    await deleteImagesFromStorage([deletedImage])
+  } else {
+    deletedImage = images.value.splice(previewIndex.value - oldImages.value.length, 1)[0]
+  }
+
   previews.value.splice(previewIndex.value, 1)
   showDialog.value = false
+  const fileName = deletedImage.name
+  await supabase.storage.from('diary_pictures').remove([fileName])
 }
 </script>
 
