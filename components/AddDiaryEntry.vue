@@ -155,7 +155,7 @@ const handleSave = async () => {
   const picturePaths = await Promise.all(pictures)
 
   if (editingEntry.value != null) {
-    const imagesToDelete = oldImages.value.filter((image) => !picturePaths.includes(image))
+    oldImages.value.filter((image) => !picturePaths.includes(image))
     await diaryService?.updateEntry(editingEntry.value.id, {
       title: title.value,
       type: 1,
@@ -198,27 +198,10 @@ const deleteEntry = async () => {
   navigateTo(l('/diary'))
 }
 
-const deleteImagesFromStorage = async (imagesToDelete) => {
-  const deletePromises = imagesToDelete.map(async (image) => {
-    await supabase.storage.from('diary_pictures').remove([image])
-  })
-  await Promise.all(deletePromises)
-}
-
 const onImageDelete = async () => {
-  let deletedImage
-
-  if (previewIndex.value < oldImages.value.length) {
-    deletedImage = oldImages.value.splice(previewIndex.value, 1)[0]
-    await deleteImagesFromStorage([deletedImage])
-  } else {
-    deletedImage = images.value.splice(previewIndex.value - oldImages.value.length, 1)[0]
-  }
-
+  await supabase.storage.from('diary_pictures').remove(oldImages.value.splice(previewIndex.value, 1)[0])
   previews.value.splice(previewIndex.value, 1)
   showDialog.value = false
-  const fileName = deletedImage.name
-  await supabase.storage.from('diary_pictures').remove([fileName])
 }
 </script>
 
