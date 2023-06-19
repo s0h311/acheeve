@@ -60,7 +60,6 @@ export default () => {
   }
 
   const deleteEntry = async (entryId: number, pictures: any) => {
-    console.log(typeof entryId, entryId)
     await supabase.from('diary_entry').delete().eq('id', entryId)
     await supabase.storage.from('diary_pictures').remove(pictures)
   }

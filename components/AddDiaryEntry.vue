@@ -20,19 +20,49 @@
       v-model="title"
     />
     <textarea
-      class="bg-transparent h-[65dvh] w-full outline-none"
+      class="bg-transparent h-[58dvh] w-full outline-none"
       :placeholder="$t('placeholder_diary_text')"
       maxlength="1000"
       v-model="text"
     />
+    <dialog
+      v-if="showDialog"
+      class="bg-dark2 responsive-w aspect-[15/12] rounded-xl grid place-items-center gap-4 centerDialog"
+      show
+    >
+      <div class="grid grid-flow-col w-full">
+        <BtnWithImg
+          image-url="/icons/delete-btn.png"
+          :width="20"
+          @onClick="onImageDelete"
+        />
+        <BtnWithImg
+          class="place-self-end"
+          imageUrl="/icons/cancel-btn.png"
+          :width="20"
+          :height="20"
+          @onClick="showDialog = false"
+        />
+      </div>
+      <div class="bg-primary p-4 rounded-xl">
+        <img
+          class="h-100%"
+          :src="previews[previewIndex]"
+        />
+      </div>
+    </dialog>
     <div class="flex space-x-2 overflow-x-scroll hideScrollbar">
-      <img
+      <div
         v-for="(preview, index) in previews"
-        class="h-12"
-        :key="index"
-        :src="preview"
-        @click="showPreview(index)"
-      />
+        class="bg-primary p-4 rounded-xl"
+      >
+        <img
+          class="h-[10dvh] cursor-pointer"
+          :key="index"
+          :src="preview"
+          @click="showPreview(index)"
+        />
+      </div>
     </div>
     <BtnWithImg
       class="absolute left-0 bottom-0"
@@ -80,7 +110,10 @@ const title = ref('')
 const text = ref('')
 const images = ref<[]>([])
 const oldImages = ref<[]>([])
-const previews = ref<object | []>([])
+const previews = ref<[]>([])
+
+const showDialog = ref<boolean>(false)
+const previewIndex = ref<number>(0)
 
 const handleImage = () => {
   if (images.value.length + oldImages.value.length <= 4) {
@@ -159,13 +192,20 @@ const onCancel = () => {
 }
 
 const showPreview = (index: number) => {
-  // TODO show preivew in a dialog
+  showDialog.value = true
+  previewIndex.value = index
 }
 
 const deleteEntry = async () => {
   await diaryService?.deleteEntry(editingEntry.value?.id, editingEntry.value?.pictures)
   globalStore.setEditingEntry(null)
   navigateTo(l('/diary'))
+}
+
+const onImageDelete = () => {
+  oldImages.value.splice(previewIndex.value, 1)
+  previews.value.splice(previewIndex.value, 1)
+  showDialog.value = false
 }
 </script>
 
@@ -184,5 +224,13 @@ textarea {
   textarea {
     height: 85dvh;
   }
+}
+
+.centerDialog {
+  position: absolute;
+  left: 50%;
+  right: 50;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

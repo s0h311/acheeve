@@ -52,8 +52,6 @@ const entrySections = computed<Array<DiaryData[]>>(() => {
   let sections: Array<DiaryData[]> = []
   let section = structuredClone(entries)
 
-  console.log(section)
-
   let lastDate = new Date(new Date().toDateString()).getTime()
 
   if (section) {
