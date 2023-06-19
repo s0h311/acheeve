@@ -38,12 +38,10 @@ const handleError = () => {
 }
 
 .statusMessage {
-  color: #ededee;
   font-size: 20px;
 }
 
 .statusCode {
-  color: #ededee;
   font-size: 50px;
 }
 </style>

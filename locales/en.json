@@ -92,5 +92,14 @@
   "week_weeks": "Week",
   "add_habit_how_often_in_a_day": "How often in a day",
   "add_habit_what_time_of_day_title": "When",
-  "add_habit_selection_allday": "All day"
+  "add_habit_selection_allday": "All day",
+  "diary_gratitude": "Gratitude",
+  "diary_gratitude_text": "Write down what you´re thankful for",
+  "diary_anxiety": "Anxiety",
+  "diary_anxiety_text": "Calm your anxiety by writing",
+  "placeholder_diary_text": "Start writing your diary entry...",
+  "upload_image": "Upload your images",
+  "delete_entry": "Delete this diary entry",
+  "placeholder_diary_title": "Title...",
+  "add_image_successful": "Your image has been successfully added!"
 }

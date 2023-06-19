@@ -28,7 +28,7 @@
       />
       <InputButton
         :text="$t('button_sign_up')"
-        @click="handle"
+        @click="handleSingup"
       />
     </div>
   </div>
@@ -72,15 +72,13 @@ const inputs = ref<SignupInputs[]>([
   },
 ])
 
-const credentials = useState('credentials', (): SignUpCredentials => {
-  return {
-    name: '',
-    email: '',
-    password: '',
-  }
+const credentials = ref<SignUpCredentials>({
+  name: '',
+  email: '',
+  password: '',
 })
 
-const handle = async () => {
+const handleSingup = async () => {
   let nameValidationError: string | null = useValidateName(credentials.value.name)
   let emailValidationError: string | null = useValidateMail(credentials.value.email)
   let passwordValidationError: string | null = useValidatePassword(credentials.value.password)
@@ -101,8 +99,8 @@ const handle = async () => {
 
     if (user && !error) {
       const { error } = await supabase.from('profiles').insert({
-        name: credentials.value.name,
         id: user.user.id,
+        name: credentials.value.name,
       })
 
       if (error) {

@@ -29,7 +29,7 @@
       <div class="space-y-5 h-[85dvh] overflow-y-scroll hideScrollbar">
         <span class="flex relative">
           <input
-            class="bg-transparent outline-none text-lg"
+            class="bg-transparent outline-none text-lg w-full"
             type="text"
             :placeholder="$t('add_habit_habit_name')"
             v-model="habitData.title"

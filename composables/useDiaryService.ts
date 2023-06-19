@@ -37,7 +37,7 @@ export default () => {
     const { data: entryIds, error: fetchEntryIdsError } = await supabase.from('user_diary_entry').select().eq('user_id', user.value?.id)
     let ids = entryIds?.map((o) => o.entry_id)
 
-    const { data: entries, error: fetchEntriesError } = await supabase.from('diary_entry').select().in('entry_id', ids)
+    const { data: entries, error: fetchEntriesError } = await supabase.from('diary_entry').select().in('id', ids)
 
     if (fetchEntriesError || fetchEntryIdsError) {
       throw createError({ statusCode: 500, statusMessage: 'Internal Error' })
@@ -46,27 +46,23 @@ export default () => {
     return entries
   }
 
-  //TODO NUR ZUM TESTEN
-  // const handleSubmit = async () => {
-  //   const fileName = Math.floor(Math.random() * 4561321989891)
-  //   const { data, error } = await supabase.storage
-  //     .from('images')
-  //     .upload(fileName, info.value.image)
+  const updateEntry = async (entryId: number, entry: DiaryData) => {
+    const { error: updateEntryError } = await supabase
+      .from('diary_entry')
+      .update({
+        ...entry,
+      })
+      .eq('id', entryId)
 
-  //   if (error) return errorMessage.value = 'image cannot be uploaded'
+    if (updateEntryError) {
+      throw createError({ statusCode: 500, statusMessage: 'Internal Error' })
+    }
+  }
 
-  //   const body = {
-  //     ...info.value,
-  //     city: info.value.city.toLowerCase(),
-  //     features: info.value.features.split(', '),
-  //     numberOfSeats: parseInt(info.value.seats),
-  //     year: parseInt(info.value.year),
-  //     price: parseInt(info.value.price),
-  //     miles: parseInt(info.value.miles),
-  //     name: `${info.value.make} ${info.value.model}`,
-  //     listerId: user.value.id,
-  //     image: data.path
-  //   }
+  const deleteEntry = async (entryId: number, pictures: any) => {
+    await supabase.from('diary_entry').delete().eq('id', entryId)
+    await supabase.storage.from('diary_pictures').remove(pictures)
+  }
 
-  return { saveEntry, getEntries }
+  return { saveEntry, getEntries, updateEntry, deleteEntry }
 }
