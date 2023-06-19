@@ -4,14 +4,14 @@
 
     <div class="grid grid-cols-2 gap-5 h-[80px] md:h-1/12">
       <InputBtnTitled
-        title="Gratitude"
-        text="Write down what you are thankful for"
+        :title="$t('diary_gratitude')"
+        :text="$t('diary_gratitude_text')"
         color="bg-[#647CB2]"
       />
 
       <InputBtnTitled
-        title="Anxiety"
-        text="Calm your anxiety by writing"
+        :title="$t('diary_anxiety')"
+        :text="$t('diary_anxiety_text')"
         color="bg-[#E77899]"
       />
     </div>
@@ -34,7 +34,6 @@
 </template>
 
 <script setup lang="ts">
-import { type } from 'os'
 import { useGlobalStore } from '~/stores/global'
 import { DiaryData } from '~/types/types'
 

@@ -149,12 +149,7 @@ const generateUniqueFileName = (fileName) => {
 const handleSave = async () => {
   const pictures = images.value.map(async (file) => {
     const uniqueFileName = generateUniqueFileName(file.name)
-    const { data, error } = await supabase.storage.from(`diary_pictures`).upload(uniqueFileName, file)
-
-    if (error) {
-      console.error('Fehler beim Hochladen des Bildes:', error)
-    }
-
+    const { data } = await supabase.storage.from(`diary_pictures`).upload(uniqueFileName, file)
     return data?.path
   })
   const picturePaths = await Promise.all(pictures)
@@ -202,8 +197,8 @@ const deleteEntry = async () => {
   navigateTo(l('/diary'))
 }
 
-const onImageDelete = () => {
-  oldImages.value.splice(previewIndex.value, 1)
+const onImageDelete = async () => {
+  await supabase.storage.from('diary_pictures').remove(oldImages.value.splice(previewIndex.value, 1)[0])
   previews.value.splice(previewIndex.value, 1)
   showDialog.value = false
 }
