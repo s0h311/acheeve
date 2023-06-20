@@ -16,14 +16,15 @@ spec:
     spec:
       containers:
         - name: acheeve
-          image: acheeve/acheeve.app:latest
+          image: registry.gitlab.com/acheeve.app/acheeve
           ports:
             - containerPort: 3000
-        env:
-        - name: NITRO_PORT
-          value: 3000
-        - name: NITRO_HOST
-          value: 0.0.0.0
-        - name: NITRO_PRESET
-          value: node_cluster
-          
+          env:
+            - name: NITRO_PORT
+              value: "3000"
+            - name: NITRO_HOST
+              value: 0.0.0.0
+            - name: NITRO_PRESET
+              value: node_cluster
+      imagePullSecrets:
+      - name: regcred
