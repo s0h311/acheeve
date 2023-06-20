@@ -100,5 +100,15 @@
   "placeholder_diary_text": "Start writing your diary entry...",
   "upload_image": "Upload your images",
   "delete_entry": "Delete this diary entry",
-  "placeholder_diary_title": "Title..."
+  "placeholder_diary_title": "Title...",
+  "gratitude.question1": "Today, I am grateful for...",
+  "gratitude.question2": "This made me smile today...",
+  "gratitude.question3": "I am particularly grateful for the following people...",
+  "gratitude.question4": "Tomorrow, I want to achieve...",
+  "anxiety.question1": "Heute bin dankbar dafür...",
+  "anxiety.question2": "Das hat mich heute zum Lächeln gebracht...",
+  "anxiety.question3": "Für folgende Personen bin ich besonders dankbar... ",
+  "anxiety.question4": "Morgen möchte ich das erreichen...",
+  "question": "Question",
+  "of": "of"
 }

@@ -7,12 +7,13 @@
         :title="$t('diary_gratitude')"
         :text="$t('diary_gratitude_text')"
         color="bg-[#647CB2]"
+        @click="navigateTo('/en/addGratitude')"
       />
-
       <InputBtnTitled
         :title="$t('diary_anxiety')"
         :text="$t('diary_anxiety_text')"
         color="bg-[#E77899]"
+        @click="navigateTo('/en/addAnxiety')"
       />
     </div>
 
@@ -80,7 +81,16 @@ const entrySections = computed<Array<DiaryData[]>>(() => {
 
 const onEntryClick = (entry: DiaryData) => {
   globalStore.setEditingEntry(entry)
-  navigateTo(l('/addDiaryEntry'))
+
+  let type = entry.type
+
+  if (type == 1) {
+    navigateTo(l('/addDiaryEntry'))
+  } else if (type == 2) {
+    navigateTo(l('/addGratitude'))
+  } else {
+    navigateTo(l('/addAnxiety'))
+  }
 }
 </script>
 <style scoped>

@@ -154,7 +154,7 @@ const handleSave = async () => {
   })
   const picturePaths = await Promise.all(pictures)
 
-  if (editingEntry.value != null) {
+  if (editingEntry.value) {
     await diaryService?.updateEntry(editingEntry.value.id, {
       title: title.value,
       type: 1,
