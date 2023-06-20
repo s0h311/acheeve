@@ -28,6 +28,12 @@ html, body { /** DEACTIVATE SCROLLING **/
   }
 }
 
+@layer base {
+  .responsive-w-window {
+    @apply w-full sm:w-4/6 md:w-3/6 lg:w-3/6 xl:w-[27%] 2xl:w-[27%]
+  }
+}
+
 @media (min-width: 1920px) {
   .responsive-w {
     width: 35vh;

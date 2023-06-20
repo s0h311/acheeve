@@ -20,7 +20,7 @@
       v-model="title"
     />
     <textarea
-      class="bg-transparent h-[58dvh] w-full outline-none"
+      class="bg-transparent w-full outline-none resize-none"
       :placeholder="$t('placeholder_diary_text')"
       maxlength="1000"
       v-model="text"
@@ -44,7 +44,7 @@
           @onClick="showDialog = false"
         />
       </div>
-      <div class="bg-primary p-4 rounded-xl">
+      <div class="bg-primary p-2 rounded-lg">
         <img
           class="h-100%"
           :src="previews[previewIndex]"
@@ -54,10 +54,10 @@
     <div class="flex space-x-2 overflow-x-scroll hideScrollbar">
       <div
         v-for="(preview, index) in previews"
-        class="bg-primary p-4 rounded-xl"
+        class="bg-primary p-2 rounded-lg"
       >
         <img
-          class="h-[10dvh] cursor-pointer"
+          class="h-[12dvh] cursor-pointer"
           :key="index"
           :src="preview"
           @click="showPreview(index)"
@@ -139,7 +139,7 @@ const handleImage = () => {
   }
 }
 
-const generateUniqueFileName = (fileName) => {
+const generateUniqueFileName = (fileName: string) => {
   const timestamp = new Date().getTime()
   const randomString = Math.random().toString(36).substring(2, 8)
   const extension = fileName.split('.').pop()
@@ -147,7 +147,7 @@ const generateUniqueFileName = (fileName) => {
 }
 
 const handleSave = async () => {
-  const pictures = images.value.map(async (file) => {
+  const pictures = images.value.map(async (file: File) => {
     const uniqueFileName = generateUniqueFileName(file.name)
     const { data } = await supabase.storage.from(`diary_pictures`).upload(uniqueFileName, file)
     return data?.path
@@ -206,12 +206,12 @@ const onImageDelete = async () => {
 
 <style scoped>
 textarea {
-  height: 55dvh;
+  height: 48dvh;
 }
 
 @media (min-height: 600px) {
   textarea {
-    height: 65dvh;
+    height: 56dvh;
   }
 }
 

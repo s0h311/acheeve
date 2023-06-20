@@ -49,7 +49,7 @@ const entries = await diaryService?.getEntries()
 
 const entrySections = computed<Array<DiaryData[]>>(() => {
   let sections: Array<DiaryData[]> = []
-  let section = structuredClone(entries)
+  let section = JSON.parse(JSON.stringify(entries)) // DEEP COPY, node 16 does not have structuredClone()
 
   let lastDate = new Date(new Date().toDateString()).getTime()
 
@@ -63,7 +63,7 @@ const entrySections = computed<Array<DiaryData[]>>(() => {
       })
       .sort((a, b) => b.created_at.getTime() - a.created_at.getTime())
       .forEach((entry) => {
-        let date = structuredClone(entry.created_at) // New Object, with new reference
+        let date = new Date(entry.created_at.getTime())
         date.setHours(0, 0, 0, 0)
         if (lastDate != date.getTime()) {
           lastDate = date.getTime()

@@ -22,7 +22,6 @@ definePageMeta({
   middleware: ['auth'],
 })
 const l = useLocalePath()
-
 const supabase = useSupabaseClient()
 
 const profile: UserProfile = await useUserProfile()

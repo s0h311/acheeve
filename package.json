@@ -26,7 +26,7 @@
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-vue": "^9.10.0",
-    "nuxt": "npm:nuxt3@^3.6.0-28102893.715be1d4",
+    "nuxt": "npm:nuxt3@^3.6.0-28120279.3fd6c179",
     "postcss": "^8.4.21",
     "prettier": "2.8.8",
     "prisma": "^4.12.0",
