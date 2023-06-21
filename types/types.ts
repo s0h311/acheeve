@@ -1,6 +1,7 @@
 interface UserProfile {
   id: string
   name: string
+  email: string
   authProvider: string | undefined
 }
 

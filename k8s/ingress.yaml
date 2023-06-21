@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: acheeve-ingress
+  annotations:
+    cert-manager.io/issuer: 'letsencrypt-prod'
+
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - k8s.acheeve.app
+      secretName: acheeve-tls
+  rules:
+    - host: k8s.acheeve.app
+      http:
+        paths:
+          - pathType: Prefix
+            path: '/'
+            backend:
+              service:
+                name: acheeve-service
+                port:
+                  number: 80

@@ -11,7 +11,6 @@ export const useHabitStore = defineStore('habit', () => {
   })
 
   const updateHabitsLeft = (daytime: string, delta: number) => {
-    habitsLeft.value.alldayLeft += delta
     if (daytime === 'allday') {
       habitsLeft.value.alldayLeft += delta
     } else if (daytime === 'morning') {

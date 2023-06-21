@@ -28,13 +28,14 @@ import { useHabitStore } from '~/stores/habitStore'
 const { t } = useI18n()
 
 const selectedTodoState = ref<number>(1) // 1 = ToDo, 2 = Done
-const selectedDaytime = ref<string>('allday')
+const selectedDaytime = ref<string | null>(null)
 const todaysDate: string = new Date().toLocaleDateString()
 const selectedDate = ref<Date>(new Date())
 selectedDate.value.setHours(0, 0, 0, 0)
 
 const habitStore = useHabitStore()
 const habitsLeft = computed(() => habitStore.habitsLeft)
+const totalHabitsLeft = computed<number>(() => habitsLeft.value.alldayLeft + habitsLeft.value.morningLeft + habitsLeft.value.eveningLeft)
 
 const welcomeText = computed<string>((): string => {
   let day = selectedDate.value.getDate()
@@ -53,9 +54,7 @@ const welcomeText = computed<string>((): string => {
       ? 'date_rd'
       : 'date_th'
 
-  return (
-    firstWord + ' ' + day + t(numberExtension) + ' ' + month + '\n' + habitsLeft.value.alldayLeft + ' ' + t('habits_left_welcome_text_hub')
-  )
+  return firstWord + ' ' + day + t(numberExtension) + ' ' + month + '\n' + totalHabitsLeft.value + ' ' + t('habits_left_welcome_text_hub')
 })
 
 const onTodoStateChange = (todoState: number) => {

@@ -24,7 +24,7 @@ import { HabitData } from '~/types/types'
 
 const props = defineProps({
   selectedTodoState: Number,
-  selectedDaytime: String,
+  selectedDaytime: String || null,
   selectedDate: {
     type: Date,
     required: true,
@@ -65,11 +65,14 @@ const isActiveOnSelectedDate = (habit: HabitData) => {
   return false
 }
 
+const habitsOnSelectedDate = computed<HabitData[]>(() => {
+  return rawHabits.value.length > 0 ? rawHabits.value.filter((habit) => isActiveOnSelectedDate(habit)) : []
+})
+
 const habits = computed(() => {
-  return rawHabits.value.length > 0
-    ? rawHabits.value
-        .filter((habit) => isActiveOnSelectedDate(habit))
-        .filter((habit) => (props.selectedDaytime === 'allday' ? true : habit.daytime === props.selectedDaytime))
+  return habitsOnSelectedDate.value.length > 0
+    ? habitsOnSelectedDate.value
+        .filter((habit) => props.selectedDaytime === null || habit.daytime === props.selectedDaytime)
         .filter((habit) => {
           if (props.selectedDate.getTime() > todaysDate.value.getTime()) {
             return true
@@ -79,7 +82,7 @@ const habits = computed(() => {
     : []
 })
 
-watch(habits, (_newValue, _oldValue) => {
+watch(habitsOnSelectedDate, (_newValue, _oldValue) => {
   updateHabitStore()
 })
 
