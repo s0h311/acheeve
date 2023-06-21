@@ -5,10 +5,10 @@ prod-deploy:
   image: bitnami/kubectl:latest
   stage: deploy
   script:
-    - kubectl --kubeconfig=/k8s/kub-config
     - kubectl version
+    - kubectl --kubeconfig=/k8s/kub-config.yaml
     - kubectl cluster-info
     - kubectl get nodes
-    - kubectl create secret docker-registry regcred --docker-server=registry.gitlab.com --docker-username="$CI_REGISTRY_USER" --docker-password="$CI_REGISTRY_PASSWORD"
+    - kubectl create secret docker-registry regcred --docker-server="$CI_REGISTRY" --docker-username="$CI_REGISTRY_USER" --docker-password="$CI_REGISTRY_PASSWORD"
     - kubectl delete deployment acheeve-deployment
     - kubectl apply -f /k8s/acheeve.yaml
