@@ -1,6 +1,6 @@
 <template>
   <div class="grid place-items-center gap-4 m-auto">
-    <h1 class="text-3xl font-semibold">{{ $t('profile') }}</h1>
+    <h1 class="text-xl font-semibold">{{ $t('profile') }}</h1>
 
     <span class="flex">
       <p class="text-xl font-thin">{{ $t('welcome_profile') }}</p>
@@ -19,6 +19,7 @@
 import { UserProfile } from '../types/types'
 
 definePageMeta({
+  layout: 'with-nav-bar',
   middleware: ['auth'],
   pageTransition: false,
   layoutTransition: false,
