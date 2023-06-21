@@ -10,6 +10,5 @@ prod-deploy:
     - mv k8s/kub-config.yaml ~/.kube/config
     - kubectl config view
     - kubectl cluster-info
-    - kubectl create secret docker-registry regcred --docker-server="$CI_REGISTRY" --docker-username="$CI_REGISTRY_USER" --docker-password="$CI_REGISTRY_PASSWORD"
     - kubectl delete deployment acheeve-deployment
     - kubectl apply -f k8s/acheeve.yaml
