@@ -22,7 +22,6 @@
           @onClick="onDelete"
         />
       </div>
-
       <p class="font-semibold">{{ $t(questions[currentIndex].question) }}</p>
       <textarea
         class="bg-transparent w-full outline-none resize-none"
@@ -60,7 +59,7 @@ import { useGlobalStore } from '~/stores/global'
 
 definePageMeta({
   layout: false,
-  middleware: [],
+  middleware: ['auth'],
 })
 
 const l = useLocalePath()
@@ -75,6 +74,10 @@ const bgColor = computed<string>(() => (entryType.value == 'gratitude' ? 'bg-[#6
 const currentIndex = ref<number>(0)
 
 onBeforeMount(() => {
+  if (entryType.value !== 'gratitude' && entryType.value !== 'anxiety') {
+    throw createError({ statusCode: 400, statusMessage: 'Page not found' })
+  }
+
   if (editingEntry.value) {
     diaryData.value.type = editingEntry.value.type
     diaryData.value.content = editingEntry.value.content

@@ -13,6 +13,7 @@
       :type="input.type"
       :errorMessage="input.errorMessage"
       @change-input="onchange"
+      @keyup.enter="handleSingup"
     />
     <p
       v-if="errorMessage"

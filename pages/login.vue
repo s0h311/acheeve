@@ -13,6 +13,7 @@
       :type="input.type"
       :errorMessage="input.errorMessage"
       @change-input="onchange"
+      @keyup.enter="handle('email')"
     />
     <p
       class="place-self-start -mt-6 text-red-500"

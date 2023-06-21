@@ -40,7 +40,7 @@ import { DiaryData } from '~/types/types'
 
 definePageMeta({
   layout: 'with-nav-bar',
-  middleware: [], //'auth'
+  middleware: ['auth'],
 })
 
 const l = useLocalePath()

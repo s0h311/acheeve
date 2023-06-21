@@ -15,7 +15,6 @@
         class="verticalLine w-[1px] h-12 place-self-center"
       />
     </div>
-
     <div class="space-y-2">
       <p class="text-xs leading-none">{{ entry.created_at?.toLocaleString().substring(0, 16) }}</p>
       <p class="text-md font-semibold leading-none">{{ entry.title }}</p>
