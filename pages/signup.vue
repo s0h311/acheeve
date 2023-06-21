@@ -40,6 +40,8 @@ import { SignUpCredentials, SignupInputs } from '~/types/types'
 
 definePageMeta({
   middleware: ['not-auth'],
+  pageTransition: false,
+  layoutTransition: false,
 })
 
 const { t } = useI18n()

@@ -60,6 +60,8 @@ import { useGlobalStore } from '~/stores/global'
 definePageMeta({
   layout: false,
   middleware: ['auth'],
+  pageTransition: false,
+  layoutTransition: false,
 })
 
 const l = useLocalePath()

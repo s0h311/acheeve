@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!--<VitePwaManifest />-->
+    <VitePwaManifest />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

@@ -27,6 +27,8 @@
 <script setup lang="ts">
 definePageMeta({
   middleware: ['not-auth'],
+  pageTransition: false,
+  layoutTransition: false,
 })
 
 const l = useLocalePath()

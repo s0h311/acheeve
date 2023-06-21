@@ -20,6 +20,8 @@ import { UserProfile } from '../types/types'
 
 definePageMeta({
   middleware: ['auth'],
+  pageTransition: false,
+  layoutTransition: false,
 })
 const l = useLocalePath()
 const supabase = useSupabaseClient()

@@ -125,6 +125,8 @@ import { HabitData } from '~/types/types'
 definePageMeta({
   layout: false,
   middleware: ['auth'],
+  pageTransition: false,
+  layoutTransition: false,
 })
 
 const { t } = useI18n()
