@@ -21,10 +21,16 @@ spec:
             - containerPort: 3000
           env:
             - name: NITRO_PORT
-              value: "3000"
+              value: '3000'
             - name: NITRO_HOST
               value: 0.0.0.0
             - name: NITRO_PRESET
               value: node_cluster
+            - name: SUPABASE_URL
+              value: https://rpoeffpbbnljlyhptgks.supabase.co
+            - name: SUPABASE_KEY
+              value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwb2VmZnBiYm5samx5aHB0Z2tzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Nzc5NTkyMjQsImV4cCI6MTk5MzUzNTIyNH0.62rHuLB3ePaIz4Rg9zIB-HnHueUUH8yXUqzk8HjhAN8
+            - name: DATABASE_URL
+              value: postgres://postgres:DhTtj8QYp1xUiA9W@db.rpoeffpbbnljlyhptgks.supabase.co:6543/postgres
       imagePullSecrets:
-      - name: regcred
+        - name: regcred

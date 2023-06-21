@@ -25,11 +25,10 @@ docker-build:
       exists:
         - Dockerfile
 
-
 prod-deploy:
   image:
     name: bitnami/kubectl:latest
-    entrypoint: [""]
+    entrypoint: ['']
   stage: deploy
   script:
     - mv k8s/kub-config.yaml ~/.kube/config
