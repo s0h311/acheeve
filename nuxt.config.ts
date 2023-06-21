@@ -17,6 +17,17 @@ export default defineNuxtConfig({
       } 
     },
   },
+  runtimeConfig: {
+    public: {
+      supabase: {
+        url: 'https://rpoeffpbbnljlyhptgks.supabase.co',
+        key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwb2VmZnBiYm5samx5aHB0Z2tzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Nzc5NTkyMjQsImV4cCI6MTk5MzUzNTIyNH0.62rHuLB3ePaIz4Rg9zIB-HnHueUUH8yXUqzk8HjhAN8',
+      },
+      database: {
+        url: 'postgres://postgres:DhTtj8QYp1xUiA9W@db.rpoeffpbbnljlyhptgks.supabase.co:6543/postgres'
+      }
+    }
+  },
   modules: [
     '@vueuse/nuxt',
     '@nuxtjs/supabase',
