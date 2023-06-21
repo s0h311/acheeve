@@ -31,6 +31,8 @@ const props = defineProps({
 })
 const emits = defineEmits(['onEntryClick'])
 
+console.log('section', props.entries)
+
 const previewText = (content: string, type: number) => {
   let text = type == 1 ? content.text : content.q1
   return text.length > 21 ? text.substring(0, 21) : text

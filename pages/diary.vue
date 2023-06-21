@@ -79,6 +79,9 @@ const entrySections = computed<Array<DiaryData[]>>(() => {
   return sections
 })
 
+console.log('entries', entries)
+console.log('sections', entrySections.value)
+
 const onEntryClick = (entry: DiaryData) => {
   globalStore.setEditingEntry(entry)
 
