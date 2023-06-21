@@ -6,8 +6,8 @@
     @click="emits('onEntryClick', entry)"
   >
     <div class="grid">
-      <nuxt-img
-        :src="`/icons/hub/diary_type${entry.type}.svg`"
+      <img
+        :src="icon(entry.type)"
         :width="35"
       />
       <hr
@@ -31,7 +31,9 @@ const props = defineProps({
 })
 const emits = defineEmits(['onEntryClick'])
 
-console.log('section', props.entries)
+const icon = (entryType: number): string => {
+  return entryType == 1 ? '/icons/hub/diary_type1.svg' : entryType == 2 ? '/icons/hub/diary_type2.svg' : '/icons/hub/diary_type3.svg'
+}
 
 const previewText = (content: string, type: number) => {
   let text = type == 1 ? content.text : content.q1
