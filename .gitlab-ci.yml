@@ -8,6 +8,7 @@ prod-deploy:
   stage: deploy
   script:
     - kubectl --kubeconfig=k8s/kub-config.yaml get pods
+    - kubectl config view
     - kubectl cluster-info
     - kubectl create secret docker-registry regcred --docker-server="$CI_REGISTRY" --docker-username="$CI_REGISTRY_USER" --docker-password="$CI_REGISTRY_PASSWORD"
     - kubectl delete deployment acheeve-deployment
