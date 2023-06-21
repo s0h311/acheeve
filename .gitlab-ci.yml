@@ -10,5 +10,5 @@ prod-deploy:
     - mv k8s/kub-config.yaml ~/.kube/config
     - kubectl config view
     - kubectl cluster-info
-    - kubectl delete deployment acheeve-deployment
+    - kubectl delete deployment acheeve-deployment 2>/dev/null
     - kubectl apply -f k8s/acheeve.yaml
