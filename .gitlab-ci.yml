@@ -2,7 +2,9 @@ stages:
   - deploy
 
 prod-deploy:
-  image: bitnami/kubectl:latest
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: [""]
   stage: deploy
   script:
     - kubectl version
