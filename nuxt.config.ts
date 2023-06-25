@@ -18,6 +18,9 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
+    supabase: {
+      serviceKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwb2VmZnBiYm5samx5aHB0Z2tzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY3Nzk1OTIyNCwiZXhwIjoxOTkzNTM1MjI0fQ.M8VzpS9vTFg_PbskBZpiVf_xxvWhRNGkjNQrq88Lsjk'
+    },
     public: {
       supabase: {
         url: 'https://rpoeffpbbnljlyhptgks.supabase.co',

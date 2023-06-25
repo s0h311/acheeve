@@ -80,15 +80,18 @@
 
     <!--LOGOUT-->
     <InputButton
+      class="w-1/3"
       :text="$t('logout')"
       @click="handleLogout"
     />
 
     <!--DELETE ACCOUNT-->
-    <InputButton
-      :text="$t('delete_account')"
+    <button
+      class="underline place-self-start"
       @click="showDialog = true"
-    />
+    >
+      {{ $t('delete_account') }}
+    </button>
 
     <div
       v-if="showDialog"
@@ -113,6 +116,7 @@
 </template>
 
 <script setup lang="ts">
+import { navigateTo } from 'nuxt/app'
 import { UserProfile } from '../types/types'
 definePageMeta({
   layout: 'with-nav-bar',
@@ -229,11 +233,14 @@ const handleLogout = async () => {
 }
 
 const onDeleteAccount = async () => {
-  const { data, error } = useFetch(`/api/deleteAccount?userId=${profile.id}`, {
+  const { error } = useFetch(`/api/user/${profile.id}`, {
     method: 'DELETE',
   })
-
+  if (error) {
+    throw createError({ statusCode: 500, statusMessage: 'Internal Error' })
+  }
   showDialog.value = false
+  navigateTo(l('/login'))
 }
 </script>
 <style scoped>
