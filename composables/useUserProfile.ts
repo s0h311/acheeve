@@ -4,8 +4,6 @@ export default async (): Promise<UserProfile> => {
   const user = useSupabaseUser()
   let id = user.value.id
 
-  console.log(user)
-
   if (user.value && user.value.app_metadata.provider !== 'email') {
     return {
       id,

@@ -233,8 +233,7 @@ const onDeleteAccount = async () => {
     method: 'DELETE',
   })
 
-  console.log(data)
-  console.log(error)
+  showDialog.value = false
 }
 </script>
 <style scoped>
