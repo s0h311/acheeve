@@ -228,4 +228,12 @@ textarea {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+input::placeholder {
+  color: #ededee;
+}
+
+textarea::placeholder {
+  color: #ededee;
+}
 </style>

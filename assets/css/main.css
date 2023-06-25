@@ -74,11 +74,3 @@ input:-webkit-autofill:active  { /** REMOVE AUTOFILL COLOR **/
 .hideScrollbar div {
   zoom: 1;
 }
-
-input::placeholder {
-  color: #EDEDEE;
-}
-
-textarea::placeholder {
-  color: #EDEDEE;
-}

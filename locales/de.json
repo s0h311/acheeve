@@ -110,5 +110,14 @@
   "anxiety.question3": "Für folgende Personen bin ich besonders dankbar... ",
   "anxiety.question4": "Morgen möchte ich das erreichen...",
   "question": "Frage",
-  "of": "von"
+  "of": "von",
+  "edit": "Bearbeiten",
+  "email_change_confirmation_request": "Bitte bestätigen Sie die Änderung per E-Mail",
+  "password_new": "Neues Passwort",
+  "send_code_to_email": "Code Senden",
+  "password_change_confirmation_request": "Wir haben dir per E-Mail einen Code gesendet",
+  "password_changed_successfully": "Dein Passwort wurde erfolgreich geändert",
+  "delete_account": "Konto löschen",
+  "delete": "Löschen",
+  "confirm_account_delete": "Möchtest du wirklich dein Konto löschen?" 
 }

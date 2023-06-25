@@ -10,8 +10,9 @@
         class="bg-transparent outline-none w-full"
         :type="`${type ? type : 'text'}`"
         :placeholder="placeholder"
-        v-model="input"
         :name="name"
+        :disabled="isDisabled"
+        v-model="input"
         @change="onChange"
       />
     </div>
@@ -31,6 +32,7 @@ const props = defineProps({
   placeholder: String,
   name: String,
   errorMessage: String,
+  isDisabled: Boolean,
 })
 
 const input = ref('')
