@@ -4,6 +4,12 @@
       <h1 class="text-xl font-semibold">{{ $t('profile') }}</h1>
     </div>
 
+    <span class="flex">
+      <p class="font-thin">{{ $t('welcome_profile') }}</p>
+      <p>&ensp;</p>
+      <p class="italic">{{ userName }}</p>
+    </span>
+
     <!--EMAIL-->
     <InputFieldEdit
       name="email"
@@ -243,6 +249,7 @@ const onDeleteAccount = async () => {
   navigateTo(l('/login'))
 }
 </script>
+
 <style scoped>
 .centerDialog {
   position: absolute;
