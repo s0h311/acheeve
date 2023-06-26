@@ -18,7 +18,7 @@
       />
 
       <button
-        class="text-sm absolute top-0 right-4 underline"
+        class="text-sm absolute top-1 right-4 underline"
         @click="$emit('activeEditing')"
       >
         {{ isDisabled ? $t('edit') : $t('cancel') }}

@@ -39,7 +39,7 @@
     <!--PASSWORD-->
     <InputFieldEdit
       name="passwordNew"
-      :label="t('password_new')"
+      :label="t('password')"
       placeholder="******"
       :errorMessage="errors.newPasswordValidationError"
       :isDisabled="!editingActive.password"
@@ -191,7 +191,6 @@ const onSaveEmail = async () => {
         setTimeout(() => {
           emailChangeRequestSend.value = false
           editingActive.value.email = false
-          userData.value.passwordNew = ''
         }, 3000)
       }
     }
@@ -226,6 +225,7 @@ const handlePasswordChange = async () => {
             passwordChangedSuccessfully.value = false
             editingActive.value.password = false
             codeSent.value = false
+            userData.value.passwordNew = ''
           }, 3000)
         }
       }
