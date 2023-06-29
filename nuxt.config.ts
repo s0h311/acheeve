@@ -17,27 +17,13 @@ export default defineNuxtConfig({
       } 
     },
   },
-  runtimeConfig: {
-    supabase: {
-      serviceKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwb2VmZnBiYm5samx5aHB0Z2tzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY3Nzk1OTIyNCwiZXhwIjoxOTkzNTM1MjI0fQ.M8VzpS9vTFg_PbskBZpiVf_xxvWhRNGkjNQrq88Lsjk'
-    },
-    public: {
-      supabase: {
-        url: 'https://rpoeffpbbnljlyhptgks.supabase.co',
-        key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwb2VmZnBiYm5samx5aHB0Z2tzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Nzc5NTkyMjQsImV4cCI6MTk5MzUzNTIyNH0.62rHuLB3ePaIz4Rg9zIB-HnHueUUH8yXUqzk8HjhAN8',
-      },
-      database: {
-        url: 'postgres://postgres:DhTtj8QYp1xUiA9W@db.rpoeffpbbnljlyhptgks.supabase.co:6543/postgres'
-      }
-    }
-  },
   modules: [
     '@vueuse/nuxt',
     '@nuxtjs/supabase',
     '@nuxt/image-edge',
     '@nuxtjs/i18n-edge',
-    '@vite-pwa/nuxt',
     '@pinia/nuxt',
+    '@vite-pwa/nuxt',
   ],
   pwa,
   i18n,
@@ -54,4 +40,5 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'],
     ],
   },
+  experimental: { inlineSSRStyles: false } // https://github.com/nuxt/nuxt/issues/21840
 })
