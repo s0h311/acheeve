@@ -1,8 +1,10 @@
-### **Anforderungen**
+### **You need...**
 ___
-`Node 16.20.0`
+`node 18.16.1`
 
-### **Wie starte ich Acheeve?**
+`yarn 3.6.0 (preferred)` or `npm 9.7.2`
+
+### **Starting a local development server**
 ---
-1. Projektordner im Terminal öffnen.
-2. Folgende Befehle nacheinander ausführen: `npm install` und `npm run dev`
+1. `yarn install`
+2. `yarn dev -o`

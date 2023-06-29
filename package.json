@@ -1,11 +1,11 @@
 {
   "engines": {
-    "node": "16.20.0",
-    "npm": "9.7.1"
+    "node": "18.16.1",
+    "npm": "9.7.2"
   },
   "name": "acheeve",
   "private": true,
-  "version": "0.0.2",
+  "version": "1.0.0-beta",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
@@ -40,5 +40,6 @@
     "joi": "17.9.1",
     "pinia": "2.0.34",
     "v-calendar": "3.0.3"
-  }
+  },
+  "packageManager": "yarn@3.6.0"
 }
