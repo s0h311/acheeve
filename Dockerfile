@@ -19,7 +19,7 @@ ENV NITRO_PRESET=node-server
 RUN corepack enable
 RUN corepack prepare yarn@stable --activate
 RUN npm install -g npm@9.7.2
-RUN yarn install --prod
+RUN yarn install
 
 COPY . .
 
