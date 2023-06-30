@@ -16,8 +16,8 @@ ENV SUPABASE_SERVICE_KEY=$SUPABASE_SERVICE_KEY
 ENV DATABASE_URL=$DATABASE_URL
 ENV NITRO_PRESET=node-server
 
-corepack enable
-corepack prepare yarn@stable --activate
+RUN corepack enable
+RUN corepack prepare yarn@stable --activate
 
 RUN yarn install
 
