@@ -7,13 +7,13 @@
         :title="$t('diary_gratitude')"
         :text="$t('diary_gratitude_text')"
         color="bg-[#647CB2]"
-        @click="navigateTo('/en/addGratitude')"
+        @click="navigateTo('/addGratitude')"
       />
       <InputBtnTitled
         :title="$t('diary_anxiety')"
         :text="$t('diary_anxiety_text')"
         color="bg-[#E77899]"
-        @click="navigateTo('/en/addAnxiety')"
+        @click="navigateTo('/addAnxiety')"
       />
     </div>
 
